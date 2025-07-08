@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+ 	<!-- to do:  neurofoam gets lost when produced in caravan on world tile! Fixed, but base game throws not implementet error, deactivated caravan spawning in modsettings as default-->	
+	
+	<!-- original = "LightMechanoid" , changed attack --> 
+	<ThingDef Name="AV_LightMechanoid" ParentName="BaseMechanoid" Abstract="True">
+		<statBases>
+			<MarketValue>800</MarketValue>
+			<MoveSpeed>3.4</MoveSpeed>
+			<ArmorRating_Blunt>0.10</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.20</ArmorRating_Sharp>
+			<MechEnergyLossPerHP>0.66</MechEnergyLossPerHP>
+		</statBases>
+		<descriptionHyperlinks>
+			<ThingDef>AV_Neurofoam</ThingDef>
+		</descriptionHyperlinks>
+		<race>
+			<body>Mech_Light</body>
+			<intelligence>ToolUser</intelligence>	
+			<thinkTreeMain>Mechanoid</thinkTreeMain>
+			<baseBodySize>0.7</baseBodySize> <!--
+			<soundMeleeHitPawn>Pawn_Melee_Punch_HitPawn</soundMeleeHitPawn>
+			<soundMeleeHitBuilding>Pawn_Melee_Punch_HitBuilding</soundMeleeHitBuilding>
+			<soundMeleeMiss>Pawn_Melee_Punch_Miss</soundMeleeMiss> -->
+			<mechWeightClass>Light</mechWeightClass>
+		</race>
+		<butcherProducts>
+			<Steel>10</Steel>
+		</butcherProducts> 
+	  	<tools>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>3</power>
+				<cooldownTime>2.6</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+			</li>
+		</tools>
+    </ThingDef>
+
+	<!-- Fluoid -->  
+    <ThingDef ParentName="AV_LightMechanoid">
+		<defName>AV_Mech_Fluoid</defName>
+		<label>Fluoid</label>
+		<description>A small mechanoid with an internal microorganism cultivation pod, designed to take care of biopods and cryptosleep caskets on long space trips. It is capable of slowly producing a nutritious but disgusting foam, while beeing quite energy efficient. But it moves slowly and is almost completely helpless in combat.\n\nIn the early age of space settlement, these mechanoids were widely used, but as tech advanced and the travelingtime got way shorter those mechanoids were no longer manufactured.</description>
+		<statBases>
+			<MoveSpeed>1.2</MoveSpeed>		
+			<MarketValue>650</MarketValue>						<!-- 800 is base, this has slightly less for my incident-->
+			<ArmorRating_Blunt>0.05</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.10</ArmorRating_Sharp>
+			<MechEnergyLossPerHP>0.66</MechEnergyLossPerHP>
+			<BandwidthCost>1</BandwidthCost>			
+			<WastepacksPerRecharge>5</WastepacksPerRecharge>	<!-- x bandwidth for real result-->
+			<MechEnergyUsageFactor>1.0</MechEnergyUsageFactor>
+			<CleaningSpeed>0.05</CleaningSpeed>
+		</statBases>
+		<race>
+			<deathAction>
+				<workerClass>AV_Mechtech.DeathActionWorker_FoamExplosion</workerClass>
+			</deathAction>
+			<mechEnabledWorkTypes>
+				<li>Hauling</li>
+				<li>Cleaning</li>
+				<li>BasicWorker</li>
+				<li>Firefighter</li>
+			</mechEnabledWorkTypes>
+			<maxMechEnergy>100</maxMechEnergy>
+			<mechFixedSkillLevel>10</mechFixedSkillLevel>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Militor_Death</soundDeath>
+					<soundCall>Pawn_Mech_Militor_Call</soundCall>
+				</li>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Militor_Death</soundDeath>
+					<soundCall>Pawn_Mech_Militor_Call</soundCall>
+				</li>
+			</lifeStageAges>
+		</race>	
+		<comps>	
+			<!-- 60.000 = 1 day   with workspeed (50%) makes effectivly 30.000 = 1 day    -->
+			<!-- only for buildings needed, mech counts power differently -->
+			<!-- 
+			<li Class="AV_Framework.CompProperties_SpawnerPawnScaling">
+				<compClass>AV_Framework.Comp_SpawnerPawnScaling</compClass>
+				<requiresPower>false</requiresPower>		
+				<thingToSpawn>AV_Neurofoam</thingToSpawn>
+				<spawnCount>1</spawnCount>
+				<spawnIntervalRange><min>30000</min><max>45000</max></spawnIntervalRange> 
+				<writeTimeLeftToSpawn>true</writeTimeLeftToSpawn>
+				<showMessageIfOwned>false</showMessageIfOwned>				
+				<scalingFactor_StatDef>WorkSpeedGlobal</scalingFactor_StatDef>			
+				<scalingFactor_PawnCapacityDef>BloodFiltration</scalingFactor_PawnCapacityDef>
+			</li>	 -->
+			<li Class="AV_Framework.CompProperties_SelectableSpawner">
+				<requiresPower>false</requiresPower>	<!-- only for buildings needed, mech counts power differently -->
+				<scalingFactor_StatDef>WorkSpeedGlobal</scalingFactor_StatDef>			
+				<scalingFactor_PawnCapacityDef>BloodFiltration</scalingFactor_PawnCapacityDef>
+				
+				<SpawnTimeMultiplier>0.25</SpawnTimeMultiplier>	<!-- looks OP but time gets devided by workspeed (50%) before! -->
+				
+				
+				<ListOfThingsToSpawn>
+					<li>AV_NeurofoamSpawn</li>
+					<li>AV_NeutroamineSpawn</li>
+					<li>AV_HemogenPasteSpawn</li>
+				</ListOfThingsToSpawn>
+			</li>
+		</comps>
+    </ThingDef>
+  
+    <PawnKindDef ParentName="LightMechanoidKind">
+		<defName>AV_Mech_Fluoid</defName>
+		<label>fluoid</label>
+		<race>AV_Mech_Fluoid</race>
+		<combatPower>10</combatPower>
+		<allowInMechClusters>false</allowInMechClusters>	<!-- removes also in ancient dangers...-->
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/AV_Fluoid</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/AV_Fluoid</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.1</drawSize>
+					<shadowData>
+						<volume>(0.3, 0.4, 0.3)</volume>
+						<offset>(0,0,-0.25)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/AV_FluoidAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/AV_Fluoid</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.1</drawSize>
+					<shadowData>
+						<volume>(0.3, 0.4, 0.3)</volume>
+						<offset>(0,0,-0.25)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<abilities>
+			<!--<li>AV_Fluoid_Cleaning</li>  -->
+		</abilities>
+
+    </PawnKindDef>
+
+	<RecipeDef ParentName="BaseMechanoidRecipe">
+        <defName>AV_Gestate_Fluoid</defName>
+        <label>gestate fluoid</label>
+        <description>Gestate a fluoid mechanoid.</description>
+		<researchPrerequisite>AV_Compressed_Mechtech</researchPrerequisite>
+        <ingredients Inherit="False">
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>30</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Silver</li>
+                    </thingDefs>
+                </filter>
+                <count>5</count>	<!-- small materials gets x10 ingame --> 
+            </li>
+			<li>
+                <filter>
+                    <thingDefs>
+                        <li>AV_Neuropod</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>SubcoreBasic</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+        </ingredients>
+        <products>
+            <AV_Mech_Fluoid>1</AV_Mech_Fluoid>
+        </products>
+        <descriptionHyperlinks>
+            <ThingDef>AV_Mech_Fluoid</ThingDef>
+        </descriptionHyperlinks>
+    </RecipeDef>
+
+	<!-- Abilities -->
+	<!-- <AbilityDef>
+		<defName>AV_Fluoid_Cleaning</defName>
+		<label>cleaning protocol</label>
+		<description>Activate the self cleaning protocol, releasing fire-retardant foam in a circular area, overdriving the reactor in the process. This couses the mech to shutdown.</description>
+		<iconPath>UI/Abilities/AV_MechFirefoamPop</iconPath>
+		<cooldownTicksRange>300000</cooldownTicksRange>
+		<displayOrder>999</displayOrder>
+		<aiCanUse>false</aiCanUse>
+		<warmupStartSound>FireSpew_Warmup</warmupStartSound>
+		<showWhenDrafted>true</showWhenDrafted>		
+		<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>true</disableGizmoWhileUndrafted>
+		<jobDef>CastAbilityOnThing</jobDef>
+		<targetRequired>false</targetRequired>
+		<canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+		<stunTargetWhileCasting>True</stunTargetWhileCasting>
+		<showPsycastEffects>False</showPsycastEffects>
+		<statBases>
+			<Ability_Duration>1000</Ability_Duration>
+			<Ability_EffectRadius>2.9</Ability_EffectRadius>
+		</statBases>
+		<hostile>false</hostile>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>0.5</warmupTime>
+			<requireLineOfSight>false</requireLineOfSight>
+			<drawAimPie>false</drawAimPie>      
+			<range>2.9</range>
+			<soundCast>Shot_ChargeRifle</soundCast>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetBuildings>false</canTargetBuildings>
+				<canTargetAnimals>false</canTargetAnimals>
+				<canTargetHumans>false</canTargetHumans>
+				<canTargetMechs>false</canTargetMechs>				
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="CompProperties_AbilityFirefoampop">
+				<firefoamRadius>2.9</firefoamRadius>
+				<clamorType>Ability</clamorType>
+				<clamorRadius>6</clamorRadius>
+			</li>
+			<li Class="CompProperties_AbilityGiveHediff">
+				<compClass>CompAbilityEffect_GiveHediff</compClass>
+				<hediffDef>AV_Energy_depletion</hediffDef>
+				<onlyBrain>True</onlyBrain>
+				<onlyApplyToSelf>True</onlyApplyToSelf>
+				<replaceExisting>true</replaceExisting>
+			</li>
+		</comps>
+	</AbilityDef>
+ -->
+
+</Defs>

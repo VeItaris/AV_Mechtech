@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- Contained Waste -->
+	<ThingDef ParentName="ResourceBase">
+		<defName>AV_CompressedWaste</defName>
+		<label>compressed toxic waste</label>
+		<description>Compressed toxic waste in a sealed canister. Dissolution will take considerably longer, even when not frozen. While they are robust they can still be damaged, releasing the waste inside.</description>
+		<possessionCount>2</possessionCount>
+		<graphicData>
+			<texPath>Things/Item/Resource/AV_ContainedWaste</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<soundInteract>Metal_Drop</soundInteract>
+		<soundDrop>Standard_Drop</soundDrop>
+		<stackLimit>5</stackLimit>
+		<statBases>
+			<Beauty>-20</Beauty>
+			<MarketValue>0</MarketValue>
+			<Mass>18</Mass>
+			<Flammability>1</Flammability>
+			<DeteriorationRate>1</DeteriorationRate>	<!-- 4 for normal wastepacks-->
+		</statBases>
+		<thingCategories>
+			<!-- <li>ItemsMisc</li>	until I find out how to remove it from shelfs-->
+			<li>Chunks</li>
+		</thingCategories>
+		<tradeability>None</tradeability>
+		<comps>
+			<li Class="CompProperties_GasOnDamage">
+				<type>ToxGas</type>
+				<damageFactor>6</damageFactor>
+				<useStackCountAsFactor>true</useStackCountAsFactor>
+			</li>
+			<li Class="CompProperties_Dissolution">							<!-- one in X / 60 * Y  years  = 5 years indoors -->
+				<dissolutionAfterDays>150</dissolutionAfterDays>			<!-- X  -->
+				<dissolutinFactorIndoors>0.5</dissolutinFactorIndoors>		<!-- y  -->
+				<dissolutionFactorRain>2</dissolutionFactorRain>
+			</li>
+			<li Class="CompProperties_DissolutionEffectPollution">
+				<cellsToPollutePerDissolution>18</cellsToPollutePerDissolution>
+				<tilePollutionPerDissolution>0.0015</tilePollutionPerDissolution>
+				<waterTilePollutionFactor>24</waterTilePollutionFactor>
+			</li>
+			<li>
+				<compClass>CompDissolutionEffect_Goodwill</compClass>
+			</li>
+		</comps>
+		<tickerType>Normal</tickerType>
+	</ThingDef>
+
+	<!-- Compress Waste -->
+	<RecipeDef>
+		<defName>AV_ContainToxicWaste</defName>
+		<label>seal toxic waste</label>
+		<description>Seal toxic wastepacks in a steel canister to contain it for a long time.</description>
+		<researchPrerequisite>AV_WasteContainment</researchPrerequisite>
+		<jobString>Seal toxic waste.</jobString>
+		<workAmount>1000</workAmount>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_Machining</soundWorking>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Wastepack</li>
+					</thingDefs>
+				</filter>
+				<count>3</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>15</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>Wastepack</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<workSkill>Crafting</workSkill>
+		<skillRequirements>
+			<Crafting>5</Crafting>
+		</skillRequirements>
+		<products>
+			<AV_CompressedWaste>1</AV_CompressedWaste>
+		</products>
+		<displayPriority>1430</displayPriority>
+		<recipeUsers>
+			<li>TableMachining</li>
+			<li>ElectricSmithy</li>
+			<li>FueledSmithy</li>
+		</recipeUsers>
+	</RecipeDef>
+
+	<!-- Open Wastecontainer -->
+	<RecipeDef>
+		<defName>AV_OpenToxicWaste</defName>
+		<label>open toxic wastecontainer</label>
+		<description>Open a sealed toxic wastecontainer to reclaim small steel amounts.</description>
+		<researchPrerequisite>AV_WasteContainment</researchPrerequisite>
+		<jobString>Seal toxic waste.</jobString>
+		<workAmount>100</workAmount>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_Machining</soundWorking>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>AV_CompressedWaste</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>AV_CompressedWaste</li>			
+			</thingDefs>
+		</fixedIngredientFilter>
+		<workSkill>Crafting</workSkill>
+		<skillRequirements>
+			<Crafting>2</Crafting>
+		</skillRequirements>
+		<products>
+			<Wastepack>3</Wastepack>
+			<Steel>5</Steel>
+		</products>
+		<displayPriority>1431</displayPriority>
+		<recipeUsers>
+			<li>TableMachining</li>
+		</recipeUsers>
+	</RecipeDef>
+
+</Defs>

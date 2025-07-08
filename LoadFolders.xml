@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<loadFolders>
+	<v1.5>
+		<li>/</li>
+		<li>1.5</li>
+		<li IfModActive="Ludeon.RimWorld.Ideology">1.5/Mods/Ideology</li>
+		<li IfModActive="Ludeon.RimWorld.Royalty">1.5/Mods/Royalty</li>
+		<li IfModActive="Ludeon.RimWorld.Anomaly">1.5/Mods/Anomaly</li>
+		
+		<li IfModActive="Erin.Body.Texture">1.5/Mods/ErinsBodyRetexture</li>
+		<li IfModNotActive="Erin.Body.Texture">1.5/Mods/NoErinsBodyRetexture</li>
+		<li IfModActive="Mlie.RecycleThis">1.5/Mods/RecycleThis</li>
+		<li IfModActive="VanillaExpanded.HelixienGas">1.5/Mods/Helixien</li>
+	</v1.5>
+	<v1.6>
+		<li>/</li>
+		<li>1.6</li>
+		<li IfModActive="Ludeon.RimWorld.Ideology">1.6/Mods/Ideology</li>
+		<li IfModActive="Ludeon.RimWorld.Royalty">1.6/Mods/Royalty</li>
+		<li IfModActive="Ludeon.RimWorld.Anomaly">1.6/Mods/Anomaly</li>
+		
+		<li IfModActive="Erin.Body.Texture">1.6/Mods/ErinsBodyRetexture</li>
+		<li IfModNotActive="Erin.Body.Texture">1.6/Mods/NoErinsBodyRetexture</li>
+		<li IfModActive="Mlie.RecycleThis">1.6/Mods/RecycleThis</li>
+		<li IfModActive="VanillaExpanded.HelixienGas">1.6/Mods/Helixien</li>
+	 	
+
+		
+		
+		<!--<li IfModActive="Veltaris.Pyrophobia">1.5/Mods/Anomaly</li>-->
+		
+	</v1.6>
+</loadFolders>

@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	
+	<!-- subdermal thermal plating -->
+	
+	<HediffDef ParentName="ImplantHediffBase">
+		<defName>AV_ThermalPlating</defName>
+		<label>thermal plating</label>
+		<labelNoun>a thermal plating</labelNoun>
+		<description>An installed subdermal thermal plating.</description>
+		<descriptionHyperlinks><ThingDef>AV_ThermalPlating</ThingDef></descriptionHyperlinks>
+		<spawnThingOnRemoved>AV_ThermalPlating</spawnThingOnRemoved>
+		<stages>
+			<li>
+				<capMods>
+					<li>
+						<capacity>Moving</capacity>
+						<postFactor>0.95</postFactor>
+					</li>
+				</capMods>
+				<statOffsets>
+					<ComfyTemperatureMin>-30</ComfyTemperatureMin>		<!-- minus = good -->
+					<ComfyTemperatureMax>-10</ComfyTemperatureMax>		<!-- plus = good -->
+					<ArmorRating_Sharp>0.05</ArmorRating_Sharp>
+					<ArmorRating_Blunt>0.05</ArmorRating_Blunt>
+					<ArmorRating_Heat>0.1</ArmorRating_Heat>
+					<ImmunityGainSpeed>-0.02</ImmunityGainSpeed>
+				</statOffsets>
+			</li>
+		</stages>
+		<tags><li>ArmorGland</li></tags>
+	</HediffDef>
+
+	<ThingDef ParentName="BodyPartBionicBase">
+		<defName>AV_ThermalPlating</defName>
+		<label>thermal plating</label>
+		<description>This subdermal plating releases heat, increasing its carriers adaptivity to cold temperatures while reducing them to hot temperatures. Provides a bit of protection.</description>
+		<descriptionHyperlinks><RecipeDef>AV_InstallThermalPlating</RecipeDef></descriptionHyperlinks>
+		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+		<costList>
+			<Plasteel>15</Plasteel>
+			<ComponentSpacer>4</ComponentSpacer>
+			<SubcoreRegular>1</SubcoreRegular>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>AV_SubdermalImplants</researchPrerequisite>
+		</recipeMaker>
+		<tradeTags>	
+			<li>AV_Mechtech</li>
+		</tradeTags>
+		<tradeability>All</tradeability>
+	</ThingDef>
+
+	<RecipeDef ParentName="SurgeryInstallImplantBase">
+		<defName>AV_InstallThermalPlating</defName>
+		<label>install thermal plating</label>
+		<description>Install a subdermal thermal plating.</description>
+		<descriptionHyperlinks>
+			<ThingDef>AV_ThermalPlating</ThingDef>
+			<HediffDef>AV_ThermalPlating</HediffDef>
+		</descriptionHyperlinks>
+		<jobString>Installing thermal plating.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>AV_ThermalPlating</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>AV_ThermalPlating</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>Torso</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>AV_ThermalPlating</addsHediff>
+		<incompatibleWithHediffTags>
+			<li>ArmorGland</li>
+		</incompatibleWithHediffTags>
+	</RecipeDef>
+  
+	<RecipeDef ParentName="SurgeryRemoveImplantBase">
+		<defName>AV_RemoveThermalPlating</defName>
+		<label>remove thermal plating</label>
+		<description>Remove thermal plating.</description>
+		<descriptionHyperlinks>
+			<ThingDef>AV_ThermalPlating</ThingDef>
+			<HediffDef>AV_ThermalPlating</HediffDef>
+		</descriptionHyperlinks>
+		<jobString>Removing thermal plating.</jobString>
+		<removesHediff>AV_ThermalPlating</removesHediff>
+	</RecipeDef>
+
+
+	<!-- subdermal frigid plating -->
+	
+	<HediffDef ParentName="ImplantHediffBase">
+		<defName>AV_FrigidPlating</defName>
+		<label>frigid plating</label>
+		<labelNoun>a frigid plating</labelNoun>
+		<description>An installed subdermal frigid plating.</description>
+		<descriptionHyperlinks><ThingDef>AV_FrigidPlating</ThingDef></descriptionHyperlinks>
+		<spawnThingOnRemoved>AV_FrigidPlating</spawnThingOnRemoved>
+		<stages>
+			<li>
+				<capMods>
+					<li>
+						<capacity>Moving</capacity>
+						<postFactor>0.95</postFactor>
+					</li>
+				</capMods>
+				<statOffsets>
+					<ComfyTemperatureMin>10</ComfyTemperatureMin>		<!-- minus = good -->
+					<ComfyTemperatureMax>30</ComfyTemperatureMax>		<!-- plus = good -->
+					<ArmorRating_Sharp>0.05</ArmorRating_Sharp>
+					<ArmorRating_Blunt>0.05</ArmorRating_Blunt>
+					<!-- <ArmorRating_Heat>0.0</ArmorRating_Heat> -->
+					<ImmunityGainSpeed>-0.02</ImmunityGainSpeed>
+				</statOffsets>
+			</li>
+		</stages>
+		<tags><li>ArmorGland</li></tags>
+	</HediffDef>
+
+	<ThingDef ParentName="BodyPartBionicBase">
+		<defName>AV_FrigidPlating</defName>
+		<label>frigid plating</label>
+		<description>This subdermal plating cools the body, increasing its carrier adaptivity to hot temperatures while reducing them to cold temperatures. Provides a bit of protection.</description>
+		<descriptionHyperlinks><RecipeDef>AV_InstallFrigidPlating</RecipeDef></descriptionHyperlinks>
+		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+		<costList>
+			<Plasteel>15</Plasteel>
+			<ComponentSpacer>4</ComponentSpacer>
+			<SubcoreRegular>1</SubcoreRegular>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>AV_SubdermalImplants</researchPrerequisite>
+		</recipeMaker>
+		<tradeTags>	
+			<li>AV_Mechtech</li>
+		</tradeTags>
+		<tradeability>All</tradeability>
+	</ThingDef>
+
+	<RecipeDef ParentName="SurgeryInstallImplantBase">
+		<defName>AV_InstallFrigidPlating</defName>
+		<label>install frigid plating</label>
+		<description>Install a subdermal frigid plating.</description>
+		<descriptionHyperlinks>
+			<ThingDef>AV_FrigidPlating</ThingDef>
+			<HediffDef>AV_FrigidPlating</HediffDef>
+		</descriptionHyperlinks>
+		<jobString>Installing frigid plating.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>AV_FrigidPlating</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>AV_FrigidPlating</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>Torso</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>AV_FrigidPlating</addsHediff>
+		<incompatibleWithHediffTags>
+			<li>ArmorGland</li>
+		</incompatibleWithHediffTags>
+	</RecipeDef>
+  
+	<RecipeDef ParentName="SurgeryRemoveImplantBase">
+		<defName>AV_RemoveFrigidPlating</defName>
+		<label>remove frigid plating</label>
+		<description>Remove frigid plating.</description>
+		<descriptionHyperlinks>
+			<ThingDef>AV_FrigidPlating</ThingDef>
+			<HediffDef>AV_FrigidPlating</HediffDef>
+		</descriptionHyperlinks>
+		<jobString>Removing frigid plating.</jobString>
+		<removesHediff>AV_FrigidPlating</removesHediff>
+	</RecipeDef>
+
+
+	<!-- subdermal armor -->
+
+	<HediffDef ParentName="ImplantHediffBase">
+		<defName>AV_SubdermalArmor</defName>
+		<label>subdermal armor</label>
+		<labelNoun>a subdermal armor</labelNoun>
+		<description>An installed subdermal armor.</description>
+		<descriptionHyperlinks><ThingDef>AV_SubdermalArmor</ThingDef></descriptionHyperlinks>
+		<spawnThingOnRemoved>AV_SubdermalArmor</spawnThingOnRemoved>
+		<stages>
+			<li>
+				<capMods>
+					<li>
+						<capacity>Moving</capacity>
+						<postFactor>0.95</postFactor>
+					</li>
+				</capMods>				
+				<statOffsets>
+					<IncomingDamageFactor>-0.15</IncomingDamageFactor>
+					<ArmorRating_Heat>0.25</ArmorRating_Heat>
+					<ImmunityGainSpeed>-0.02</ImmunityGainSpeed>
+				</statOffsets>
+			</li>
+		</stages>
+		<tags><li>ArmorGland</li></tags>
+	</HediffDef>
+
+	<ThingDef ParentName="BodyPartBionicBase">
+		<defName>AV_SubdermalArmor</defName>
+		<label>subdermal armor</label>
+		<description>This subdermal armor implant makes the carrier more resistant to damage across their whole body, at the price of interfering with the immune system.</description>
+		<descriptionHyperlinks><RecipeDef>AV_InstallSubdermalArmor</RecipeDef></descriptionHyperlinks>
+		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+		<costList>
+			<Plasteel>60</Plasteel>
+			<ComponentSpacer>4</ComponentSpacer>
+			<SubcoreRegular>1</SubcoreRegular>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>AV_SubdermalImplants</researchPrerequisite>
+		</recipeMaker>
+		<tradeTags>	
+			<li>AV_Mechtech</li>
+		</tradeTags>
+		<tradeability>All</tradeability>
+	</ThingDef>
+
+	<RecipeDef ParentName="SurgeryInstallImplantBase">
+		<defName>AV_InstallSubdermalArmor</defName>
+		<label>install subdermal armor</label>
+		<description>Install a subdermal armor.</description>
+		<descriptionHyperlinks>
+			<ThingDef>AV_SubdermalArmor</ThingDef>
+			<HediffDef>AV_SubdermalArmor</HediffDef>
+		</descriptionHyperlinks>
+		<jobString>Installing subdermal armor.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>AV_SubdermalArmor</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>AV_SubdermalArmor</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>Torso</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>AV_SubdermalArmor</addsHediff>
+		<incompatibleWithHediffTags>
+			<li>ArmorGland</li>
+		</incompatibleWithHediffTags>
+	</RecipeDef>
+  
+	<RecipeDef ParentName="SurgeryRemoveImplantBase">
+		<defName>AV_RemoveSubdermalArmor</defName>
+		<label>remove subderrmal armor</label>
+		<description>Remove subdermal armor.</description>
+		<descriptionHyperlinks>
+			<ThingDef>AV_SubdermalArmor</ThingDef>
+			<HediffDef>AV_SubdermalArmor</HediffDef>
+		</descriptionHyperlinks>
+		<jobString>Removing subdermal armor.</jobString>
+		<removesHediff>AV_SubdermalArmor</removesHediff>
+	</RecipeDef>
+
+
+	<!-- pain reducer -->
+  
+	<HediffDef ParentName="ImplantHediffBase">
+		<defName>AV_PainReducer</defName>
+		<label>painreducer</label>
+		<labelNoun>a painreducer</labelNoun>
+		<description>An installed painreducer.</description>
+		<descriptionHyperlinks><ThingDef>AV_PainReducer</ThingDef></descriptionHyperlinks>
+		<spawnThingOnRemoved>AV_PainReducer</spawnThingOnRemoved>
+		<priceOffset>0</priceOffset>
+		<stages>
+			<li>
+				<painFactor>0.5</painFactor>
+				<!-- 
+				<statOffsets>
+					<PainShockThreshold>0.30</PainShockThreshold>
+				</statOffsets>
+				 -->
+				<!-- normal pawns have 80% pain threshold, so +30% makes them immune... -->
+			</li>
+		</stages>
+	</HediffDef>
+
+	<ThingDef ParentName="BodyPartBionicBase">
+		<defName>AV_PainReducer</defName>
+		<label>painreducer</label>
+		<description>A brain implant which reduces the users pain sensitivity by moving parts of the pain signal to a subcore instead of to the brain.</description>	
+		<descriptionHyperlinks><RecipeDef>AV_InstallPainReducer</RecipeDef></descriptionHyperlinks>
+		<thingSetMakerTags><li>RewardStandardLowFreq</li></thingSetMakerTags>
+		<costList>
+			<Steel>15</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<SubcoreHigh>1</SubcoreHigh>
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>AV_SubdermalImplants</researchPrerequisite>
+		</recipeMaker>
+		<tradeTags>	
+			<li>AV_Mechtech</li>
+		</tradeTags>
+		<tradeability>All</tradeability>
+	</ThingDef>
+
+	<RecipeDef ParentName="SurgeryInstallImplantBase">
+		<defName>AV_InstallPainReducer</defName>
+		<label>install painreducer</label>
+		<description>Install a painreducer.</description>
+		<descriptionHyperlinks>
+			<ThingDef>AV_PainReducer</ThingDef>
+			<HediffDef>AV_PainReducer</HediffDef>
+		</descriptionHyperlinks>
+		<jobString>Installing painreducer.</jobString>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>AV_PainReducer</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>AV_PainReducer</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<appliedOnFixedBodyParts>
+			<li>Brain</li>
+		</appliedOnFixedBodyParts>
+		<addsHediff>AV_PainReducer</addsHediff>
+	</RecipeDef>
+
+	<RecipeDef ParentName="SurgeryRemoveImplantBase">
+		<defName>AV_RemovePainReducer</defName>
+		<label>remove painreducer</label>
+		<description>Remove painreducer.</description>
+		<descriptionHyperlinks>
+			<ThingDef>AV_PainReducer</ThingDef>
+			<HediffDef>AV_PainReducer</HediffDef>
+		</descriptionHyperlinks>
+		<jobString>Removing painreducer.</jobString>
+		<removesHediff>AV_PainReducer</removesHediff>
+	</RecipeDef>
+
+
+</Defs>

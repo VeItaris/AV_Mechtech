@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+
+	<!-- Scrapper -->  
+    <ThingDef ParentName="LightMechanoid">
+		<defName>AV_Mech_Scrapper</defName>
+		<label>Scrapper</label>
+		<description>A small mechanoid built for mining in treacherous locations. It is slow but can deal with blunt impacts quite well and comes with an inbuild jetpack. Originaly designed on generation ships for asteroid mining it was also used as an civilian security force.</description>
+		<statBases>
+			<MoveSpeed>1.9</MoveSpeed>		
+			<MarketValue>800</MarketValue>
+			<ArmorRating_Blunt>0.60</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.20</ArmorRating_Sharp>
+			<MechEnergyLossPerHP>0.66</MechEnergyLossPerHP>
+			<BandwidthCost>1</BandwidthCost>
+			<WastepacksPerRecharge>5</WastepacksPerRecharge>	<!-- x bandwidth for real result-->	
+		</statBases>
+		<race>
+		    <deathAction>
+				<workerClass>AV_Mechtech.DeathActionWorker_SmokeExplosion</workerClass>
+			</deathAction>
+			<mechEnabledWorkTypes>   
+				<li>Crafting</li>			
+				<li>Mining</li>
+				<li>BasicWorker</li>
+				<li>Firefighter</li>
+				 <li MayRequire="Mlie.RecycleThis">RecycleThis_Recycle</li> 	
+				 <li MayRequire="Ogliss.TheWhiteCrayon.Quarry" >QuarryMining</li>
+			</mechEnabledWorkTypes>
+			<maxMechEnergy>100</maxMechEnergy>
+			<mechFixedSkillLevel>4</mechFixedSkillLevel>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Militor_Death</soundDeath>
+					<soundCall>Pawn_Mech_Militor_Call</soundCall>
+				</li>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Militor_Death</soundDeath>
+					<soundCall>Pawn_Mech_Militor_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<bulletStaggerEffecterDef>TunnelerSlowedDown</bulletStaggerEffecterDef>
+		</race>
+		<modExtensions>
+			<li Class="AV_Framework.MechCanUseMortar"></li>
+		</modExtensions>
+    </ThingDef>
+  
+    <PawnKindDef ParentName="LightMechanoidKind">
+		<defName>AV_Mech_Scrapper</defName>
+		<label>scrapper</label>
+		<race>AV_Mech_Scrapper</race>
+		<combatPower>10</combatPower>
+		<isFighter>false</isFighter>	<!-- should not be in raids now?-->
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/AV_Scrapper</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Mech_Scapper</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.25</drawSize>
+					<shadowData>
+						<volume>(0.3, 0.4, 0.3)</volume>
+						<offset>(0,0,-0.25)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/AV_ScrapperAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/Mech_Scapper</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.25</drawSize>
+					<shadowData>
+						<volume>(0.3, 0.4, 0.3)</volume>
+						<offset>(0,0,-0.25)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<abilities>
+			<li>LongjumpMechLauncher</li>	
+		</abilities> 
+    </PawnKindDef>
+
+	<RecipeDef ParentName="BaseMechanoidRecipe">
+        <defName>AV_Gestate_Scrapper</defName>
+        <label>gestate scrapper</label>
+        <description>Gestate a scrapper mechanoid.</description>
+		<researchPrerequisite>AV_Compressed_Mechtech</researchPrerequisite>
+        <ingredients Inherit="False">
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>40</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Plasteel</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>SubcoreBasic</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+		</ingredients>
+        <products>
+            <AV_Mech_Scrapper>1</AV_Mech_Scrapper>
+        </products>
+        <descriptionHyperlinks>
+            <ThingDef>AV_Mech_Scrapper</ThingDef>
+        </descriptionHyperlinks>
+    </RecipeDef>
+
+</Defs>

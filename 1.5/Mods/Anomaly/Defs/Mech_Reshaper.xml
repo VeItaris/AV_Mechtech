@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- Reshaper -->  
+    <ThingDef ParentName="LightMechanoid">
+		<defName>AV_Mech_Reshaper</defName>
+		<label>Reshaper</label>
+		<description>A small combat mechanoid that formed a symbiotic relationship with an anomaly. Its core is a shard of ominous power possessed by a sinistre. Although it is not very strong on its own, it can harness the power of its sinistre and grows stronger as the connection becomes closer. However, like any power, it comes with a cost: If the sinistre is not fed with bioferrite or shards, it may turn against its owner. These not-so-rare mistakes are the reason why a bioferrite-storing mechanoid is used as a host for the sinistre and not a human.\n\nBioferrite needs to be refilled by another creature by hand.\n\n&lt;color=#f8f32b&gt;Gameplay note:&lt;/color&gt;\nWhen the sinistre is attached to the mech, it will use its power as soon as the mechanoid is destroyed, reshaping the mech and using any bioferrite stored in the mech to continue fighting, after which the sinistre disappears.\nIt will reattach itself after around a day.</description>
+		<statBases>
+			<MoveSpeed>4.8</MoveSpeed>	<!-- very fast, Impids from Sanguophage Hunters have 7.6 when buffed -->
+			<MarketValue>800</MarketValue>
+			<ArmorRating_Blunt>0.20</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.40</ArmorRating_Sharp> 
+			<BandwidthCost>2</BandwidthCost>
+			<WastepacksPerRecharge>2.5</WastepacksPerRecharge>	<!-- x bandwidth for real result-->
+		</statBases>
+		<race>
+			<baseHealthScale>0.8</baseHealthScale>
+			<maxMechEnergy>100</maxMechEnergy>
+			<mechFixedSkillLevel>10</mechFixedSkillLevel>
+			<body>Lancer</body>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Militor_Death</soundDeath>
+					<soundCall>Pawn_Mech_Militor_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<deathAction Class="AV_Mechtech.DeathActionProperties_Reshaper">
+				<dividePawnKindOptions>
+					<li>AV_Apparition</li>
+				</dividePawnKindOptions>
+				<neededResources>20</neededResources>
+			</deathAction>
+			<ageGenerationCurve>
+				<points>
+					<li>(0,0)</li>
+					<li>(1,130)</li>
+					<li>(5,100)</li>
+					<li>(6,0)</li>
+				</points>
+			</ageGenerationCurve>
+			<renderTree>AV_RenderTreeReshaper</renderTree>
+		</race>
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_GiveHediffsWhenAlive_Reshaper">
+				<compClass>AV_Mechtech.Comp_GiveHediffsWhenAlive_Reshaper</compClass>
+				<hediff>AV_SinistreMechDeathRefusal</hediff>		
+				<UseCooldown>true</UseCooldown>
+				<CooldownTicks>60000</CooldownTicks>
+				<NeedsGraphicUpdate>true</NeedsGraphicUpdate>
+			</li>
+			<li Class="AV_Framework.CompProperties_MechReloadableResourceHolder">
+				<compClass>AV_Framework.CompMechReloadableResourceHolder</compClass>
+				<fixedIngredient>Bioferrite</fixedIngredient>		
+				<maxIngredientCount>60</maxIngredientCount>	
+				<startingIngredientCountAI>40~60</startingIngredientCountAI>
+				<startingIngredientCountPlayer>0</startingIngredientCountPlayer>
+				<removeResourcesOnDeath>false</removeResourcesOnDeath>	<!-- DeathAction still needs them to trigger --> 
+				<refillGizmoTextPath>UI/Gizmos/AV_AllowRefill_Bioferrite</refillGizmoTextPath>
+				<needsGraphicUpdate>true</needsGraphicUpdate>
+				<showAdvancedRefillGizmo>true</showAdvancedRefillGizmo>
+				<showEjectGizmo>true</showEjectGizmo>
+				<refillColor>(0.19, 0.16, 0.16)</refillColor> <!-- 50 | 40 | 40 -->
+				<refillColorHighlight>(0.32, 0.16, 0.16)</refillColorHighlight> <!-- 80 | 40 | 40 -->
+			</li>
+			<li Class="AV_Mechtech.CompProperties_WanderingSinistre">
+				<pawnKindDef>AV_Sinistre</pawnKindDef>		
+				<TimeToSpawn>600000~120000</TimeToSpawn><!-- average 900000 = 15 days --> 
+				<pawnKindDefShadow>AV_Apparition</pawnKindDefShadow>
+			</li>
+		</comps>
+		<tools>
+			<li>
+				<label>spike</label>
+				<labelNoLocation>spike</labelNoLocation>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>12</power>
+				<cooldownTime>1.8</cooldownTime>
+				<!-- <linkedBodyPartsGroup>LeftSpike</linkedBodyPartsGroup> --> 
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+				<!--	<soundMeleeHit>Pawn_Fleshbeast_Attack_Spike</soundMeleeHit>
+				--> 			
+			</li>
+		</tools>
+    </ThingDef>
+  
+    <PawnKindDef ParentName="LightMechanoidKind">
+		<defName>AV_Mech_Reshaper</defName>
+		<label>reshaper</label>
+		<race>AV_Mech_Reshaper</race>
+		<combatPower>80</combatPower>	<!-- Trispike is 90 / metalhorror is 300--> 
+		<isFighter>false</isFighter>	<!-- will be in mechraids and ancient dangers when true, add under factiondef instead when needed as a fighter --> 
+		<forceDeathOnDowned>true</forceDeathOnDowned>
+		<minGenerationAge>1</minGenerationAge>
+		<maxGenerationAge>5</maxGenerationAge>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<!-- texPath & maskPath are only used for UI, the mech itself is drawn with a custom rendertree --> 
+					<texPath>Things/Pawn/Mechanoid/AV_Reshaper/AV_Reshaper</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/AV_Reshaper</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.5</drawSize>
+					<shadowData>
+						<volume>(0.45, 0.55, 0.45)</volume>
+						<offset>(0,0,0)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<abilities>
+			<li>AV_CallSinistreShadows</li>
+			<li>AV_CallSinistre</li>
+			<li>AV_CallBackSinistre</li>
+			<li>AV_SinistreOvertake</li>
+		</abilities>
+		
+    </PawnKindDef>
+
+	<RecipeDef ParentName="BaseMechanoidRecipe">
+        <defName>AV_Gestate_Reshaper</defName>
+        <label>gestate reshaper</label>
+        <description>Gestate a reshaper mechanoid.</description>
+		<researchPrerequisites>
+			<li>AV_Compressed_Mechtech</li>
+			<!-- <li>BioferriteShaping</li> should this really be locked behind the monolith? --> 
+		</researchPrerequisites>
+        <ingredients Inherit="False">
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>75</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Bioferrite</li>
+                    </thingDefs>
+                </filter>
+                <count>50</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Shard</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+			<li>
+                <filter>
+                    <thingDefs>
+                        <li>SubcoreBasic</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+        </ingredients>
+        <products>
+            <AV_Mech_Reshaper>1</AV_Mech_Reshaper>
+        </products>
+        <descriptionHyperlinks>
+            <ThingDef>AV_Mech_Reshaper</ThingDef>
+        </descriptionHyperlinks>
+    </RecipeDef>
+
+
+	<!-- rendertree --> 
+	<PawnRenderTreeDef>
+		<defName>AV_RenderTreeReshaper</defName>
+			<root Class="PawnRenderNodeProperties_Parent">
+			<debugLabel>Root</debugLabel>
+			<tagDef>Root</tagDef>
+			<children>
+				<li>
+					<debugLabel>Body</debugLabel>
+					<tagDef>Body</tagDef>
+					<nodeClass>AV_Mechtech.PawnRenderNodeReshaper</nodeClass>
+					<useRottenColor>true</useRottenColor>
+					<children>
+						<li>
+							<debugLabel>Wounds</debugLabel>
+							<nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+							<workerClass>PawnRenderNodeWorker_OverlayWounds</workerClass>
+							<overlayLayer>Body</overlayLayer>
+							<useGraphic>false</useGraphic>
+							<baseLayer>3</baseLayer>
+						</li>
+						<li>
+							<debugLabel>Firefoam</debugLabel>
+							<nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+							<workerClass>PawnRenderNodeWorker_OverlayFirefoam</workerClass>
+							<overlayLayer>Body</overlayLayer>
+							<useGraphic>false</useGraphic>
+							<baseLayer>5</baseLayer>
+						</li>
+						<li>
+							<debugLabel>AV_Reshaping_AboveMech</debugLabel>
+							<nodeClass>AV_Mechtech.PawnRenderNode_MechReshapingAbove</nodeClass>
+							<workerClass>AV_Mechtech.PawnRenderNodeWorker_Reshaping</workerClass>
+							<overlayLayer>Body</overlayLayer>
+							<useGraphic>true</useGraphic>
+							<baseLayer>10</baseLayer> 
+						</li>
+						<li>
+							<debugLabel>AV_Reshaping_BelowMech</debugLabel>
+							<nodeClass>AV_Mechtech.PawnRenderNode_MechReshapingBelow</nodeClass>
+							<workerClass>AV_Mechtech.PawnRenderNodeWorker_Reshaping</workerClass>
+							<overlayLayer>Body</overlayLayer>
+							<useGraphic>true</useGraphic>
+							<baseLayer>-5</baseLayer>
+						</li>
+					</children>
+				</li>
+				<li Class="PawnRenderNodeProperties_Carried">
+					<debugLabel>Weapon/carried thing</debugLabel>
+					<workerClass>PawnRenderNodeWorker_Carried</workerClass>
+				</li>
+			</children>
+		</root>
+	</PawnRenderTreeDef>
+
+
+	<!-- mech reforming --> 
+	<HediffDef>
+		<defName>AV_SinistreMechDeathRefusal</defName>
+		<label>sinistre reforming</label>
+		<hediffClass>AV_Mechtech.Hediff_MechDeathRefusal</hediffClass>
+		<description>This mech is infused with the power of a sinistre which allows it to reform after it is destroyed. This can only be done a certain number of times.</description>
+		<isBad>false</isBad>
+		<showGizmosOnCorpse>true</showGizmosOnCorpse>
+		<comps>
+			<li Class="AV_Framework.HediffCompPropertie_UpdateGraphic"/>
+		</comps>
+	</HediffDef>
+
+
+
+	<!-- call sinistre --> 
+	<AbilityDef>
+		<defName>AV_CallSinistre</defName>
+		<label>release sinistre</label>
+		<description>Release the sinistre.\n&lt;color=#f8f32b&gt;Consumes 30 bioferrite.&lt;/color&gt;</description>
+		<iconPath>UI/Abilities/AV_CallSinistre</iconPath>
+		<targetRequired>false</targetRequired>
+		<hostile>false</hostile>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<aiCanUse>false</aiCanUse>
+		<showOnCharacterCard>true</showOnCharacterCard>
+		<cooldownTicksRange>120000</cooldownTicksRange>	<!-- 2 days --> 
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>1</warmupTime>
+			<range>-1</range>
+			<drawAimPie>false</drawAimPie>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_AbilityCallSinistre"/>
+		</comps>
+	</AbilityDef>
+  
+  
+  	<!-- call back sinistre --> 
+	<AbilityDef>
+		<defName>AV_CallBackSinistre</defName>
+		<label>call back sinistre</label>
+		<description>Reattaches the sinistre to its mech.</description>
+		<iconPath>UI/Abilities/AV_CallSinistre</iconPath>
+		<targetRequired>false</targetRequired>
+		<hostile>false</hostile>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<aiCanUse>false</aiCanUse>
+		<showOnCharacterCard>true</showOnCharacterCard>
+		<cooldownTicksRange>60</cooldownTicksRange>	<!-- nothing --> 
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>1</warmupTime>
+			<range>-1</range>
+			<drawAimPie>false</drawAimPie>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_AbilityCallBackSinistre"/>
+		</comps>
+	</AbilityDef>
+  
+  
+  	<!-- call shadows --> 
+	<AbilityDef>
+		<defName>AV_CallSinistreShadows</defName>
+		<label>call apparitions</label>
+		<description>Call apparitions to attack your enemies.\n&lt;color=#f8f32b&gt;Consumes 15 bioferrite per apparition.&lt;/color&gt;</description>
+		<iconPath>UI/Abilities/AV_CallShadows</iconPath>
+		<targetRequired>false</targetRequired>
+		<hostile>false</hostile>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<aiCanUse>false</aiCanUse>
+		<showOnCharacterCard>true</showOnCharacterCard>
+		<cooldownTicksRange>12000</cooldownTicksRange>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>1</warmupTime>
+			<range>-1</range>
+			<drawAimPie>false</drawAimPie>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_AbilityCallSinistreShadows"/>
+		</comps>
+	</AbilityDef>
+ 
+  	<!-- sinistre overtake --> 
+	<AbilityDef>
+		<defName>AV_SinistreOvertake</defName>
+		<label>sinistre overtake</label>
+		<description>The sinistre will take over controll of this mech.\n- drafts the mech - no controll range limit\n- increased damage\n&lt;color=#f8f32b&gt;Consumes 30 bioferrite.&lt;/color&gt;</description>
+		<iconPath>UI/Abilities/AV_SinistreTakeover</iconPath>
+		<targetRequired>false</targetRequired>
+		<hostile>false</hostile>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<aiCanUse>false</aiCanUse>
+		<showOnCharacterCard>true</showOnCharacterCard>
+		<cooldownTicksRange>24000</cooldownTicksRange>
+		<showWhenDrafted>true</showWhenDrafted>
+		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>0.5</warmupTime>
+			<range>-1</range>
+			<drawAimPie>false</drawAimPie>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_AbilitySinistreOvertake"/>
+			<!-- 
+			<li Class="CompProperties_AbilityGiveHediff">
+			    <compClass>CompAbilityEffect_GiveHediff</compClass>
+				<hediffDef>AV_SinistreOvertake</hediffDef>
+				<applyToSelf>true</applyToSelf>
+				<onlyApplyToSelf>true</onlyApplyToSelf>
+				<severity>1</severity>
+				<replaceExisting>true</replaceExisting>
+			</li> --> 
+		</comps>
+	</AbilityDef>
+
+	<!-- sinistre overtake buff --> 
+	<HediffDef>
+		<defName>AV_SinistreOvertake</defName>
+		<label>sinistre overtake</label>
+		<hediffClass>HediffWithComps</hediffClass>
+		<description>This mech is completly controlled and infused with the power of a sinistre. It can be drafted even when its overseer is downed and ignores its overseers control range. Becomes uncontrollable should the overseer die.</description>
+		<isBad>false</isBad>
+		<minSeverity>0</minSeverity>
+		<maxSeverity>1</maxSeverity>
+		<stages>
+			<li>
+				<minSeverity>0</minSeverity>	
+			</li>
+			<li>
+				<minSeverity>1</minSeverity>
+				<statFactors>
+					<IncomingDamageFactor>0.75</IncomingDamageFactor>
+					<MeleeDamageFactor>1.5</MeleeDamageFactor>
+				</statFactors>								
+			</li>
+		</stages>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>12000~16000</disappearsAfterTicks>
+				<showRemainingTime>true</showRemainingTime>
+				<messageOnDisappear>the sinistre is no longer controlling its host mechanoid.</messageOnDisappear>
+			</li>
+			<li Class="AV_Framework.HediffCompPropertie_UpdateGraphic"/>
+			<li Class="HediffCompProperties_DisappearsOnDeath"/>
+		</comps>
+		
+	</HediffDef>
+
+	<!-- sinistre skip 
+	<AbilityDef ParentName="PsycastBaseSkip">
+		<defName>AV_SinistreSkip</defName>
+		<label>skip</label>
+		<description>Teleport the target to a desired position not too far from its starting point. Objects which are too large cannot be teleported.</description>
+		<level>4</level>
+		<iconPath>UI/Abilities/Skip</iconPath>
+		<writeCombatLog>True</writeCombatLog>
+		<showPsycastEffects>False</showPsycastEffects>
+		<hotKey>Misc9</hotKey>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<statBases>
+			<Ability_EntropyGain>25</Ability_EntropyGain>
+			<Ability_PsyfocusCost>0.02</Ability_PsyfocusCost>
+		</statBases>
+		<verbProperties>
+			<warmupTime>0.25</warmupTime>
+			<range>27.9</range>
+			<targetParams>
+				<canTargetSelf>True</canTargetSelf>
+				<canTargetAnimals>True</canTargetAnimals>
+				<canTargetItems>True</canTargetItems>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class = "CompProperties_AbilityTeleport">
+				<compClass>CompAbilityEffect_Teleport</compClass>
+				<destination>Selected</destination>
+				<requiresLineOfSight>True</requiresLineOfSight>
+				<range>27.9</range>
+				<clamorType>Ability</clamorType>
+				<clamorRadius>10</clamorRadius>
+				<destClamorType>Ability</destClamorType>
+				<destClamorRadius>10</destClamorRadius>
+				<stunTicks>18~60</stunTicks>
+				<goodwillImpact>-15</goodwillImpact>
+				<applyGoodwillImpactToLodgers>False</applyGoodwillImpactToLodgers>
+			</li>
+		</comps>
+	</AbilityDef>
+ --> 
+
+
+  <!--============= Satisfy bioferrite needs ============
+  
+  <ThinkTreeDef>
+    <defName>AV_SatisfyBioferriteNeeds</defName>
+    <thinkRoot Class="ThinkNode_Tagger">
+      <tagToGive>SatisfyingNeeds</tagToGive>
+      <subNodes>
+        <li Class="ThinkNode_PrioritySorter">
+          <subNodes>
+            <li Class="JobGiver_GetFood"/>
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef> 
+ -->
+ 
+ 
+</Defs>

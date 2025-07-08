@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- Neurill -->	
+	<ThingDef ParentName="MakeableDrugPillBase">
+		<defName>AV_Neurill</defName>
+		<label>neurill</label>
+		<description>A synthetic stimulant. Neurill changes the brains focus to concentrate on an installed mechlink making them far better mechanitors. However, taking neurill runs the risk of developing an addiction. Users without a mechlink are said to get a special high.</description>
+		<descriptionHyperlinks>
+			<HediffDef>AV_NeurillHigh</HediffDef>
+			<HediffDef>AV_NeurillAddiction</HediffDef>
+			<HediffDef>HeartAttack</HediffDef>
+		</descriptionHyperlinks>
+		<graphicData>
+			<texPath>Things/Item/Drug/AV_Neurill</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<rotatable>false</rotatable>
+		<statBases>
+			<WorkToMake>900</WorkToMake>
+			<MarketValue>15</MarketValue>
+			<Mass>0.005</Mass>
+		</statBases>
+		<techLevel>Industrial</techLevel>
+		<ingestible>
+			<joyKind>Chemical</joyKind>
+			<joy>0.30</joy>
+			<drugCategory>Hard</drugCategory>
+			<outcomeDoers>
+				<li Class="AV_Mechtech.IngestionOutcomeDoer_Neurill">
+					<hediffDef>AV_NeurillHigh</hediffDef>
+					<hediffDef_nonMechanitor>AV_NeurillHigh_nonMechanitor</hediffDef_nonMechanitor>
+					<severity>0.75</severity>
+					<toleranceChemical>AV_Neurill</toleranceChemical>
+				</li>
+			</outcomeDoers>
+		</ingestible>
+		<recipeMaker>
+			<researchPrerequisite>AV_Neutroamine_Production</researchPrerequisite>
+			<skillRequirements>
+				<Crafting>3</Crafting>
+			</skillRequirements>
+			<recipeUsers>
+				<li>DrugLab</li>
+			</recipeUsers>
+		</recipeMaker>
+		<costList>
+			<AV_Neurofoam>2</AV_Neurofoam>
+			<PsychoidLeaves>1</PsychoidLeaves>
+		</costList>
+		<tradeTags>	
+			<li>AV_Mechtech_Spacer</li>
+			<li>AV_Mechtech</li>
+		</tradeTags>
+		<comps>
+			<li Class="CompProperties_Drug">
+				<chemical>AV_Neurill</chemical>
+				<addictiveness>0.02</addictiveness>
+				<existingAddictionSeverityOffset>0.20</existingAddictionSeverityOffset>
+				<needLevelOffset>0.9</needLevelOffset>
+				<listOrder>210</listOrder>
+				<overdoseSeverityOffset>0.18~0.35</overdoseSeverityOffset>
+				<largeOverdoseChance>0.005</largeOverdoseChance>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<!-- Neurill High -->	
+	<HediffDef>
+		<defName>AV_NeurillHigh</defName>
+		<label>high on neurill</label>
+		<labelNoun>a neurill high</labelNoun>
+		<description>Neurill in the bloodstream. It increases focus for mechlink users.</description>
+		<hediffClass>Hediff_High</hediffClass>
+		<defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+		<scenarioCanAdd>true</scenarioCanAdd>
+		<maxSeverity>1.0</maxSeverity>
+		<isBad>false</isBad>
+		<comps>
+			<li Class="HediffCompProperties_SeverityPerDay">
+				<severityPerDay>-0.65</severityPerDay>		<!-- Neurill High -->
+				<showHoursToRecover>true</showHoursToRecover>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<!-- <offset>-0.1</offset> -->
+						<postFactor>0.95</postFactor>	
+					</li>
+				</capMods>
+				<statOffsets>
+					<MechBandwidth>8</MechBandwidth>
+					<WorkSpeedGlobalOffsetMech>0.10</WorkSpeedGlobalOffsetMech>
+					<PsychicSensitivity>0.2</PsychicSensitivity>	
+					<MechRepairSpeed>0.10</MechRepairSpeed>
+					<MechFormingSpeed>0.25</MechFormingSpeed>
+				</statOffsets>
+				<statFactors>
+					<!-- <RestFallRateFactor>0.8</RestFallRateFactor> -->
+				</statFactors>
+				<hediffGivers>
+					<li Class="HediffGiver_Random">
+						<hediff>HeartAttack</hediff>
+						<mtbDays>120</mtbDays>
+						<partsToAffect>
+							<li>Heart</li>
+						</partsToAffect>
+					</li>
+				</hediffGivers>
+			</li>
+		</stages>
+	</HediffDef>
+
+	<HediffDef>
+		<defName>AV_NeurillHigh_nonMechanitor</defName>
+		<label>high on neurill</label>
+		<labelNoun>a neurill high</labelNoun>
+		<description>Neurill is in the bloodstream and focuses concentration to a non-existent mechlink, consciousness is significantly reduced.</description>
+		<hediffClass>Hediff_High</hediffClass>
+		<defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+		<scenarioCanAdd>false</scenarioCanAdd>
+		<maxSeverity>1.0</maxSeverity>
+		<isBad>false</isBad>
+		<comps>
+			<li Class="HediffCompProperties_SeverityPerDay">
+				<severityPerDay>-0.4</severityPerDay>		<!-- Neurill High -->
+				<showHoursToRecover>true</showHoursToRecover>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<!-- <offset>-0.1</offset> -->
+						<postFactor>0.5</postFactor>	
+					</li>
+				</capMods>
+				<hediffGivers>
+					<li Class="HediffGiver_Random">
+						<hediff>HeartAttack</hediff>
+						<mtbDays>120</mtbDays>
+						<partsToAffect>
+							<li>Heart</li>
+						</partsToAffect>
+					</li>
+				</hediffGivers>
+			</li>
+		</stages>
+	</HediffDef>
+  
+	<!-- Neurill addiction -->	
+	<ChemicalDef>
+		<defName>AV_Neurill</defName>
+		<label>neurill</label>
+		<addictionHediff>AV_NeurillAddiction</addictionHediff>
+		<geneOverdoseChanceFactorResist>0.5</geneOverdoseChanceFactorResist>
+		<geneOverdoseChanceFactorImmune>0</geneOverdoseChanceFactorImmune>
+	</ChemicalDef>
+  
+	<NeedDef ParentName="DrugAddictionNeedBase">
+		<defName>AV_Chemical_Neurill</defName>
+		<needClass>Need_Chemical</needClass>
+		<label>neurill</label>
+		<description>Because of a neurill addiction, this person needs to regularly consume the drug to avoid withdrawal symptoms.</description>
+		<fallPerDay>0.333</fallPerDay>
+		<listPriority>40</listPriority>
+	</NeedDef>
+
+	<HediffDef ParentName="AddictionBase">
+		<defName>AV_NeurillAddiction</defName>
+		<label>neurill addiction</label>
+		<description>A chemical addiction to neurill. Long-term presence of neurill has caused neurological adaptations at the cellular level, so the brain can no longer function properly without the drug. \nWithout regular doses of neurill, withdrawal symptoms will begin. However, extended abstinence will force the brain to adapt back to its normal state, resolving the addiction.</description>
+		<hediffClass>Hediff_Addiction</hediffClass>
+		<chemicalNeed>AV_Chemical_Neurill</chemicalNeed>
+		<comps>
+			<li Class="HediffCompProperties_SeverityPerDay">
+				<severityPerDay>-0.045</severityPerDay>
+				<showDaysToRecover>true</showDaysToRecover>
+			</li>
+		</comps>
+		<stages>
+			<li>
+			</li>
+			<li>
+				<label>withdrawal</label>
+				<socialFightChanceFactor>2.0</socialFightChanceFactor>
+				<statOffsets>
+					<RestFallRateFactor>0.3</RestFallRateFactor>
+				</statOffsets>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.30</offset>
+					</li>
+					<li>
+						<capacity>Manipulation</capacity>
+						<offset>-0.25</offset>
+					</li>
+					<li>
+						<capacity>Moving</capacity>
+						<offset>-0.20</offset>
+					</li>
+				</capMods>
+				<mentalStateGivers>
+					<li>
+						<mentalState>Binging_DrugExtreme</mentalState>
+						<mtbDays>40</mtbDays>
+					</li>
+					<li>
+						<mentalState>Wander_Psychotic</mentalState>
+						<mtbDays>10</mtbDays>
+					</li>
+				</mentalStateGivers>
+			</li>
+		</stages>
+	</HediffDef>
+
+	<ThoughtDef>
+		<defName>AV_NeurillWithdrawal</defName>
+		<workerClass>ThoughtWorker_Hediff</workerClass>
+		<hediff>AV_NeurillAddiction</hediff>
+		<validWhileDespawned>true</validWhileDespawned>
+		<developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+		<stages>
+			<li>
+				<visible>false</visible>
+			</li>
+			<li>
+				<label>neurill withdrawal</label>
+				<description>I feel all fuzzy and unfocused. And I'm so tired.</description>
+				<baseMoodEffect>-22</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+
+	<HediffDef ParentName="DrugToleranceBase">
+		<defName>AV_NeurillTolerance</defName>
+		<label>neurill tolerance</label>
+		<description>A built-up tolerance to neurill. The more severe this tolerance is, the more neurill it takes to get the same effect.</description>
+		<comps>
+			<li Class="HediffCompProperties_SeverityPerDay">
+				<severityPerDay>-0.015</severityPerDay>
+			</li>
+			<li Class="HediffCompProperties_DrugEffectFactor">
+				<chemical>AV_Neurill</chemical>
+			</li>
+		</comps>
+		<hediffGivers>
+			<li Class="HediffGiver_RandomDrugEffect">
+				<hediff>ChemicalDamageSevere</hediff>
+				<severityToMtbDaysCurve>
+					<points>
+						<li>(0.45, 99999)</li>
+						<li>(0.5, 180)</li>
+						<li>(1, 135)</li>
+					</points>
+				</severityToMtbDaysCurve>
+				<partsToAffect>
+					<li>Kidney</li>
+				</partsToAffect>
+			</li>
+		</hediffGivers>
+	</HediffDef>
+
+
+</Defs>

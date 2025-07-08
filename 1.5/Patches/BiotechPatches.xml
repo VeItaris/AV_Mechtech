@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Patch>
+
+	<!-- Mech recipes -->
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="MechGestator"]/recipes</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MechGestator"]/recipes</xpath>
+			<order>Prepend</order>
+			<value>
+				<li>AV_Gestate_Fluoid</li>
+				<li>AV_Gestate_Scrapper</li>
+			</value>
+		</match>
+	</Operation>
+	
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="LargeMechGestator"]/recipes</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="LargeMechGestator"]/recipes</xpath>
+			<order>Prepend</order>
+			<value>
+				<li>AV_Gestate_Tarantula</li>
+			</value>
+		</match>
+	</Operation>	
+	
+ 	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/RecipeDef[defName = "ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/RecipeDef[defName = "ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
+			<value>
+				<li>Corpse_AV_Mech_Fluoid</li>	
+				<li>Corpse_AV_Mech_Scrapper</li>				
+			</value>
+		</match>
+	</Operation>
+	
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/RecipeDef[defName = "ResurrectUltraheavyMech"]/fixedIngredientFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/RecipeDef[defName = "ResurrectUltraheavyMech"]/fixedIngredientFilter/thingDefs</xpath>
+			<value>
+				<li>Corpse_AV_Mech_Tarantula</li>				
+			</value>
+		</match>
+	</Operation>
+	
+	<!-- Add tarantula to raids -->
+	 <Operation Class="PatchOperationConditional">	<!-- All types-->
+		<xpath>Defs/FactionDef[@Name="Mechanoid"]/pawnGroupMakers/li[0]/options</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/FactionDef[@Name="Mechanoid"]/pawnGroupMakers/li[0]/options</xpath>
+			<value>
+				<AV_Tarantula>1</AV_Tarantula>
+			</value>
+		</match>
+	</Operation>
+
+	 <Operation Class="PatchOperationConditional">	<!-- Ranged only -->
+		<xpath>Defs/FactionDef[@Name="Mechanoid"]/pawnGroupMakers/li[1]/options</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/FactionDef[@Name="Mechanoid"]/pawnGroupMakers/li[1]/options</xpath>
+			<value>
+				<AV_Tarantula>2</AV_Tarantula>
+			</value>
+		</match>
+	</Operation>
+
+
+	
+	<!-- Add basic Mechlink removal recipy to humanlikes -->
+	
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName="Human"]/recipes</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[defName="Human"]/recipes</xpath>
+			<order>Append</order>
+			<value>
+				<li>AV_RemoveBasicMechlink</li>
+				<li>AV_CureNeuroferiumPoisoning</li>
+			</value>	
+		</match>
+	</Operation>
+
+	<!-- Mitilors can use mortars -->
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="Mech_Militor"]</xpath>
+		<value>
+			<li Class="AV_Framework.MechCanUseMortar"></li>
+		</value>
+	</Operation>
+
+
+</Patch>

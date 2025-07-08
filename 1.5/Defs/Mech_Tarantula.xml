@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- Tarantula -->  
+    <ThingDef ParentName="SuperHeavyMechanoid">
+		<defName>AV_Mech_Tarantula</defName>
+		<label>Tarantula</label>
+		<description>A heavy combat mechanoid that walks on three pairs of heavy legs. This variant is equipped with two attached missile launchers, making it very effective against bunched-up static defenders. Once their long range missiles are depleted it becomes somewhat vulnerable to mobile hit-and-run tactics, but even without missiles its thick carapace and firepower should not be underestimated.\n\nRockets need to be refilled in the form of 15 chemfuel by another creature by hand.\n\n "Just use smokegrenades and advance! Little did we know that this devil did not care at all."</description>
+		<statBases>
+			<MoveSpeed>2.4</MoveSpeed>	<!-- war queen: 1.6 | Centipede: 1.9 -->
+			<EnergyShieldRechargeRate>0.5</EnergyShieldRechargeRate>
+			<EnergyShieldEnergyMax>3</EnergyShieldEnergyMax>
+			<MeleeDoorDamageFactor>1.5</MeleeDoorDamageFactor>
+			<EMPResistance>0.7</EMPResistance>
+		</statBases>
+		<race>
+			<body>AV_Tarantula</body>	<!-- make a new one  MechanicalCentipede -->	
+			<baseBodySize>3</baseBodySize>	<!-- like Centipede -->	
+			<baseHealthScale>5.2</baseHealthScale>
+			<dutyBoss>Warqueen</dutyBoss>	<!-- keep this warqueen -->	
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Warqueen_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Warqueen_Death</soundDeath>
+					<soundCall>Pawn_Mech_Warqueen_Call</soundCall>
+				</li>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Warqueen_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Warqueen_Death</soundDeath>
+					<soundCall>Pawn_Mech_Warqueen_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<detritusLeavings>			
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>13</texOverrideIndex>
+					<spawnChance>0.75</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>3</texOverrideIndex>
+					<spawnChance>0.75</spawnChance>
+				</li>
+				<li>
+					<def>ChunkMechanoidSlag</def>
+					<texOverrideIndex>0</texOverrideIndex>
+					<spawnChance>0.75</spawnChance>
+				</li>
+			</detritusLeavings>
+			<renderTree>AV_RenderTreeTarantula</renderTree>
+		</race>
+		<comps>
+			<li Class="AV_Framework.CompProperties_MechReloadableResourceHolder">
+				<compClass>AV_Framework.CompMechReloadableResourceHolder</compClass>
+				<fixedIngredient>Chemfuel</fixedIngredient>		
+				<maxIngredientCount>240</maxIngredientCount>
+				<startingIngredientCountAI>240</startingIngredientCountAI>
+				<startingIngredientCountPlayer>0</startingIngredientCountPlayer>
+				<removeResourcesOnDeath>false</removeResourcesOnDeath> <!-- only so that the corpse shows missiles, reviving from the player still needs refilling -->	
+				<refillGizmoTextPath>UI/Gizmos/AV_AllowRefill_Chemfuel</refillGizmoTextPath>
+				<needsGraphicUpdate>true</needsGraphicUpdate>
+				<refillBodyPartNeeded>AV_MissileSilo</refillBodyPartNeeded>
+				<refillColor>(0.63, 0.16, 0.19)</refillColor> <!-- 161 | 40 | 48 -->
+				<refillColorHighlight>(0.79, 0.0, 0.16)</refillColorHighlight> <!-- 202 | 0 | 42 -->
+			</li>
+		</comps>
+		<tools>
+			<li>
+				<label>head</label>
+				<capacities>
+					<li>Blunt</li>
+				</capacities>
+				<power>17</power>	<!-- like Centipede -->	
+				<cooldownTime>2</cooldownTime>
+				<linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+				<ensureLinkedBodyPartsGroupAlwaysUsable>true</ensureLinkedBodyPartsGroupAlwaysUsable>
+				<chanceFactor>0.2</chanceFactor>			
+			</li>
+		</tools>
+		<killedLeavingsPlayerHostile>
+			<AV_Unspecialized_Mechchip>1</AV_Unspecialized_Mechchip>
+		</killedLeavingsPlayerHostile>
+    </ThingDef>
+  
+    <PawnKindDef ParentName="HeavyMechanoidKind">
+		<defName>AV_Mech_Tarantula</defName>
+		<label>tarantula</label>
+		<race>AV_Mech_Tarantula</race>
+		<combatPower>500</combatPower>	<!-- like diabolus -->
+		<maxPerGroup>3</maxPerGroup>
+		<isBoss>true</isBoss>
+		<allowInMechClusters>true</allowInMechClusters>	<!-- turn this off, if too anoying -->
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<!-- texPath & maskPath are only used for UI, the mech itself is drawn with a custom rendertree --> 
+					<texPath>Things/Pawn/Mechanoid/AV_Tarantula/Empty/AV_Tarantula</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/AV_Tarantula</maskPath>	 
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>4</drawSize>
+					<shadowData>
+						<volume>(0.45, 0.55, 0.45)</volume>
+						<offset>(0,0,0.25)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<!-- texPath & maskPath are only used for UI, the mech itself is drawn with a custom rendertree --> 
+					<texPath>Things/Pawn/Mechanoid/AV_Tarantula/Empty/AV_Tarantula</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/AV_Tarantula</maskPath>	
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>4</drawSize>
+					<shadowData>
+						<volume>(0.45, 0.55, 0.45)</volume>
+						<offset>(0,0,0.25)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<weaponTags>
+			<li>AV_TarantulaHeavyBlaster</li>
+		</weaponTags>
+		<abilities>
+			<li>AV_Rocketswarm</li>
+			<li>AV_Incendiary_Missile</li>
+			<li>AV_Foam_Missile</li>
+			<li>AV_Smoke_Missile</li>
+			<li>AV_EMP_Missile</li>
+			<li>AV_BlowUpMissileLauncher</li>
+		</abilities>
+    </PawnKindDef>
+
+	<RecipeDef ParentName="SuperHeavyMechanoidRecipe"> 
+        <defName>AV_Gestate_Tarantula</defName>
+        <label>gestate tarantula</label>
+        <description>Gestate a tarantula mechanoid.</description>
+		<descriptionHyperlinks>
+			<ThingDef>AV_Mech_Tarantula</ThingDef>
+		</descriptionHyperlinks>
+		<researchPrerequisites>
+			<li>AV_Compressed_Mechtech</li>
+			<li>HighMechtech</li>
+		</researchPrerequisites>
+        <ingredients Inherit="False">
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>300</count>
+            </li>
+            <li>
+				<filter>
+					<thingDefs>
+						<li>Plasteel</li>
+					</thingDefs>
+				</filter>
+			<count>300</count>
+			</li>
+			<li>
+                <filter>
+                    <thingDefs>
+                        <li>PowerfocusChip</li>
+                    </thingDefs>
+                </filter>
+                <count>2</count>
+            </li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>SubcoreHigh</li>
+					</thingDefs>
+				</filter>
+			<count>1</count>
+			</li>
+        </ingredients>
+        <products>
+            <AV_Mech_Tarantula>1</AV_Mech_Tarantula>
+        </products>
+    </RecipeDef>
+
+	<BossDef>
+		<defName>AV_Tarantula</defName>
+		<kindDef>AV_Mech_Tarantula</kindDef>
+		<appearAfterTicks>10800000</appearAfterTicks> <!--	3 years -->
+	</BossDef>
+
+
+	<!-- weapon --> 
+	<ThingDef ParentName="Gun_ChargeBlasterHeavyBase">
+		<defName>AV_Gun_ChargeBlasterHeavy</defName>
+		<graphicData>
+			<texPath>Things/Item/Equipment/WeaponRanged/AV_ChargeBlasterHeavy</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>	<!-- + 0.1 accuracy --> 
+			<AccuracyTouch>0.28</AccuracyTouch>
+			<AccuracyShort>0.36</AccuracyShort>
+			<AccuracyMedium>0.36</AccuracyMedium>
+			<AccuracyLong>0.28</AccuracyLong>
+			<RangedWeapon_Cooldown>3.7</RangedWeapon_Cooldown>
+		</statBases>
+		<verbs>
+			<li>	<!-- half bulletcount over same time --> 
+				<verbClass>Verb_Shoot</verbClass>	<!-- make custom for offset --> 
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_ChargeBlasterHeavy</defaultProjectile>
+				<warmupTime>1.25</warmupTime>
+				<range>26.9</range>
+				<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+				<burstShotCount>12</burstShotCount>
+				<soundCast>Shot_ChargeBlaster</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>9</muzzleFlashScale>
+			</li>
+		</verbs>
+		<weaponTags>
+			<li>AV_TarantulaHeavyBlaster</li>
+		</weaponTags>
+	</ThingDef>
+
+
+
+
+	<!-- rocketswarm --> 
+ 	<AbilityDef>
+		<defName>AV_Rocketswarm</defName>
+		<label>launch rocketswarm</label>
+		<description>Launch a salve of up to 8 rockets at the targeted area.\n&lt;color=#f8f32b&gt;Consumes 15 chemfuel per rocket.&lt;/color&gt;</description>
+		<iconPath>UI/Abilities/AV_Rocketswarm</iconPath>
+		<aiCanUse>true</aiCanUse>
+		<showOnCharacterCard>true</showOnCharacterCard> 
+		<!-- <abilityClass>AV_Mechtech.Ability_Rocketswarm</abilityClass>	errors out, probably can't be used like this - gizmo gets hidden with CompProperties_AbilityLaunchRocketswarm for now, need to find a way to disable instead of hide -->  
+		<verbProperties>
+			<verbClass>AV_Mechtech.Verb_CastAbilityRocketswarm</verbClass>
+			<defaultProjectile>AV_Proj_Rocket</defaultProjectile>
+			<minRange>6.9</minRange>
+			<range>29.9</range>
+			<warmupTime>2.5</warmupTime>
+			<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+			<burstShotCount>8</burstShotCount>
+			<forcedMissRadius>1.75</forcedMissRadius>  <!-- RocketswarmLauncher has 5.75 but we are a deadly mech boss - tweak this to make it weaker or stronger  -->  
+			<forcedMissEvenDispersal>true</forcedMissEvenDispersal><!-- deactivated in  AV_Mechtech.Verb_CastAbilityRocketswarm --> 
+			<targetParams>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetLocations>true</canTargetLocations>
+				<canTargetBuildings>false</canTargetBuildings>
+			</targetParams>
+			<soundCast>RocketswarmLauncher_Fire</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>14</muzzleFlashScale>
+			<ai_IsWeapon>false</ai_IsWeapon>
+			<ai_ProjectileLaunchingIgnoresMeleeThreats>true</ai_ProjectileLaunchingIgnoresMeleeThreats>
+			<ai_IsDoorDestroyer>true</ai_IsDoorDestroyer>
+		</verbProperties>
+		<!-- cooldown and charges sounds good but behaves like crap in this usecase --> 
+		<!-- 
+		<cooldownTicksRange>3000</cooldownTicksRange>
+		<cooldownPerCharge>false</cooldownPerCharge>
+		<charges>2</charges> 
+		--> 
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_AbilityLaunchRocketswarm">	
+				<projectileDef>Proj_Rocket</projectileDef>	<!-- should be something, but currently doesn't matter what as the verb is launching the missiles -->
+			</li>		
+		</comps>
+	</AbilityDef>
+
+	<ThingDef>	<!-- same as Proj_Rocket, just different texture -->
+		<defName>AV_Proj_Rocket</defName>
+		<label>rocket</label>
+		<thingClass>Projectile_Explosive</thingClass>
+		<category>Projectile</category>
+		<tickerType>Normal</tickerType>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<useHitPoints>False</useHitPoints>
+		<neverMultiSelect>True</neverMultiSelect>
+		<graphicData>
+			<texPath>Things/Projectile/Rocket_Big</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>0.6</drawSize>
+		</graphicData>
+		<projectile>
+			<damageDef>Bomb</damageDef>
+			<explosionRadius>2.9</explosionRadius>
+			<speed>38</speed>
+			<damageAmountBase>24</damageAmountBase>
+			<arcHeightFactor>0.4</arcHeightFactor>
+			<soundExplode>Explosion_Rocket</soundExplode>
+		</projectile>
+	</ThingDef>
+
+	<!-- EMP --> 
+ 	<AbilityDef>
+		<defName>AV_EMP_Missile</defName>
+		<label>launch EMP missiles</label>
+		<description>Launch a salve of up to 2 EMP missiles at the targeted area.\n&lt;color=#f8f32b&gt;Consumes 15 chemfuel per rocket.&lt;/color&gt;</description>
+		<iconPath>UI/Abilities/AV_EMPMissiles</iconPath>
+		<aiCanUse>false</aiCanUse>
+		<showOnCharacterCard>true</showOnCharacterCard> 
+		<verbProperties>
+			<verbClass>AV_Mechtech.Verb_CastAbilityRocketswarm</verbClass>
+			<defaultProjectile>AV_Proj_EMP_Missile</defaultProjectile>
+			<minRange>6.9</minRange>
+			<range>29.9</range>
+			<warmupTime>2.5</warmupTime>
+			<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+			<burstShotCount>2</burstShotCount>
+			<forcedMissRadius>2.75</forcedMissRadius> 
+			<forcedMissEvenDispersal>true</forcedMissEvenDispersal>
+			<targetParams>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetLocations>true</canTargetLocations>
+				<canTargetBuildings>false</canTargetBuildings>
+			</targetParams>
+			<soundCast>RocketswarmLauncher_Fire</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>14</muzzleFlashScale>
+			<ai_IsWeapon>false</ai_IsWeapon>
+		</verbProperties>
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_AbilityLaunchRocketswarm">	
+				<projectileDef>Proj_Rocket</projectileDef>	<!-- should be something, but currently doesn't matter what as the verb is launching the missiles -->
+			</li>		
+			</comps>
+	</AbilityDef>
+
+	<ThingDef>
+		<defName>AV_Proj_EMP_Missile</defName>
+		<label>rocket</label>
+		<thingClass>Projectile_Explosive</thingClass>
+		<category>Projectile</category>
+		<tickerType>Normal</tickerType>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<useHitPoints>False</useHitPoints>
+		<neverMultiSelect>True</neverMultiSelect>
+		<graphicData>
+			<texPath>Things/Projectile/Rocket_Big</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>0.6</drawSize>
+		</graphicData>
+		<projectile>
+			<damageDef>EMP</damageDef>
+			<explosionRadius>2.9</explosionRadius>
+			<speed>38</speed>
+			<damageAmountBase>40</damageAmountBase>
+			<arcHeightFactor>0.4</arcHeightFactor>
+			<soundExplode>Explosion_Rocket</soundExplode>
+		</projectile>
+	</ThingDef>
+
+	<!-- Fire --> 
+ 	<AbilityDef>
+		<defName>AV_Incendiary_Missile</defName>
+		<label>launch incendiary missiles</label>
+		<description>Launch a salve of up to 2 incendiary missiles at the targeted area. These missiles are filled with highly flammable, fast-burning chemicals.\n&lt;color=#f8f32b&gt;Consumes 15 chemfuel per rocket.&lt;/color&gt;</description>
+		<iconPath>UI/Abilities/AV_FireMissiles</iconPath>
+		<aiCanUse>false</aiCanUse>
+		<showOnCharacterCard>true</showOnCharacterCard> 
+		<verbProperties>
+			<verbClass>AV_Mechtech.Verb_CastAbilityRocketswarm</verbClass>
+			<defaultProjectile>AV_Proj_Incendiary_Missile</defaultProjectile>
+			<minRange>6.9</minRange>
+			<range>29.9</range>
+			<warmupTime>2.5</warmupTime>
+			<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+			<burstShotCount>2</burstShotCount>
+			<forcedMissRadius>2.75</forcedMissRadius> 
+			<forcedMissEvenDispersal>true</forcedMissEvenDispersal>
+			<targetParams>
+				<canTargetPawns>true</canTargetPawns>
+				<canTargetLocations>true</canTargetLocations>
+				<canTargetBuildings>false</canTargetBuildings>
+				<canTargetMechs>false</canTargetMechs>
+			</targetParams>
+			<soundCast>RocketswarmLauncher_Fire</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>14</muzzleFlashScale>
+			<ai_IsWeapon>false</ai_IsWeapon>
+			<rangedFireRulepack>Combat_RangedFire_Thrown</rangedFireRulepack>
+		</verbProperties>
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_AbilityLaunchRocketswarm">	
+				<projectileDef>Proj_Rocket</projectileDef>	<!-- should be something, but currently doesn't matter what as the verb is launching the missiles -->
+			</li>		
+			</comps>
+	</AbilityDef>
+
+	<ThingDef>
+		<defName>AV_Proj_Incendiary_Missile</defName>
+		<label>rocket</label>
+		<thingClass>Projectile_Explosive</thingClass>
+		<category>Projectile</category>
+		<tickerType>Normal</tickerType>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<useHitPoints>False</useHitPoints>
+		<neverMultiSelect>True</neverMultiSelect>
+		<graphicData>
+			<texPath>Things/Projectile/Rocket_Big</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>0.6</drawSize>
+		</graphicData>
+		<projectile>
+			<damageDef>Flame</damageDef>
+			<explosionRadius>3.9</explosionRadius>
+			<speed>38</speed>
+			<damageAmountBase>24</damageAmountBase>
+			<arcHeightFactor>0.4</arcHeightFactor>
+			<soundExplode>Explosion_Rocket</soundExplode>
+			<filth>Filth_FlammableBile</filth>	
+			<filthCount>1~2</filthCount>
+		</projectile>
+	</ThingDef>
+
+	<!-- Smoke --> 
+ 	<AbilityDef>
+		<defName>AV_Smoke_Missile</defName>
+		<label>launch smoke missiles</label>
+		<description>Launch a salve of up to 2 smoke missiles at the targeted area.\n&lt;color=#f8f32b&gt;Consumes 15 chemfuel per rocket.&lt;/color&gt;</description>
+		<iconPath>UI/Abilities/AV_SmokeMissiles</iconPath>
+		<aiCanUse>false</aiCanUse>
+		<showOnCharacterCard>true</showOnCharacterCard> 
+		<verbProperties>
+			<verbClass>AV_Mechtech.Verb_CastAbilityRocketswarm</verbClass>
+			<defaultProjectile>AV_Proj_Smoke_Missile</defaultProjectile>
+			<minRange>6.9</minRange>
+			<range>29.9</range>
+			<warmupTime>2.5</warmupTime>
+			<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+			<burstShotCount>2</burstShotCount>
+			<forcedMissRadius>2.75</forcedMissRadius> 
+			<forcedMissEvenDispersal>true</forcedMissEvenDispersal>
+			<targetParams>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetLocations>true</canTargetLocations>
+				<canTargetBuildings>false</canTargetBuildings>
+			</targetParams>
+			<soundCast>RocketswarmLauncher_Fire</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>14</muzzleFlashScale>
+			<ai_IsWeapon>false</ai_IsWeapon>
+			
+		</verbProperties>
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_AbilityLaunchRocketswarm">	
+				<projectileDef>Proj_Rocket</projectileDef>	<!-- should be something, but currently doesn't matter what as the verb is launching the missiles -->
+			</li>		
+			</comps>
+	</AbilityDef>
+
+	<ThingDef>
+		<defName>AV_Proj_Smoke_Missile</defName>
+		<label>rocket</label>
+		<thingClass>Projectile_Explosive</thingClass>
+		<category>Projectile</category>
+		<tickerType>Normal</tickerType>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<useHitPoints>False</useHitPoints>
+		<neverMultiSelect>True</neverMultiSelect>
+		<graphicData>
+			<texPath>Things/Projectile/Rocket_Big</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>0.6</drawSize>
+		</graphicData>
+		<projectile>
+			<damageDef>Smoke</damageDef>
+			<explosionRadius>2.9</explosionRadius>
+			<speed>38</speed>
+			<damageAmountBase>24</damageAmountBase>
+			<arcHeightFactor>0.4</arcHeightFactor>
+			<soundExplode>Explosion_Rocket</soundExplode>
+			<postExplosionGasType>BlindSmoke</postExplosionGasType>
+		</projectile>
+	</ThingDef>
+
+
+	<!-- Firefoam --> 
+ 	<AbilityDef>
+		<defName>AV_Foam_Missile</defName>
+		<label>launch foam missiles</label>
+		<description>Launch a salve of up to 2 fire foam spreading missiles at the targeted area.\n&lt;color=#f8f32b&gt;Consumes 15 chemfuel per rocket.&lt;/color&gt;</description>
+		<iconPath>UI/Abilities/AV_FirefoamMissiles</iconPath>
+		<aiCanUse>false</aiCanUse>
+		<showOnCharacterCard>true</showOnCharacterCard> 
+		<verbProperties>
+			<verbClass>AV_Mechtech.Verb_CastAbilityRocketswarm</verbClass>
+			<defaultProjectile>AV_Proj_Foam_Missile</defaultProjectile>
+			<minRange>6.9</minRange>
+			<range>29.9</range>
+			<warmupTime>2.5</warmupTime>
+			<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+			<burstShotCount>2</burstShotCount>
+			<forcedMissRadius>2.75</forcedMissRadius> 
+			<forcedMissEvenDispersal>true</forcedMissEvenDispersal>
+			<targetParams>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetLocations>true</canTargetLocations>
+				<canTargetBuildings>false</canTargetBuildings>
+			</targetParams>
+			<soundCast>RocketswarmLauncher_Fire</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>14</muzzleFlashScale>
+			<ai_IsWeapon>false</ai_IsWeapon>
+		</verbProperties>
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_AbilityLaunchRocketswarm">	
+				<projectileDef>Proj_Rocket</projectileDef>	<!-- should be something, but currently doesn't matter what as the verb is launching the missiles -->
+			</li>		
+			</comps>
+	</AbilityDef>
+
+	<ThingDef>
+		<defName>AV_Proj_Foam_Missile</defName>
+		<label>rocket</label>
+		<thingClass>Projectile_Explosive</thingClass>
+		<category>Projectile</category>
+		<tickerType>Normal</tickerType>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<useHitPoints>False</useHitPoints>
+		<neverMultiSelect>True</neverMultiSelect>
+		<graphicData>
+			<texPath>Things/Projectile/Rocket_Big</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>0.6</drawSize>
+		</graphicData>
+		<projectile>
+			<damageDef>Extinguish</damageDef>
+			<explosionRadius>3.9</explosionRadius>
+			<speed>38</speed>
+			<damageAmountBase>2000</damageAmountBase> <!-- will extinguish any fire --> 
+			<arcHeightFactor>0.4</arcHeightFactor>
+			<soundExplode>Explosion_FirefoamPopper</soundExplode>
+			<filth>Filth_FireFoam</filth>	
+			<filthCount>1~5</filthCount>
+			<!-- <explosionEffect>ExtinguisherExplosion</explosionEffect> --> 	
+		</projectile>
+
+	</ThingDef>
+
+	<!-- blow up missile launcher --> 
+	<AbilityDef>
+		<defName>AV_BlowUpMissileLauncher</defName>
+		<label>blow up</label>
+		<description>Blow up the remaining missiles directly in the silo. This damages the tarantula more then the surroundings.</description>
+		<iconPath>UI/Abilities/AV_BlowUpMissileLauncher</iconPath>
+		<targetRequired>false</targetRequired>
+		<hostile>true</hostile>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<aiCanUse>false</aiCanUse>
+		<showOnCharacterCard>true</showOnCharacterCard> 
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>1</warmupTime>
+			<range>3.9</range>
+			<drawAimPie>false</drawAimPie>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_AbilityBlowUpMissileLauncher"/>
+		</comps>
+	</AbilityDef>
+  
+  
+
+	<!-- rendertree --> 
+	<PawnRenderTreeDef>
+		<defName>AV_RenderTreeTarantula</defName>
+			<root Class="PawnRenderNodeProperties_Parent">
+			<debugLabel>Root</debugLabel>
+			<tagDef>Root</tagDef>
+			<children>
+				<li>
+					<debugLabel>Body</debugLabel>
+					<tagDef>Body</tagDef>
+					<nodeClass>AV_Mechtech.PawnRenderNodeTarantula</nodeClass>
+					<useRottenColor>true</useRottenColor>
+					<children>
+						<li>
+							<debugLabel>Wounds</debugLabel>
+							<nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+							<workerClass>PawnRenderNodeWorker_OverlayWounds</workerClass>
+							<overlayLayer>Body</overlayLayer>
+							<useGraphic>false</useGraphic>
+							<baseLayer>3</baseLayer>
+						</li>
+						<li>
+							<debugLabel>Firefoam</debugLabel>
+							<nodeClass>PawnRenderNode_AnimalPart</nodeClass>
+							<workerClass>PawnRenderNodeWorker_OverlayFirefoam</workerClass>
+							<overlayLayer>Body</overlayLayer>
+							<useGraphic>false</useGraphic>
+							<baseLayer>5</baseLayer>
+						</li>
+					</children>
+				</li>
+				<li Class="AV_Mechtech.PawnRenderNodeProperties_CarriedOffset">
+					<debugLabel>Weapon/carried thing</debugLabel>
+					<workerClass>AV_Mechtech.PawnRenderNodeWorker_CarriedOffset</workerClass>
+				</li>
+			</children>
+		</root>
+	</PawnRenderTreeDef>
+
+	<!-- bodydef --> 
+	<BodyDef>
+		<defName>AV_Tarantula</defName>
+		<label>war queen</label>
+		<corePart>	
+			<def>AV_MechanicalTarantulaBodyFirstRing</def>
+			<height>Middle</height>
+			<depth>Outside</depth>
+			<groups>
+				<li>Torso</li>
+			</groups>
+			<parts>
+				<li>	<!-- head --> 
+					<def>MechanicalHead</def>
+					<coverage>0.1</coverage>
+					<groups>
+						<li>HeadAttackTool</li>
+					</groups>
+					<parts>
+						<li>
+							<def>ArtificialBrain</def>
+							<coverage>0.10</coverage>
+							<depth>Inside</depth>
+						</li>
+						<li>
+							<def>SightSensor</def>
+							<customLabel>left sight sensor</customLabel>
+							<coverage>0.13</coverage>
+						</li>
+						<li>
+							<def>SightSensor</def>
+							<customLabel>right sight sensor</customLabel>
+							<coverage>0.13</coverage>
+						</li>
+						<li>
+							<def>HearingSensor</def>
+							<customLabel>left hearing sensor</customLabel>
+							<coverage>0.10</coverage>
+						</li>
+						<li>
+							<def>HearingSensor</def>
+							<customLabel>right hearing sensor</customLabel>
+							<coverage>0.10</coverage>
+						</li>
+						<li>
+							<def>SmellSensor</def>
+							<coverage>0.10</coverage>
+						</li>
+					</parts>
+				</li>
+				<li>	<!-- AV_MechanicalTarantulaBodySecondRing --> 
+					<def>AV_MechanicalTarantulaBodySecondRing</def>
+					<coverage>0.40</coverage>
+					<parts>
+						<li>
+							<def>Reactor</def>
+							<coverage>0.05</coverage>
+							<depth>Inside</depth>
+						</li>
+						<li>
+							<def>AV_MechanicalTarantulaBodyThirdRing</def>
+							<coverage>0.8</coverage>
+							<parts>
+								<li>
+									<def>AV_MechanicalTarantulaBodyFourthRing</def>
+									<coverage>0.7</coverage>
+									<parts>
+										<li>
+											<def>AV_MechanicalTarantulaBodyFifthRing</def>
+											<coverage>0.6</coverage>
+											<parts>
+												<li>
+													<def>FluidReprocessor</def>
+													<coverage>0.05</coverage>
+													<depth>Inside</depth>
+												</li>
+											</parts>
+										</li>
+									</parts>
+								</li>
+							</parts>
+						</li>
+					</parts>
+				</li>				
+				<li>	<!-- leg --> 
+					<def>AV_HeavyMechanicalLeg</def>
+					<customLabel>left frantal leg</customLabel>
+					<coverage>0.05</coverage>
+					<height>Middle</height>
+				</li>
+				<li>	<!-- leg --> 
+					<def>AV_HeavyMechanicalLeg</def>
+					<customLabel>right frantal leg</customLabel>
+					<coverage>0.05</coverage>
+					<height>Middle</height>
+				</li>
+				<li>	<!-- leg --> 
+					<def>AV_HeavyMechanicalLeg</def>
+					<customLabel>left middle leg</customLabel>
+					<coverage>0.05</coverage>
+					<height>Middle</height>
+				</li>
+				<li>	<!-- leg --> 
+					<def>AV_HeavyMechanicalLeg</def>
+					<customLabel>right middle leg</customLabel>
+					<coverage>0.05</coverage>
+					<height>Middle</height>
+				</li>
+				<li>	<!-- leg --> 
+					<def>AV_HeavyMechanicalLeg</def>
+					<customLabel>left rear leg</customLabel>
+					<coverage>0.03</coverage>
+					<height>Middle</height>
+				</li>
+				<li>	<!-- leg --> 
+					<def>AV_HeavyMechanicalLeg</def>
+					<customLabel>right rear leg</customLabel>
+					<coverage>0.03</coverage>
+					<height>Middle</height>
+				</li>			
+				<li>	<!-- silo --> 
+					<def>AV_MissileSilo</def>
+					<customLabel>missile silo</customLabel>
+					<height>Top</height>
+					<coverage>0.15</coverage>
+				</li>
+			</parts>
+		</corePart>
+	</BodyDef>
+  
+    <BodyPartDef>
+		<defName>AV_HeavyMechanicalLeg</defName>
+		<label>heavy leg</label>
+		<hitPoints>20</hitPoints>
+		<frostbiteVulnerability>2</frostbiteVulnerability>
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<skinCovered>true</skinCovered>
+		<solid>true</solid>
+		<alive>false</alive>
+		<bleedRate>0</bleedRate>
+		<tags>
+			<li>MovingLimbCore</li>
+			<li>MovingLimbSegment</li>
+		</tags>
+	</BodyPartDef>
+
+	<BodyPartDef>
+		<defName>AV_MissileSilo</defName>
+		<label>missile silo</label>
+		<hitPoints>10</hitPoints>	<!-- 10 = 52  | Needs to be somewhat low so it can actually explode when its destroyed fast --> 
+		<permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+		<skinCovered>false</skinCovered>
+		<solid>true</solid>
+		<bleedRate>0</bleedRate>
+		<alive>false</alive>
+	</BodyPartDef>
+
+	<!-- Warqueen copy without MovingLimbCore -->
+	<BodyPartDef Abstract="True" Name="AV_MechanicalTarantulaRingBase">
+    <labelShort>body ring</labelShort>
+    <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
+    <skinCovered>false</skinCovered>
+    <solid>true</solid>
+    <alive>false</alive>
+    <bleedRate>0</bleedRate>
+    <tags>
+      <li>ManipulationLimbCore</li>
+    </tags>
+  </BodyPartDef>
+
+  <BodyPartDef ParentName="AV_MechanicalTarantulaRingBase">
+    <defName>AV_MechanicalTarantulaBodyFirstRing</defName>
+    <label>first body ring</label>
+    <hitPoints>55</hitPoints>
+  </BodyPartDef>
+
+  <BodyPartDef ParentName="AV_MechanicalTarantulaRingBase">
+    <defName>AV_MechanicalTarantulaBodySecondRing</defName>
+    <label>second body ring</label>
+    <hitPoints>50</hitPoints>
+  </BodyPartDef>
+
+  <BodyPartDef ParentName="AV_MechanicalTarantulaRingBase">
+    <defName>AV_MechanicalTarantulaBodyThirdRing</defName>
+    <label>third body ring</label>
+    <hitPoints>45</hitPoints>
+  </BodyPartDef>
+
+  <BodyPartDef ParentName="AV_MechanicalTarantulaRingBase">
+    <defName>AV_MechanicalTarantulaBodyFourthRing</defName>
+    <label>fourth body ring</label>
+    <hitPoints>40</hitPoints>
+  </BodyPartDef>
+
+  <BodyPartDef ParentName="AV_MechanicalTarantulaRingBase">
+    <defName>AV_MechanicalTarantulaBodyFifthRing</defName>
+    <label>fifth body ring</label>
+    <hitPoints>35</hitPoints>
+  </BodyPartDef>
+
+
+</Defs>

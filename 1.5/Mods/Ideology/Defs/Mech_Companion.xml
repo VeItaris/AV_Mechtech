@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- Companion -->  
+    <ThingDef ParentName="LightMechanoid">
+		<defName>AV_Mech_Companion</defName>
+		<label>Companoid sphere</label>
+		<description>A small hovering utility mechanoid, designed to acompany and guide a person on space flights. They come with different guiding protocols which makes them quite versitile. Its unique reactor shortens loading times, but is easy to damage. While it comes with an emergency kit, its retractable arms are barly capable of using it. \n\nOuter space colonies use companiod spheres to raise a single child acting as a friend and teacher, often resulting in a lifelong bond.</description>
+		<statBases>
+			<MoveSpeed>4.4</MoveSpeed>
+			<MechEnergyUsageFactor>0.25</MechEnergyUsageFactor>		<!-- 0.25 to be on par with vanilla mechs -->
+			<MarketValue>1000</MarketValue>
+			<!-- <ArmorRating_Blunt>0.40</ArmorRating_Blunt> -->
+			<!-- <ArmorRating_Sharp>0.60</ArmorRating_Sharp> -->
+			<MechEnergyLossPerHP>0.66</MechEnergyLossPerHP>		<!-- 0.165 to be on par with vanilla mechs-->
+			<BandwidthCost>2</BandwidthCost>
+			<WastepacksPerRecharge>2.5</WastepacksPerRecharge>	<!-- x bandwidth for real result-->
+			<CleaningSpeed>0.1</CleaningSpeed>
+			<MedicalTendSpeed>0.5</MedicalTendSpeed>
+			<MedicalTendQuality>0.5</MedicalTendQuality>
+			<MedicalOperationSpeed>0.5</MedicalOperationSpeed>
+			<MedicalSurgerySuccessChance>1.0</MedicalSurgerySuccessChance>	
+		</statBases>
+		<race>
+			<baseHealthScale>0.75</baseHealthScale>
+			<deathAction>
+				<workerClass>AV_Mechtech.DeathActionWorker_EMPExplosion</workerClass>
+			</deathAction>	
+			<mechEnabledWorkTypes>
+				<li>Cleaning</li>
+				<li>Doctor</li>
+				<li>BasicWorker</li>
+				<li>Firefighter</li>
+			</mechEnabledWorkTypes>
+			<maxMechEnergy>25</maxMechEnergy>
+			<mechFixedSkillLevel>4</mechFixedSkillLevel>
+			<body>Mech_Companion</body>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Militor_Death</soundDeath>
+					<soundCall>Pawn_Mech_Militor_Call</soundCall>
+				</li>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>100</minAge>
+					<soundWounded>Pawn_Mech_Militor_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_Militor_Death</soundDeath>
+					<soundCall>Pawn_Mech_Militor_Call</soundCall>
+				</li>
+			</lifeStageAges>
+		</race>
+		<comps>
+			<li Class="AV_Framework.CompProperties_GiveHediffsWhenAlive">
+				<compClass>AV_Framework.Comp_GiveHediffsWhenAlive</compClass>
+				<hediff>AV_Helper_Command</hediff>		
+			</li>	
+			<li Class="AV_Mechtech.CompProperties_RadioMech">
+				<compClass>AV_Mechtech.Comp_RadioMech</compClass>
+				<radiohediff>AV_Helper_Command</radiohediff>	
+				<radioswitchEffect>AV_ElectricCharge</radioswitchEffect>		
+				<!-- <mote>AV_Mote_MechSparkSimple</mote> -->
+				<mote>AV_CompanionMote</mote>
+			</li>
+		</comps>
+    </ThingDef>
+  
+    <PawnKindDef ParentName="LightMechanoidKind">
+		<defName>AV_Mech_Companion</defName>
+		<label>companoid sphere</label>
+		<race>AV_Mech_Companion</race>
+		<combatPower>20</combatPower>
+		<isFighter>false</isFighter>	<!-- should not be in raids now?-->
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/AV_Sphere</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/AV_Sphere</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.5</drawSize>
+					<shadowData>
+						<volume>(0.45, 0.55, 0.45)</volume>
+						<offset>(0,0,0.25)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Mechanoid/AV_SphereAncient</texPath>
+					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/AV_Sphere</maskPath>
+					<shaderType>CutoutWithOverlay</shaderType>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.5</drawSize>
+					<shadowData>
+						<volume>(0.45, 0.55, 0.45)</volume>
+						<offset>(0,0,0.25)</offset>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>
+		<abilities>
+			<li>AV_Emergency_EMP</li>	
+			<!-- <li>AV_Helper_Mode</li> -->
+		</abilities> 
+    </PawnKindDef>
+
+	<RecipeDef ParentName="BaseMechanoidRecipe">
+        <defName>AV_Gestate_Companion</defName>
+        <label>gestate companoid sphere</label>
+        <description>Gestate a companoid sphere mechanoid.</description>
+		<researchPrerequisite>AV_Compressed_Mechtech</researchPrerequisite>
+        <ingredients Inherit="False">
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Steel</li>
+                    </thingDefs>
+                </filter>
+                <count>40</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>Plasteel</li>
+                    </thingDefs>
+                </filter>
+                <count>10</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>SubcoreBasic</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+        </ingredients>
+        <products>
+            <AV_Mech_Companion>1</AV_Mech_Companion>
+        </products>
+        <descriptionHyperlinks>
+            <ThingDef>AV_Mech_Companion</ThingDef>
+        </descriptionHyperlinks>
+    </RecipeDef>
+
+	<!-- Abilities -->
+
+	<!-- Emergency EMP -->
+	<AbilityDef>
+		<defName>AV_Emergency_EMP</defName>
+		<label>overdrive</label>
+		<description>Activate the emergency protocol, overdriving the reactor to release a short electro magnetic pulse. This causes the mech to shutdown.</description>
+		<iconPath>UI/Gizmos/AV_MechOverdrive</iconPath>
+		<cooldownTicksRange>300000</cooldownTicksRange><!-- 5 days -->
+		<displayOrder>999</displayOrder>
+		<aiCanUse>false</aiCanUse>
+		<warmupStartSound>FireSpew_Warmup</warmupStartSound>
+		<showWhenDrafted>true</showWhenDrafted>
+		<displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>true</disableGizmoWhileUndrafted>	
+		<jobDef>CastAbilityOnThing</jobDef>
+		<targetRequired>False</targetRequired>
+		<canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+		<stunTargetWhileCasting>True</stunTargetWhileCasting>
+		<showPsycastEffects>False</showPsycastEffects>
+		<statBases>
+			<Ability_Duration>1000</Ability_Duration>
+			<Ability_EffectRadius>2.9</Ability_EffectRadius>
+		</statBases>
+		<hostile>false</hostile>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>0.5</warmupTime>
+			<requireLineOfSight>false</requireLineOfSight>
+			<drawAimPie>false</drawAimPie>      
+			<range>2.9</range>
+			<soundCast>Shot_ChargeRifle</soundCast>
+			<targetParams>
+				<canTargetSelf>true</canTargetSelf>
+				<canTargetPawns>false</canTargetPawns>
+				<canTargetBuildings>false</canTargetBuildings>
+				<canTargetAnimals>false</canTargetAnimals>
+				<canTargetHumans>false</canTargetHumans>
+				<canTargetMechs>false</canTargetMechs>				
+			</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="CompProperties_AbilityLaunchProjectile">
+				<projectileDef>AV_EMP</projectileDef>
+			</li>
+			<li Class="CompProperties_AbilityGiveHediff">
+				<compClass>CompAbilityEffect_GiveHediff</compClass>
+				<hediffDef>AV_Energy_depletion</hediffDef>
+				<onlyBrain>True</onlyBrain>
+				<onlyApplyToSelf>True</onlyApplyToSelf>
+				<replaceExisting>true</replaceExisting>
+			</li>	
+		</comps>
+	</AbilityDef>
+
+	<ThingDef ParentName="BaseBullet">
+		<defName>AV_EMP</defName>
+		<label>emp</label>
+		<thingClass>Projectile_Explosive</thingClass>
+		<graphicData>
+			<texPath>Things/Projectile/AV_Lightning</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+		<projectile>
+			<explosionRadius>3</explosionRadius>
+			<damageDef>EMP</damageDef>
+			<damageAmountBase>30</damageAmountBase>
+			<speed>50</speed>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef ParentName="MoteBase">
+		<defName>AV_CompanionMote</defName>
+		<graphicData>
+			<texPath>UI/Gizmos/AV_waves</texPath>
+			<drawSize>1.4</drawSize>
+		</graphicData>
+		<thingClass>MoteThrownAttached</thingClass>
+		<altitudeLayer>Projectile</altitudeLayer>
+		<mote>
+			<fadeInTime>0.25</fadeInTime>
+			<solidTime>1</solidTime>
+			<fadeOutTime>1.4</fadeOutTime>
+			<attachedDrawOffset>(0, 0, 0.35)</attachedDrawOffset> <!-- xx, zz, yy -->
+		</mote>
+	</ThingDef>
+	
+
+	<!-- mech buff -->
+	<HediffDef ParentName="DiseaseBase">
+		<defName>AV_Helper_Command</defName>
+		<label>guiding protocol</label>
+		<description>By encouraging and guiding this mech enhances the focus of nearby allies.</description>
+		<defaultLabelColor>(0.52, 1, 0.95)</defaultLabelColor>
+		<makesSickThought>false</makesSickThought>
+		<initialSeverity>0.01</initialSeverity> 
+		<minSeverity>0</minSeverity>
+		<maxSeverity>5.0</maxSeverity>	
+		<scenarioCanAdd>false</scenarioCanAdd>
+			<comps>
+				<li Class="HediffCompProperties_Immunizable">
+					<severityPerDayNotImmune>0.00</severityPerDayNotImmune>
+				</li>
+				<li Class="HediffCompProperties_DisappearsOnDeath"/>
+				<li Class="AV_Mechtech.HediffCompProperties_GiveHediffsSeverityInRange">
+					<range>4.9</range>
+					<!--
+					<mote>AV_Mote_Helper_Mode</mote>
+					<hideMoteWhenNotDrafted>true</hideMoteWhenNotDrafted> -->
+					<targetingParameters>
+						<canTargetBuildings>false</canTargetBuildings>
+						<canTargetAnimals>false</canTargetAnimals>
+						<canTargetMechs>false</canTargetMechs>
+						<onlyTargetColonists>true</onlyTargetColonists>
+					</targetingParameters>
+					<hediff_to_look>AV_Helper_Command</hediff_to_look>
+					<hediff_to_set>AV_Helper_Mode_Buff</hediff_to_set>
+				</li>					
+			</comps>			
+		<stages>
+			<li>
+				<label>general</label>
+				<minSeverity>0.01</minSeverity>
+			</li>
+			<li>
+				<label>teacher</label>
+				<minSeverity>1.0</minSeverity>
+			</li>
+			<li>
+				<label>hacker</label>
+				<minSeverity>2.0</minSeverity>
+			</li>
+			<li>
+				<label>mechanitor</label>
+				<minSeverity>3.0</minSeverity>
+			</li>
+			<li>
+				<label>medic</label>
+				<minSeverity>4.0</minSeverity>
+			</li>
+		</stages>
+	</HediffDef>
+	
+	<!-- link circle -->
+	<ThingDef ParentName="MoteBase">
+		<defName>AV_Mote_Helper_Mode</defName>
+		<thingClass>MoteAttached</thingClass>
+		<altitudeLayer>LightingOverlay</altitudeLayer>
+		<drawOffscreen>true</drawOffscreen>
+		<mote>
+			<solidTime>9999999</solidTime>
+			<needsMaintenance>true</needsMaintenance>
+		</mote>
+		<graphicData>
+			<graphicClass>Graphic_Mote</graphicClass>
+			<texPath>Things/Mote/CombatCommandMask</texPath>
+			<shaderType>MoteGlow</shaderType>
+			<color>(0, 17, 32)</color>
+			<drawSize>8.9</drawSize>	<!-- not radius, diameter! -->
+		</graphicData>
+	</ThingDef>
+	
+	<!-- link line -->
+	<ThingDef ParentName="MoteBase">
+		<defName>AV_Mote_HelperMode_LinkLine</defName>
+		<thingClass>MoteDualAttached</thingClass>
+		<altitudeLayer>MoteLow</altitudeLayer>
+		<mote>
+			<fadeInTime>0.1</fadeInTime>
+			<fadeOutTime>0.1</fadeOutTime>
+			<solidTime>999999</solidTime>
+			<needsMaintenance>True</needsMaintenance>
+			<rotateTowardsTarget>True</rotateTowardsTarget>
+			<scaleToConnectTargets>True</scaleToConnectTargets>
+		</mote>
+		<graphicData>
+			<shaderType>MoteGlow</shaderType>
+			<texPath>Things/Mote/WorkCommandLinkLine</texPath>	<!-- color comes from here! -->
+		</graphicData>
+	</ThingDef>
+	
+	<!-- pawn boost-->
+	<!-- <HediffDef ParentName="RoleStatBuff"> -->
+	<HediffDef>
+		<defName>AV_Helper_Mode_Buff</defName>
+		<label>Guidance</label>
+		<description>Abilities are boosted thanks to a nearby companoid sphere. A colonist can only benefit from one companoid sphere at a time.</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<defaultLabelColor>(0.52, 1, 0.95)</defaultLabelColor>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<showRemainingTime>false</showRemainingTime>
+				<disappearsAfterTicks>600</disappearsAfterTicks>
+			</li>
+			<li Class="HediffCompProperties_DisappearsOnDeath"/>			
+			<li Class="HediffCompProperties_Link">
+				<requireLinkOnOtherPawn>false</requireLinkOnOtherPawn>
+				<maxDistance>4.9</maxDistance>
+				<customMote>AV_Mote_HelperMode_LinkLine</customMote>
+				<showName>false</showName>	<!-- true means name of source is shown on pawn hediff-->
+			</li>
+		</comps>
+		<isBad>false</isBad>
+		<stages>
+			<li>
+				<label>general</label>
+				<minSeverity>0.01</minSeverity>
+				<statOffsets>
+					<GlobalLearningFactor>0.1</GlobalLearningFactor>
+					<HuntingStealth>-0.5</HuntingStealth>
+					
+					<PawnTrapSpringChance>-0.5</PawnTrapSpringChance>
+					<GeneralLaborSpeed>0.05</GeneralLaborSpeed>	
+				</statOffsets>
+			</li>
+			<li>
+				<label>teacher</label>
+				<minSeverity>1.0</minSeverity>
+				<statOffsets>
+					<GlobalLearningFactor>0.1</GlobalLearningFactor>
+					<HuntingStealth>-0.5</HuntingStealth>
+					
+					<LearningRateFactor>0.25</LearningRateFactor>
+					<BabyPlayGainFactor>0.25</BabyPlayGainFactor>	
+				</statOffsets>
+			</li>
+			<li>
+				<label>hacker</label>
+				<minSeverity>2.0</minSeverity>
+				<statOffsets>
+					<GlobalLearningFactor>0.1</GlobalLearningFactor>
+					<HuntingStealth>-0.5</HuntingStealth>
+					
+					<ResearchSpeed>0.25</ResearchSpeed>
+					<HackingSpeed MayRequire="Ludeon.RimWorld.Ideology">0.25</HackingSpeed>
+				</statOffsets>
+			</li>	
+			<li>
+				<label>mechanitor</label>
+				<minSeverity>3.0</minSeverity>
+				<statOffsets>
+					<GlobalLearningFactor>0.1</GlobalLearningFactor>
+					<HuntingStealth>-0.5</HuntingStealth>
+					
+					<MechRepairSpeed>0.25</MechRepairSpeed>
+					<WorkSpeedGlobalOffsetMech>0.1</WorkSpeedGlobalOffsetMech>
+					<MechFormingSpeed>0.25</MechFormingSpeed>
+				</statOffsets>
+			</li>
+			<li>
+				<label>medic</label>
+				<minSeverity>4.0</minSeverity>
+				<statOffsets>
+					<GlobalLearningFactor>0.1</GlobalLearningFactor>
+					<HuntingStealth>-0.5</HuntingStealth>
+					
+
+					<MedicalTendSpeed>0.05</MedicalTendSpeed>
+					<MedicalTendQuality>0.1</MedicalTendQuality>
+					<MedicalOperationSpeed>0.05</MedicalOperationSpeed>
+					<MedicalSurgerySuccessChance>0.1</MedicalSurgerySuccessChance>	
+				</statOffsets>
+			</li>				
+		</stages>
+	</HediffDef>
+
+	<!-- energy depletion -->
+	<HediffDef>
+		<defName>AV_Energy_depletion</defName>
+		<hediffClass>HediffWithComps</hediffClass>
+		<label>energy depletion</label>
+		<description>This mech is suffering from a lack of energy due to overloaded systems.</description>
+		<defaultLabelColor>(0.8, 0.8, 0.35)</defaultLabelColor>
+		<isBad>true</isBad>
+		<makesSickThought>false</makesSickThought>
+		<priceImpact>true</priceImpact>
+		<initialSeverity>0.01</initialSeverity> 
+		<minSeverity>0</minSeverity>
+		<maxSeverity>1</maxSeverity>		
+		<scenarioCanAdd>false</scenarioCanAdd>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>2500~3500</disappearsAfterTicks>
+			</li>
+			<li Class="HediffCompProperties_DisappearsOnDeath"/>	<!-- DOES NOT NEED li End-Tag! -->
+			<li Class="HediffCompProperties_Immunizable">
+				<severityPerDayNotImmune>1.00</severityPerDayNotImmune>
+			</li>
+		</comps>			
+		<stages>
+			<li>	
+				<label>draining</label>
+				<minSeverity>0.01</minSeverity> 
+				<statOffsets>
+					<MechEnergyUsageFactor>1000.0</MechEnergyUsageFactor>
+				</statOffsets>				
+			</li>			
+			<li>
+				<label>drained</label>
+				<minSeverity>0.02</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<setMax>0.2</setMax>
+					</li>
+				</capMods>
+			</li>			
+			<li>
+				<label>depleting</label>
+				<minSeverity>0.05</minSeverity>
+				<statOffsets>
+					<MechEnergyUsageFactor>2.0</MechEnergyUsageFactor>
+				</statOffsets>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<setMax>0.5</setMax>
+					</li>
+				</capMods>
+			</li>
+			<li>
+				<label>recovering</label>
+				<minSeverity>0.3</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<setMax>0.75</setMax>
+					</li>
+				</capMods>			
+			</li>
+		</stages>
+	</HediffDef>
+
+	<!-- light hovering sphere mech -->
+	<BodyDef>
+		<defName>Mech_Companion</defName>
+		<label>light hovering sphere mech</label>
+		<corePart>
+			<def>MechanicalThorax</def>
+			<customLabel>spherical shell</customLabel>
+			<height>Middle</height>
+			<depth>Outside</depth>
+			<parts>
+				<li>	<!-- MechanicalHead -->
+					<def>MechanicalHead</def>
+					<customLabel>frontal interface</customLabel>
+					<coverage>0.15</coverage>
+					<groups>
+						<li>HeadAttackTool</li>
+					</groups>
+					<height>Top</height>
+					<parts>
+						<li>
+							<def>ArtificialBrain</def>
+							<coverage>0.10</coverage>
+							<depth>Inside</depth>
+						</li>
+						<li>
+							<def>SightSensor</def>
+							<customLabel>sight sensor</customLabel>
+							<coverage>0.13</coverage>
+						</li>
+						<li>
+							<def>HearingSensor</def>
+							<customLabel>hearing sensor</customLabel>
+							<coverage>0.10</coverage>
+						</li>
+						<li>
+							<def>SmellSensor</def>
+							<coverage>0.10</coverage>
+						</li>
+					</parts>
+				</li>
+				<li>	<!-- MechanicalArm -->
+					<def>MechanicalArm</def>
+					<customLabel>right manipulator</customLabel>
+					<coverage>0.10</coverage>
+					<height>Middle</height>
+					<depth>Outside</depth>
+				</li> 
+				<li>	<!-- MechanicalArm -->
+					<def>MechanicalArm</def>
+					<customLabel>left manipulator</customLabel>
+					<coverage>0.10</coverage>
+					<height>Middle</height>
+					<depth>Outside</depth>
+				</li> 
+				<li>	<!-- SmallMechanicalLeg -->
+					<def>SmallMechanicalLeg</def>
+					<customLabel>first thruster</customLabel>
+					<coverage>0.05</coverage>
+					<height>Bottom</height>
+				</li>
+				<li>	<!-- SmallMechanicalLeg -->
+					<def>SmallMechanicalLeg</def>
+					<customLabel>second thruster</customLabel>
+					<coverage>0.05</coverage>
+					<height>Bottom</height>
+				</li>
+				<li>	<!-- SmallMechanicalLeg -->
+					<def>SmallMechanicalLeg</def>
+					<customLabel>third thruster</customLabel>
+					<coverage>0.05</coverage>
+					<height>Bottom</height>
+				</li>
+				<li>	<!-- Reactor -->
+					<def>Reactor</def>
+					<coverage>0.15</coverage>	<!-- 0.06 -->
+					<depth>Inside</depth>
+				</li>
+				<li>	<!-- FluidReprocessor -->
+					<def>FluidReprocessor</def>
+					<coverage>0.04</coverage>
+					<depth>Inside</depth>
+				</li>
+			</parts>
+		</corePart>
+	</BodyDef>
+	
+</Defs>

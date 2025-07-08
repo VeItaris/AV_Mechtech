@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+	<!-- Hacking Lance -  -->
+    <AV_DescHackingHediffRemoved>{PAWN_nameDef} old connection data was wiped.</AV_DescHackingHediffRemoved>
+    <AV_DescHackingBandwithSuccess>mechanoid targeted by a hacking lance was hacked and is now wandering aimlessly.</AV_DescHackingBandwithSuccess>
+	
+	<!-- no longer in use, hacking invalid targets is disabled -->
+	<!--	<AV_DescHackingBandwithFailOne>mechanoid targeted by a hacking lance has more than</AV_DescHackingBandwithFailOne>
+    <AV_DescHackingBandwithFailTwo>bandwidth cost. One charge was wasted.</AV_DescHackingBandwithFailTwo>
+    <AV_DescHackingBandwithFailCharge>mechanoid targeted by a hacking lance has more bandwidthcost than the hacking lance has charges. Hacking failed, one charge was wasted.</AV_DescHackingBandwithFailCharge>	-->
+	
+	
+	<!-- Radio Mech -->
+	
+    <AV_LabelGizmoModule>module</AV_LabelGizmoModule>
+    <AV_LabelGizmoGeneral>general</AV_LabelGizmoGeneral>
+    <AV_LabelGizmoTeacher>teacher</AV_LabelGizmoTeacher>	
+    <AV_LabelGizmoHacker>hacker</AV_LabelGizmoHacker>	
+    <AV_LabelGizmoMechanitor>mechanitor</AV_LabelGizmoMechanitor>
+    <AV_LabelGizmoMedic>medic</AV_LabelGizmoMedic>
+
+    <AV_DescGizmoChangeModule>click to change module</AV_DescGizmoChangeModule>	
+    <AV_DescGizmoGeneral>giving general advice</AV_DescGizmoGeneral>
+    <AV_DescGizmoTeacher>helps children to learn</AV_DescGizmoTeacher>	
+    <AV_DescGizmoHacker>giving intelligence advice</AV_DescGizmoHacker>	
+    <AV_DescGizmoMechanitor>giving mechanitor advice</AV_DescGizmoMechanitor>
+    <AV_DescGizmoMedic>giving medical advice</AV_DescGizmoMedic>	
+	
+	
+	<!-- mechlink unlimiter -->
+	
+    <AV_LabelGizmoUnlimited>increase mechlink power</AV_LabelGizmoUnlimited>
+	<AV_DescGizmoUnlimited>allow the unlimiter to trade brain capacity for additional bandwidth. This can not be undone.</AV_DescGizmoUnlimited>	
+	<AV_MechlinkUnlimiterWarning>Increase mechlink power?\n\nThis will have the following effects:\n 10% reduced consciousness\n +2 bandwidth\n +10% bandwidth\n +10% mech workspeed\n +10% mech repair speed\n +15% mech gestation speed\n +5% psychic sensitivity\n\n&lt;color=#f8f32b&gt;Warning!\nThis can not be undone.\nA pawn with below 30% consciousness will fall uncousious.&lt;/color&gt;</AV_MechlinkUnlimiterWarning>
+		
+	<!-- no longer in use, got reworked -->
+	<!--
+	<AV_DescGizmoUnlimitedZero>debug: Remove unlimters adjustments</AV_DescGizmoUnlimitedZero>	
+    <AV_DescGizmoUnlimitedOne>trade 20% brain capacity</AV_DescGizmoUnlimitedOne>	
+    <AV_DescGizmoUnlimitedTwo>trade 40% brain capacity</AV_DescGizmoUnlimitedTwo>
+    <AV_DescGizmoUnlimitedThree>trade 60% brain capacity</AV_DescGizmoUnlimitedThree>	
+    <AV_DescGizmoUnlimitedFour>trade 70% brain capacity</AV_DescGizmoUnlimitedFour>	
+    <AV_DescGizmoUnlimitedFive>trade 90% brain capacity</AV_DescGizmoUnlimitedFive>
+	 -->
+	
+
+
+	<!-- HediffComp_HealPermanentWounds_time -->
+    <AV_Message_missing>missing</AV_Message_missing> 
+	<AV_Message_CauseNeuroferium>Cause: Neuroferium</AV_Message_CauseNeuroferium>
+
+	<!-- fueled bandnode flickable -->
+    <AV_FueledBandnode_commandLabelKey>Designate fuel toggle</AV_FueledBandnode_commandLabelKey> 
+    <AV_FueledBandnode_commandDescKey>Designate this thing to use fuel. A colonist will come soon to flick the switch.</AV_FueledBandnode_commandDescKey> 	
+	
+	<!-- collar -->
+    <AV_LetterLabelSlaveRebellionPrevented>slave rebellion prevented</AV_LetterLabelSlaveRebellionPrevented>
+    <AV_LetterSlaveRebellionPrevented>{PAWN}'s rebellion was put to an end by an hightech slave collar.</AV_LetterSlaveRebellionPrevented>
+
+
+	<!-- retuner Verb_CastTargetEffectLances_Recoder -->
+	<AV_Message_RetuningSuccessful>{ITEM} targeted by a biocode retuner changed its biocoding to {PAWN}</AV_Message_RetuningSuccessful>
+	<AV_MouseAttachedLabel_Biocoded>Already biocoded to user</AV_MouseAttachedLabel_Biocoded>
+	<AV_MouseAttachedLabel_CanRecode>Can be recoded</AV_MouseAttachedLabel_CanRecode>
+	<AV_MouseAttachedLabel_NotRecodeable>Not biocodeable</AV_MouseAttachedLabel_NotRecodeable>
+		
+	<!-- Verb_CastTargetEffectLances_MechanoidStateRemover -->
+	<AV_MouseAttachedLabel_Overload>Overload power cell</AV_MouseAttachedLabel_Overload>
+	<AV_MouseAttachedLabel_FixMentalState>Fix mental state</AV_MouseAttachedLabel_FixMentalState>
+	<AV_MouseAttachedLabel_OldConnectionData>Purge old connection data</AV_MouseAttachedLabel_OldConnectionData>
+	<AV_MouseAttachedLabel_DataBreach>Fix data breach</AV_MouseAttachedLabel_DataBreach>		
+				
+	<!-- Verb_CastTargetEffectLances_Hacking -->
+	<AV_MouseAttachedLabel_Overseen>Already overseen</AV_MouseAttachedLabel_Overseen>
+	<AV_MouseAttachedLabel_NoCharges>Not enough charges</AV_MouseAttachedLabel_NoCharges>
+	<AV_MouseAttachedLabel_ShowChargecost>Hacking consumes {CHARGECOST} charge(s)</AV_MouseAttachedLabel_ShowChargecost>
+	
+	<!-- CompTargetEffect_MechanoidStateRemover -->
+	<AV_Message_OldConnectionDataWiped>Old connection data of {PAWN} was wiped permanently.</AV_Message_OldConnectionDataWiped>
+	<AV_Message_DatabreachFixed>Databreach of {PAWN} was fixed.</AV_Message_DatabreachFixed>
+
+	<!-- Comp_WanderingSinistre -->
+	<AV_Message_SinistreRoam>{PAWN}'s sinistre consumed all bioferrite to form itself and has decided to roam the area for a bit.</AV_Message_SinistreRoam>
+	<AV_Message_SinistreRoamHostile>{PAWN}'s sinistre is starved of bioferrite and went out of control.</AV_Message_SinistreRoamHostile>
+	<AV_Message_ReshaperPowerUp>{PAWN}'s bond to its sinistre increased.</AV_Message_ReshaperPowerUp>
+		
+</LanguageData>

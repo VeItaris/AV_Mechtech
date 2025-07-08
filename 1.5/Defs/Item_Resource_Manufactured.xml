@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+	<!-- neuro pod -->
+	<ThingDef ParentName="ResourceBase">
+		<defName>AV_Neuropod</defName>
+		<label>micro pod</label>
+		<description>A small pod which provides the perfect environment for cultivating microorganisms.</description>
+		<possessionCount>1</possessionCount>
+		<graphicData>
+			<texPath>Things/Item/Resource/AV_NeuroCell/AV_NeuroCell</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<soundInteract>Metal_Drop</soundInteract>
+		<soundDrop>Standard_Drop</soundDrop>
+		<stackLimit>5</stackLimit>
+		<statBases>
+			<MarketValue>200</MarketValue>
+			<Beauty>-10</Beauty>
+			<Mass>2</Mass>
+			<Flammability>1</Flammability>
+			<DeteriorationRate>1</DeteriorationRate>
+		</statBases>
+		<thingCategories>
+			<li>Manufactured</li>
+		</thingCategories>
+		<tradeability>All</tradeability>
+		<tradeTags Inherit="False">
+			<li>AV_Mechtech</li>
+			<li>AV_Mechtech_Spacer</li>
+			<li>Artifact</li>	<!-- artifact does not get rolled as often as exotic -->
+		</tradeTags>
+		<comps><!--
+			<li Class="CompProperties_Studiable">
+				<studyAmountToComplete>5</studyAmountToComplete>
+				<completedLetterTitle>{PARENT_label} studied: {RESEARCH} unlocked</completedLetterTitle>
+				<completedLetterText>By studying the {PARENT_label}, {STUDIER_labelShort} has acquired the insight needed for the research project(s) {RESEARCH}.\n\nYour researchers can now use research benches to begin researching how to actually use the technology.</completedLetterText>
+				<completedLetterDef>PositiveEvent</completedLetterDef>
+			</li> -->
+		</comps> 
+	</ThingDef>
+
+	<!-- recipy neuro pod -->
+	<RecipeDef>
+		<defName>AV_CreateMicroPod</defName>
+		<label>micro pod</label>
+		<description>A small sealed pod that provides the perfect environment for cultivating microorganisms.</description>
+		<researchPrerequisite>AV_MicroPod</researchPrerequisite>
+		<jobString>Manufactureing a micro pod.</jobString>
+		<workAmount>600</workAmount>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<effectWorking>Smith</effectWorking>
+		<soundWorking>Recipe_Machining</soundWorking>
+		<unfinishedThingDef>UnfinishedPack</unfinishedThingDef>
+		<ingredients><!-- 
+			<li>
+				<filter>
+					<thingDefs>
+						<li>AV_Neurofoam</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li> -->
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Silver</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>	<!-- silver gets multiplied ingame by 10 -->
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+			<li>
+				<filter>
+					<customSummary>nutrition</customSummary>
+					<categories>
+						<li>FoodRaw</li>
+					</categories>
+				</filter>
+				<count>10</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<!-- <li>AV_Neurofoam</li>	 -->
+				<!-- <li>Steel</li>		 -->
+				<!-- <li>ComponentIndustrial</li>		 -->				
+			</thingDefs>
+			<categories>
+				<li>FoodRaw</li>
+			</categories>
+			<specialFiltersToDisallow>
+				<li>AllowPlantFood</li>
+			</specialFiltersToDisallow>
+		</fixedIngredientFilter>
+		<defaultIngredientFilter>
+			<categories>
+				<li>FoodRaw</li>
+			</categories>
+			<disallowedCategories>
+				<li>EggsFertilized</li>
+			</disallowedCategories>
+			<disallowedThingDefs>
+				<li>Meat_Human</li>
+				<li>Meat_Megaspider</li>
+				<li>InsectJelly</li>
+				<li MayRequire="Ludeon.RimWorld.Anomaly">Meat_Twisted</li>
+			</disallowedThingDefs>
+		</defaultIngredientFilter>
+		<workSkill>Crafting</workSkill>
+		<skillRequirements>
+			<Crafting>4</Crafting>
+		</skillRequirements>
+		<products>
+			<AV_Neuropod>1</AV_Neuropod>
+		</products>
+		<displayPriority>1431</displayPriority>
+		<recipeUsers>
+			<li>FabricationBench</li>
+			<li>TableMachining</li>
+			<li>ElectricSmithy</li>
+			<li>FueledSmithy</li>
+		</recipeUsers>
+	</RecipeDef>
+
+
+	<!-- unfinished Subcores-->
+	<ThingDef ParentName="UnfinishedBase">
+		<defName>AV_UnfinishedSubcoreRegular</defName>
+		<label>unfinished standard subcore</label>
+		<description>An unfinished mechanoid subcore of the standard type.</description>
+		<statBases>
+			<Flammability>0.5</Flammability>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Item/Unfinished/AV_UnfinishedRegularSubcore</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stuffCategories Inherit="false" />
+	</ThingDef>
+
+	<ThingDef ParentName="UnfinishedBase">
+		<defName>AV_UnfinishedSubcoreHigh</defName>
+		<label>unfinished high subcore</label>
+		<description>An unfinished mechanoid subcore of the high type.</description>
+		<statBases>
+			<Flammability>0.5</Flammability>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Item/Unfinished/AV_UnfinishedHighSubcore</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stuffCategories Inherit="false" />
+	</ThingDef>
+
+
+	<!-- make SubcoreRegular-->
+	<RecipeDef>
+		<defName>AV_CopySubcoreRegular</defName>
+		<label>copy standard subcore</label>
+		<description>Copy the engram of an existing standard subcore to a newly build one. This is a lengthy process.</description>
+		<researchPrerequisite>AV_SubcoreManipulation</researchPrerequisite>
+		<jobString>Copying regular subcore.</jobString>
+		<workAmount>20000</workAmount>
+		<workSpeedStat>SubcoreEncodingSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>SubcoreEncoder_Working</soundWorking>
+		<unfinishedThingDef>AV_UnfinishedSubcoreRegular</unfinishedThingDef>
+		<mechanitorOnlyRecipe>true</mechanitorOnlyRecipe>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>50</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>4</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>SubcoreRegular</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<workSkill>Crafting</workSkill>
+		<skillRequirements>
+			<Crafting>6</Crafting>
+		</skillRequirements>
+		<products>
+			<SubcoreRegular>2</SubcoreRegular>
+		</products>
+		<displayPriority>1430</displayPriority>
+		<recipeUsers>
+			<li>SubcoreEncoder</li>
+		</recipeUsers>		
+	</RecipeDef>
+	
+	<!-- make SubcoreHigh-->
+	<RecipeDef>
+		<defName>AV_CopySubcoreHigh</defName>
+		<label>copy high subcore</label>
+		<description>Copy the engram of an existing high subcore to a newly build one. This is a very lengthy process.</description>
+		<researchPrerequisite>AV_SubcoreManipulation</researchPrerequisite>
+		<jobString>Copying high subcore.</jobString>
+		<workAmount>120000</workAmount>	<!-- 2 days-->
+		<workSpeedStat>SubcoreEncodingSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>SubcoreEncoder_Working</soundWorking>
+		<unfinishedThingDef>AV_UnfinishedSubcoreHigh</unfinishedThingDef>
+		<mechanitorOnlyRecipe>true</mechanitorOnlyRecipe>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>50</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>ComponentIndustrial</li>
+					</thingDefs>
+				</filter>
+				<count>4</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>SubcoreHigh</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<workSkill>Crafting</workSkill>
+		<skillRequirements>
+			<Crafting>6</Crafting>
+		</skillRequirements>
+		<products>
+			<SubcoreHigh>2</SubcoreHigh>
+		</products>
+		<displayPriority>1430</displayPriority>
+		<recipeUsers>
+			<li>SubcoreEncoder</li>
+		</recipeUsers>		
+	</RecipeDef>
+	
+	
+	<!-- unspecialized mechanoid chip -->
+	<ThingDef ParentName="MechResourceBase">
+		<defName>AV_Unspecialized_Mechchip</defName>
+		<label>unspecialized mechanoid chip</label>
+		<description>An unspecialized mechanoid micro-organ. A mechanitor may trigger a specialization to an already studied mechchips.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AV_SpecialMechChip</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<stackLimit>1</stackLimit>	<!-- needs to stay st one!! -->
+		<statBases>
+			<MarketValue>2000</MarketValue>
+		</statBases>
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_Usable_UnspecializedMechchip">
+				<useJob>AV_SpecializeMechanoidChip</useJob>
+				<useLabel>Specialize chip into </useLabel>
+				<useDuration>600</useDuration>
+				<floatMenuOptionPriority>SummonThreat</floatMenuOptionPriority>
+				<ignoreOtherReservations>true</ignoreOtherReservations>
+				<thingDefs>
+					<li>SignalChip</li>
+					<li>PowerfocusChip</li>
+					<li>NanostructuringChip</li>
+					<li MayRequire="sarg.alphamechs">AM_HyperLinkageChip</li>
+					<li MayRequire="sarg.alphamechs">AM_StellarProcessingChip</li>
+					<li MayRequire="sarg.alphamechs">AM_QuantumMatrixChip</li>
+				</thingDefs>
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<JobDef>
+		<defName>AV_SpecializeMechanoidChip</defName>
+		<driverClass>AV_Mechtech.JobDriver_SpecializeMechanoidChip</driverClass>
+		<reportString>specializing TargetA.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<suspendable>false</suspendable>
+		<alwaysShowWeapon>false</alwaysShowWeapon>
+    </JobDef>
+	
+	
+	
+</Defs>

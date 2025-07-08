@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Patch>
+
+	<!-- Mech recipes -->
+	
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="MechGestator"]/recipes</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MechGestator"]/recipes</xpath>
+			<order>Prepend</order>
+			<value>
+				<li>AV_Gestate_Reshaper</li>
+			</value>
+		</match>
+	</Operation>
+
+ 	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/RecipeDef[defName = "ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/RecipeDef[defName = "ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
+			<value>
+				<li>Corpse_AV_Mech_Reshaper</li>				
+			</value>
+		</match>
+	</Operation>
+
+</Patch>

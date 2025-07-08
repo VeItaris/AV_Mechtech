@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+ 
+ 
+	<!-- Helixien bandnode -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>AV_BandNode_Helixien</defName>
+		<label>helixien band node</label>
+		<description>A mechanoid-band signal amplifier. Band nodes must be tuned to a specific mechanitor. This will add 1 bandwidth to that mechanitor's total bandwidth, allowing them to control more mechanoids. Needs to be fueled with helixien gas to work. \nThis bandnode keeps on working during solarflares, but is expensive to maintain. \n\nOnce a band node is constructed, it can be quickly tuned to a mechanitor. However, retuning a band node to a different mechanitor takes significantly longer. \n\nGamplay note:\nEven though they have an internal helixien gas tank, there still needs to be a gas tank build from the mod 'Vanilla Helixien Gas Expanded' to properly fill the bandnodes tank.</description>
+		<tickerType>Normal</tickerType>
+		<rotatable>false</rotatable>
+		<canOverlapZones>false</canOverlapZones>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<fillPercent>0.4</fillPercent>
+		<graphicData>
+			<texPath>Things/Building/Misc/AV_BandNodeHelixien</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<shadowData>
+				<volume>(1.5, 0.35, 1.2)</volume>
+				<offset>(0, 0, -0.15)</offset>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<buildingTags>
+				<li>Biotech</li>
+			</buildingTags>
+		</building>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<designationCategory>Biotech</designationCategory>
+		<uiOrder>2440</uiOrder>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>12000</WorkToBuild>
+			<Mass>25</Mass>
+			<Flammability>0.5</Flammability>
+		</statBases>
+		<size>(2,2)</size>
+		<costList>
+			<Steel>200</Steel>
+			<ComponentIndustrial>6</ComponentIndustrial>
+		</costList>
+		<researchPrerequisites>
+			<li>AV_Compressed_Mechtech</li>
+			<li>VHGE_GasExtraction</li>
+		</researchPrerequisites>
+		<comps>	
+			<li Class="AV_Framework.CompProperties_ExtraText">
+				<text>helixien gas needed: 400l/d</text>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>400.00</fuelConsumptionRate>
+				<fuelCapacity>400.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>VHGE_Helixien</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>0</initialFuelPercent>
+				<showAllowAutoRefuelToggle>false</showAllowAutoRefuelToggle>
+				<targetFuelLevelConfigurable>false</targetFuelLevelConfigurable>
+				<initialConfigurableTargetFuelLevel>400</initialConfigurableTargetFuelLevel>
+				<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+			</li>
+			<li Class="AV_Framework.CompProperties_BandNodeFueled">
+				<hediff>AV_BandNode</hediff>
+				<untunedEffect>BandNodeUntuned</untunedEffect>
+				<tuningEffect>BandNodeTuning</tuningEffect>
+				<tunedEffect>BandNodeTuned</tunedEffect>
+				<retuningEffect>BandNodeRetuning</retuningEffect>
+				<tuningCompleteSound>BandNodeTuning_Complete</tuningCompleteSound>
+				<workDuringSolarFlare>true</workDuringSolarFlare>
+				<bandwidthImprovement>1</bandwidthImprovement>
+			</li>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Gizmos/AV_helixientank</commandTexture>	
+				<commandLabelKey>AV_FueledBandnode_commandLabelKey</commandLabelKey>
+				<commandDescKey>AV_FueledBandnode_commandDescKey</commandDescKey>
+			</li> 
+		</comps>
+		<modExtensions>
+            <li Class="AV_Framework.PsycicDisturber">
+				<isPsycicDisturber>true</isPsycicDisturber>
+			</li>
+        </modExtensions>
+		<placeWorkers>
+			<li>AV_Framework.PlaceWorker_NeverAdjectentPsycicDisturber</li>
+		</placeWorkers>
+	</ThingDef>
+
+
+</Defs>

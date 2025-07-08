@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "NJVsNkxQP0Q=",
+  "success": true,
+  "projectFilePath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\AV_Mechtech.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\damnw\\.nuget\\packages\\krafs.rimworld.ref\\1.6.4498-beta\\krafs.rimworld.ref.1.6.4498-beta.nupkg.sha512",
+    "C:\\Users\\damnw\\.nuget\\packages\\lib.harmony\\2.3.6\\lib.harmony.2.3.6.nupkg.sha512"
+  ],
+  "logs": []
+}

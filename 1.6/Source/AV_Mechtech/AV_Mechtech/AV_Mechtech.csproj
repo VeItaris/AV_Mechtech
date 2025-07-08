@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BB9D5701-7B01-4A8A-9A2C-957F40730E0F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AV_Mechtech</RootNamespace>
+    <AssemblyName>AV_Mechtech</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AV_Framework">
+      <HintPath>..\..\..\..\..\AV_Framework\1.6\Assemblies\AV_Framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Comps_Things\CompProperties_GiveHediffsWhenAlive_Reshaper.cs" />
+    <Compile Include="Comps_Things\Comp_GiveHediffsWhenAlive_Reshaper.cs" />
+    <Compile Include="Abilities\Sinistre\CompAbilityEffect_CallBackSinistre.cs" />
+    <Compile Include="Abilities\Sinistre\CompProperties_AbilityCallBackSinistre.cs" />
+    <Compile Include="Abilities\Sinistre\GameComponent_Sinistre.cs" />
+    <Compile Include="Abilities\Sinistre\SinistrePawn.cs" />
+    <Compile Include="Abilities\Sinistre\ThinkNode_ConditionalSinistreCouldEat.cs" />
+    <Compile Include="Ability_Rocketswarm.cs" />
+    <Compile Include="Abilities\Sinistre\CompAbilityEffect_SinistreOvertake.cs" />
+    <Compile Include="Abilities\Sinistre\CompAbilityEffect_CallSinistreShadows.cs" />
+    <Compile Include="Abilities\Sinistre\CompAbilityEffect_CallSinistre.cs" />
+    <Compile Include="Abilities\Tarantula\CompAbilityEffect_BlowUpMissileLauncher.cs" />
+    <Compile Include="Abilities\Sinistre\CompProperties_AbilitySinistreOvertake.cs" />
+    <Compile Include="Abilities\Sinistre\CompProperties_AbilityCallSinistreShadows.cs" />
+    <Compile Include="Abilities\Sinistre\CompProperties_AbilityCallSinistre.cs" />
+    <Compile Include="Abilities\Tarantula\CompProperties_AbilityBlowUpMissileLauncher.cs" />
+    <Compile Include="Abilities\Sinistre\JobDriver_SinistreIngest.cs" />
+    <Compile Include="Comps_Hediff\Hediff_MechDeathRefusal.cs" />
+    <Compile Include="DeathActionWorker\DeathActionWorker_Sinistre.cs" />
+    <Compile Include="Jobs\JobDriver_SinistreEssence.cs" />
+    <Compile Include="Abilities\Sinistre\CompProperties_Usable_SinistreEssence.cs" />
+    <Compile Include="Comps_Things\CompProperties_Usable_UnspecializedMechchip.cs" />
+    <Compile Include="Comps_Hediff\Hediff_MechlinkUnlimiter.cs" />
+    <Compile Include="Abilities\Sinistre\CompProperties_SinistreNeeds.cs" />
+    <Compile Include="Abilities\Sinistre\CompProperties_WanderingSinistre.cs" />
+    <Compile Include="Abilities\Sinistre\Comp_SinistreNeeds.cs" />
+    <Compile Include="Abilities\Sinistre\Comp_WanderingSinistre.cs" />
+    <Compile Include="Abilities\Sinistre\CompUsableSinistreEssence.cs" />
+    <Compile Include="Comps_Things\CompUsableUnspecializedMechchip.cs" />
+    <Compile Include="DeathActionWorker\DeathActionWorker_Reshaper.cs" />
+    <Compile Include="DeathActionWorker\DeathActionProperties_Reshaper.cs" />
+    <Compile Include="Abilities\Sinistre\IncidentWorker_SinistreArriving.cs" />
+    <Compile Include="Abilities\Sinistre\JobGiver_SinistreBinge.cs" />
+    <Compile Include="Jobs\JobDriver_SpecializeMechanoidChip.cs" />
+    <Compile Include="RenderNodes\PawnRenderNodeProperties_CarriedOffset.cs" />
+    <Compile Include="RenderNodes\PawnRenderNodeReshaper.cs" />
+    <Compile Include="RenderNodes\PawnRenderNode_MechReshapingBelow.cs" />
+    <Compile Include="RenderNodes\PawnRenderNode_MechReshapingAbove.cs" />
+    <Compile Include="RenderNodes\PawnRenderNodeTarantula.cs" />
+    <Compile Include="Abilities\Tarantula\CompAbilityEffect_LaunchRocketswarm.cs" />
+    <Compile Include="Abilities\Tarantula\CompProperties_AbilityLaunchRocketswarm.cs" />
+    <Compile Include="Comps_Hediff\HediffComp_GiveHediffsInRange_Commander.cs" />
+    <Compile Include="Comps_Hediff\HediffComp_HealPermanentWounds_time.cs" />
+    <Compile Include="Comps_Target\CompTargetEffect_Recoder.cs" />
+    <Compile Include="Comps_Hediff\HediffCompProperties_HealPermanentWounds_time.cs" />
+    <Compile Include="Comps_Target\Verb_CastTargetEffectLances_MechanoidStateRemover.cs" />
+    <Compile Include="Comps_Target\Verb_CastTargetEffectLances_Recoder.cs" />
+    <Compile Include="Comps_Target\Verb_CastTargetEffectLances_Hacking.cs" />
+    <Compile Include="Comps_Things\CompProperties_UseEffectUpgradeMechlink.cs" />
+    <Compile Include="Comps_Hediff\HediffCompProperties_GiveHediffsInRange_Commander.cs" />
+    <Compile Include="Comps_Hediff\HediffCompProperties_MechlinkUnlimiter.cs" />
+    <Compile Include="Comps_Things\CompProperties_RadioMech.cs" />
+    <Compile Include="Comps_Hediff\HediffComp_MechlinkUnlimiter.cs" />
+    <Compile Include="Comps_Things\Comp_RadioMech.cs" />
+    <Compile Include="Main\HarmonyPatch.cs" />
+    <Compile Include="RenderNodes\PawnRenderNodeWorker_Reshaping.cs" />
+    <Compile Include="Abilities\Sinistre\SinistreUtility.cs" />
+    <Compile Include="Abilities\Tarantula\TarantulaUtility.cs" />
+    <Compile Include="Thingclass\CultivationPod.cs" />
+    <Compile Include="DeathActionWorker\DeathActionWorker_EMPExplosion.cs" />
+    <Compile Include="DeathActionWorker\DeathActionWorker_SmokeExplosion.cs" />
+    <Compile Include="Main\AV_Mechtech_Global.cs" />
+    <Compile Include="Main\DefOf.cs" />
+    <Compile Include="Comps_Target\CompTargetEffect_MechanoidStateRemover.cs" />
+    <Compile Include="Comps_Target\CompTargetEffect_Hack.cs" />
+    <Compile Include="DeathActionWorker\DeathActionWorker_FoamExplosion.cs" />
+    <Compile Include="Comps_Hediff\HediffComp_GiveHediffsSeverityInRange.cs" />
+    <Compile Include="Comps_Hediff\HediffCompProperties_GiveHediffsSeverityInRange.cs" />
+    <Compile Include="Comps_Ability\CompAbilityEffect_SetHediffSeverity.cs" />
+    <Compile Include="Comps_Ability\CompProperties_SetHediffSeverity.cs" />
+    <Compile Include="Projectiles\Projectile_MechanoidShellCluster.cs" />
+    <Compile Include="Projectiles\Projectile_ToxicShell.cs" />
+    <Compile Include="Projectiles\Projectile_MechanoidShell.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IngestOutcomeDoer\IngestionOutcomeDoer_Neurill.cs" />
+    <Compile Include="IngestOutcomeDoer\IngestionOutcomeDoer_Neuroferium.cs" />
+    <Compile Include="Comps_Things\CompUseEffect_UpgradeMechlink.cs" />
+    <Compile Include="Comps_Hediff\Hediff_BandnodeExpander.cs" />
+    <Compile Include="Abilities\Tarantula\Verb_AbilityShootRocketswarm.cs" />
+    <Compile Include="RenderNodes\PawnRenderNodeWorker_CarriedOffset.cs" />
+    <Compile Include="Abilities\Sinistre\ThinkNode_ConditionalSinistreHungry.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.*-*" />
+    <PackageReference Include="Lib.Harmony">
+      <Version>2.3.6</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

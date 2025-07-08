@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Patch>
+	<!-- Allow recycling and smelting for mechs -->
+
+	<Operation  Class="PatchOperationConditional">
+		<xpath>/Defs/WorkGiverDef[defName = "RecycleThis_Recycle"]</xpath>
+		<match Class="PatchOperationConditional">
+			<xpath>/Defs/WorkGiverDef[defName = "RecycleThis_Recycle"]/canBeDoneByMechs</xpath>
+			<match Class="PatchOperationReplace">
+				<xpath>/Defs/WorkGiverDef[defName = "RecycleThis_Recycle"]/canBeDoneByMechs</xpath>
+				<value>
+					<canBeDoneByMechs>true</canBeDoneByMechs>		
+				</value>
+			</match>
+			<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs/WorkGiverDef[defName = "RecycleThis_Recycle"]</xpath>
+				<value>
+					<canBeDoneByMechs>true</canBeDoneByMechs>		
+				</value>
+			</nomatch>
+		</match>
+	</Operation>
+
+</Patch>

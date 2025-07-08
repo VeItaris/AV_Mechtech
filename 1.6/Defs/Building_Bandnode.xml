@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+ 
+ 
+	<!-- Neutroamine bandnode -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>AV_BandNode_Neutroamine</defName>
+		<label>neutro band node</label>
+		<description>A mechanoid-band signal amplifier. Band nodes must be tuned to a specific mechanitor. This will add 1 bandwidth to that mechanitor's total bandwidth, allowing them to control more mechanoids. Needs to be fueled with neutroamine by hand to work. \n\nOnce a band node is constructed, it can be quickly tuned to a mechanitor. However, retuning a band node to a different mechanitor takes significantly longer.\nBuildings powered by neutroamine have no problems with power fluctuations or solar flares, but are expensive to maintain.</description>
+		<tickerType>Normal</tickerType>
+		<rotatable>false</rotatable>
+		<canOverlapZones>false</canOverlapZones>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<fillPercent>0.4</fillPercent>
+		<graphicData>
+			<texPath>Things/Building/Misc/AV_BandNode</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<shadowData>
+				<volume>(1.5, 0.35, 1.2)</volume>
+				<offset>(0, 0, -0.15)</offset>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<buildingTags>
+				<li>Biotech</li>
+			</buildingTags>
+		</building>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<designationCategory>Biotech</designationCategory>
+		<uiOrder>2440</uiOrder>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>12000</WorkToBuild>
+			<Mass>25</Mass>
+			<Flammability>0.5</Flammability>
+		</statBases>
+		<size>(2,2)</size>
+		<costList>
+			<Steel>150</Steel>
+			<Silver>100</Silver>
+			<ComponentIndustrial>6</ComponentIndustrial>
+		</costList>
+		<researchPrerequisites>
+			<li>AV_Compressed_Mechtech</li>
+			<li>AV_Neutroamine_Industrialisation</li>
+		</researchPrerequisites>
+		<comps>	
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>0.33</fuelConsumptionRate>
+				<fuelCapacity>5.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>Neutroamine</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>0</initialFuelPercent>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+				<targetFuelLevelConfigurable>false</targetFuelLevelConfigurable>
+				<initialConfigurableTargetFuelLevel>5</initialConfigurableTargetFuelLevel>
+				<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+			</li>
+			<li Class="AV_Framework.CompProperties_BandNodeFueled">
+				<hediff>AV_BandNode</hediff>
+				<untunedEffect>BandNodeUntuned</untunedEffect>
+				<tuningEffect>BandNodeTuning</tuningEffect>
+				<tunedEffect>BandNodeTuned</tunedEffect>
+				<retuningEffect>BandNodeRetuning</retuningEffect>
+				<tuningCompleteSound>BandNodeTuning_Complete</tuningCompleteSound>
+				<workDuringSolarFlare>true</workDuringSolarFlare>
+				<bandwidthImprovement>1</bandwidthImprovement>
+			</li>
+			<li Class="CompProperties_Flickable">
+				<commandTexture>UI/Gizmos/AV_neutrotank</commandTexture>	
+				<commandLabelKey>AV_FueledBandnode_commandLabelKey</commandLabelKey>
+				<commandDescKey>AV_FueledBandnode_commandDescKey</commandDescKey>
+			</li> 
+		</comps>
+		<modExtensions>
+            <li Class="AV_Framework.PsycicDisturber">
+				<isPsycicDisturber>true</isPsycicDisturber>
+			</li>
+        </modExtensions>
+		<placeWorkers>
+			<li>PlaceWorker_BandNode</li>
+			<!-- <li>AV_Framework.PlaceWorker_NeverAdjectentPsycicDisturber</li> -->
+		</placeWorkers>
+	</ThingDef>
+
+
+	<!-- Hediff Band node -->
+	<HediffDef>
+		<defName>AV_BandNode</defName>
+		<hediffClass>AV_Framework.Hediff_BandNode_Fueled</hediffClass>
+		<label>band node (tuned)</label>
+		<description>This mechanitor's bandwidth might be increased thanks to the influence of a fuel-powered band node structure.</description>
+		<isBad>false</isBad>
+	</HediffDef>
+
+
+	<!-- Chemfuel bandnode -->
+	<ThingDef ParentName="BuildingBase">
+		<defName>AV_BandNode_Chemfuel</defName>
+		<label>chemfuel band node</label>
+		<description>A mechanoid-band signal amplifier. Band nodes must be tuned to a specific mechanitor. This will add 1 bandwidth to that mechanitor's total bandwidth, allowing them to control more mechanoids. Needs to be fueled with neutroamine by hand to work. \n\nOnce a band node is constructed, it can be quickly tuned to a mechanitor. However, retuning a band node to a different mechanitor takes significantly longer.\nChemfuel powered band nodes are more resiliant against power fluctuations, but will stop working if hit by a solar flare.</description>
+		<tickerType>Normal</tickerType>
+		<rotatable>false</rotatable>
+		<canOverlapZones>false</canOverlapZones>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<fillPercent>0.4</fillPercent>
+		<graphicData>
+			<texPath>Things/Building/Misc/AV_BandNodeChemfuel</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+			<shadowData>
+				<volume>(1.5, 0.35, 1.2)</volume>
+				<offset>(0, 0, -0.15)</offset>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<buildingTags>
+				<li>Biotech</li>
+			</buildingTags>
+		</building>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<designationCategory>Biotech</designationCategory>
+		<uiOrder>2440</uiOrder>
+		<statBases>
+			<MaxHitPoints>150</MaxHitPoints>
+			<WorkToBuild>10000</WorkToBuild>
+			<Mass>25</Mass>
+			<Flammability>0.5</Flammability>
+		</statBases>
+		<size>(2,2)</size>
+		<costList>
+			<Steel>250</Steel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+		<researchPrerequisites>
+			<li>AV_Compressed_Mechtech</li>
+			<li>BiofuelRefining</li>
+		</researchPrerequisites>
+		<comps>	
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>3</fuelConsumptionRate>
+				<fuelCapacity>30.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>Chemfuel</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>0</initialFuelPercent>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+				<targetFuelLevelConfigurable>false</targetFuelLevelConfigurable>
+				<initialConfigurableTargetFuelLevel>30</initialConfigurableTargetFuelLevel>
+				<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+			</li>
+			<li Class="AV_Framework.CompProperties_BandNodeFueled">
+				<hediff>AV_BandNode</hediff>
+				<untunedEffect>BandNodeUntuned</untunedEffect>
+				<tuningEffect>BandNodeTuning</tuningEffect>
+				<tunedEffect>BandNodeTuned</tunedEffect>
+				<retuningEffect>BandNodeRetuning</retuningEffect>
+				<tuningCompleteSound>BandNodeTuning_Complete</tuningCompleteSound>
+				<workDuringSolarFlare>false</workDuringSolarFlare>
+				<bandwidthImprovement>1</bandwidthImprovement>
+			</li>
+			<li Class="CompProperties_Flickable">  
+				<commandTexture>UI/Gizmos/AV_gastank</commandTexture>
+				<commandLabelKey>AV_FueledBandnode_commandLabelKey</commandLabelKey>
+				<commandDescKey>AV_FueledBandnode_commandDescKey</commandDescKey>
+			</li> 
+		</comps>
+		<modExtensions>
+            <li Class="AV_Framework.PsycicDisturber">
+				<isPsycicDisturber>true</isPsycicDisturber>
+			</li>
+        </modExtensions>
+		<placeWorkers>
+			<li>PlaceWorker_BandNode</li>
+			<!-- <li>AV_Framework.PlaceWorker_NeverAdjectentPsycicDisturber</li> -->
+		</placeWorkers>
+	</ThingDef>
+
+
+</Defs>

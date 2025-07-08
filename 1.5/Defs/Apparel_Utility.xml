@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- hacking lance --> 	
+	<ThingDef ParentName="ApparelNoQualityBase">
+		<defName>AV_HackingLance</defName>
+		<label>psychic hacking lance</label>
+		<description>A limited-use psychic hacking device for mechanoids. It overwhelms the targetes defence and temporarily disrupt its connection to their overseer or hive, making them wander around aimlessly. A new overseer can connect to it afterwards. It has a long range but requires line of sight. This processs consumes charges depending on the bandwithcost of the targeted mech.</description>
+		<graphicData>
+			<texPath>Things/Item/Apparel/AV_HackingLance/AV_HackingLance</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Spacer</techLevel>
+		<tradeTags Inherit='False'>
+			<li>Artifact</li>
+			<li>AV_Mechtech</li>
+			<li>AV_Mechtech_Spacer</li>
+		</tradeTags>
+		<thingSetMakerTags>
+			<li>RewardStandardHighFreq</li>
+		</thingSetMakerTags>
+		<statBases>
+			<Mass>0.5</Mass>
+			<EquipDelay>2</EquipDelay>
+			<!-- <MarketValue>1250</MarketValue> -->
+			<MaxHitPoints>80</MaxHitPoints>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<thingCategories>
+			<li>ApparelUtility</li>
+		</thingCategories>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<scoreOffset>4</scoreOffset>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<ignoredByNonViolent>true</ignoredByNonViolent>
+			<wearPerDay>0</wearPerDay>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Belt</li>
+			</layers>
+			<wornGraphicPath>Things/Item/Apparel/AV_HackingLance/AV_HackingLance</wornGraphicPath>
+			<wornGraphicData>
+				<renderUtilityAsPack>true</renderUtilityAsPack>
+				<north>
+					<scale>(0.7,0.7)</scale>
+				</north>
+				<south>
+					<offset>(0,0.4)</offset>
+					<scale>(0.7,0.7)</scale>
+				</south>
+				<east>
+					<offset>(-0.35,0)</offset>
+					<scale>(0.85,0.85)</scale>
+					<thin>
+						<offset>(0,0.1)</offset>
+					</thin>
+					<hulk>
+						<offset>(-0.15,0)</offset>
+					</hulk>
+					<fat>
+						<offset>(-0.15,0)</offset>
+					</fat>
+					<male>
+						<offset>(0,0.1)</offset>
+					</male>
+				</east>
+				<west>
+					<offset>(0.35,0)</offset>
+					<scale>(0.85,0.85)</scale>
+					<thin>
+						<offset>(0,0.1)</offset>
+					</thin>
+					<hulk>
+						<offset>(0.15,0)</offset>
+					</hulk>
+					<fat>
+						<offset>(0.15,0)</offset>
+					</fat>
+					<male>
+						<offset>(0,0.1)</offset>
+					</male>
+				</west>
+			</wornGraphicData>
+		</apparel>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedSubcore</unfinishedThingDef>
+			<researchPrerequisite>AV_Mechanoidhacking</researchPrerequisite>
+			<recipeUsers>
+				<li>SubcoreEncoder</li>
+			</recipeUsers>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<workAmount>10000</workAmount>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Machining</soundWorking>
+			<skillRequirements>
+				<Crafting>4</Crafting>
+			</skillRequirements>
+			<displayPriority>340</displayPriority>
+		</recipeMaker>
+		<costList>
+			<Plasteel>40</Plasteel>
+			<PowerfocusChip>1</PowerfocusChip>
+		</costList>
+		<resourceReadoutPriority>Middle</resourceReadoutPriority>
+		<tradeNeverStack>true</tradeNeverStack>
+		<smeltable>false</smeltable>
+		<burnableByRecipe>false</burnableByRecipe>
+		<drawGUIOverlay>false</drawGUIOverlay>
+		<relicChance>3</relicChance>
+		<verbs>
+			<li>
+			<!-- 	<verbClass>Verb_CastTargetEffectLances</verbClass> 	 -->
+				<verbClass>AV_Mechtech.Verb_CastTargetEffectLances_Hacking</verbClass> 
+				<label>psychic hacking lance</label>
+				<hasStandardCommand>true</hasStandardCommand>
+				<targetable>true</targetable>
+				<onlyManualCast>true</onlyManualCast>
+				<violent>true</violent>
+				<range>34.9</range>
+				<warmupTime>8.5</warmupTime>
+				<invalidTargetPawn>too much bandwidth</invalidTargetPawn>
+				<targetParams>
+					<canTargetBuildings>false</canTargetBuildings>
+					<canTargetAnimals>false</canTargetAnimals>
+					<canTargetHumans>false</canTargetHumans>
+					<canTargetMechs>true</canTargetMechs>
+					<onlyTargetPsychicSensitive>true</onlyTargetPsychicSensitive>
+					<neverTargetIncapacitated>false</neverTargetIncapacitated>
+				</targetParams>
+				<soundCast>PsychicInsanityLanceCast</soundCast>
+			</li>
+		</verbs>
+		<comps>
+			<li Class="CompProperties_ApparelReloadable">
+				<maxCharges>5</maxCharges>
+				<destroyOnEmpty>true</destroyOnEmpty>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>charge</chargeNoun>
+				<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+			</li>
+			<li>
+				<compClass>AV_Mechtech.CompTargetEffect_Hack</compClass>		<!-- this is the result--> 
+			</li>
+			<li Class="CompProperties_TargetEffect_FleckOnTarget">
+				<fleckDef>PsycastPsychicEffect</fleckDef>
+			</li>
+			<li Class="CompProperties_TargetEffect_FleckConnecting">
+				<fleckDef>PsycastPsychicLine</fleckDef>
+			</li>
+			<li Class="CompProperties_Styleable"></li>
+		</comps>
+		<allowedArchonexusCount>1</allowedArchonexusCount>
+	</ThingDef>
+
+	<!-- failsafe lance -->		
+	<ThingDef ParentName="ApparelNoQualityBase">
+		<defName>AV_MechMentalLance</defName>
+		<label>mech failsafe lance</label>
+		<description>A reuseable psychic hacking device for fixing mechanoids with failing systems. Requires line of sight. Needs to be refueled with components after 2 uses.\n\n&lt;color=#f8f32b&gt;Usage:&lt;/color&gt;\n- destoy mechs with a limited power cell\n- removes mental state problems\n&lt;color=#f8f32b&gt;With [AV] Mechanoid orbital traders:&lt;/color&gt;\n- purge old connection data\n- fix data breaches</description>
+		<graphicData>
+			<texPath>Things/Item/Apparel/AV_FailsafeLance/AV_FailsafeLance</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Spacer</techLevel>
+		<tradeTags Inherit='False'>	
+			<li>AV_Mechtech_Spacer</li>
+			<li>AV_Mechtech</li>
+		</tradeTags>
+		<thingSetMakerTags>
+			<!-- <li>RewardStandardHighFreq</li> --> 
+		</thingSetMakerTags>
+		<statBases>
+			<Mass>0.5</Mass>
+			<EquipDelay>2</EquipDelay>
+			<MarketValue>150</MarketValue>
+			<MaxHitPoints>80</MaxHitPoints>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<thingCategories>
+			<li>ApparelUtility</li>
+		</thingCategories>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<scoreOffset>4</scoreOffset>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<ignoredByNonViolent>false</ignoredByNonViolent>
+			<wearPerDay>0</wearPerDay>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Belt</li>
+			</layers>
+			<wornGraphicPath>Things/Item/Apparel/AV_HackingLance/AV_HackingLance</wornGraphicPath>
+			<wornGraphicData>
+				<renderUtilityAsPack>true</renderUtilityAsPack>
+				<north>
+					<scale>(0.7,0.7)</scale>
+				</north>
+				<south>
+					<offset>(0,0.4)</offset>
+					<scale>(0.7,0.7)</scale>
+				</south>
+				<east>
+					<offset>(-0.35,0)</offset>
+					<scale>(0.85,0.85)</scale>
+					<thin>
+						<offset>(0,0.1)</offset>
+					</thin>
+					<hulk>
+						<offset>(-0.15,0)</offset>
+					</hulk>
+					<fat>
+						<offset>(-0.15,0)</offset>
+					</fat>
+					<male>
+						<offset>(0,0.1)</offset>
+					</male>
+				</east>
+				<west>
+					<offset>(0.35,0)</offset>
+					<scale>(0.85,0.85)</scale>
+					<thin>
+						<offset>(0,0.1)</offset>
+					</thin>
+					<hulk>
+						<offset>(0.15,0)</offset>
+					</hulk>
+					<fat>
+						<offset>(0.15,0)</offset>
+					</fat>
+					<male>
+						<offset>(0,0.1)</offset>
+					</male>
+				</west>
+			</wornGraphicData>
+		</apparel>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedPack</unfinishedThingDef>
+			<researchPrerequisite>AV_Mechanoidhacking</researchPrerequisite>
+			<recipeUsers>
+				<li>SubcoreEncoder</li>
+			</recipeUsers>
+			<workAmount>1000</workAmount>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Machining</soundWorking>
+			<skillRequirements>
+				<Crafting>4</Crafting>
+			</skillRequirements>
+			<displayPriority>340</displayPriority>
+		</recipeMaker>
+		<costList>
+			<Steel>40</Steel>
+			<SubcoreBasic>1</SubcoreBasic>
+			<ComponentIndustrial>2</ComponentIndustrial>
+		</costList>
+		<resourceReadoutPriority>Middle</resourceReadoutPriority>
+		<tradeNeverStack>true</tradeNeverStack>
+		<smeltable>true</smeltable>
+		<burnableByRecipe>false</burnableByRecipe>
+		<drawGUIOverlay>false</drawGUIOverlay>
+		<relicChance>3</relicChance>
+		<verbs>
+			<li>
+				<!-- <verbClass>Verb_CastTargetEffectLances</verbClass>  -->  
+				<verbClass>AV_Mechtech.Verb_CastTargetEffectLances_MechanoidStateRemover</verbClass>
+				<label>mech failsafe lance</label>
+				<hasStandardCommand>true</hasStandardCommand>
+				<targetable>true</targetable>
+				<onlyManualCast>True</onlyManualCast>
+				<violent>false</violent>
+				<range>34.9</range>
+				<warmupTime>0.5</warmupTime>
+				<invalidTargetPawn>psychic insanity immune</invalidTargetPawn>
+				<targetParams>
+					<canTargetBuildings>false</canTargetBuildings>
+					<canTargetAnimals>false</canTargetAnimals>
+					<canTargetHumans>false</canTargetHumans>
+					<canTargetMechs>true</canTargetMechs>
+					<onlyTargetPsychicSensitive>true</onlyTargetPsychicSensitive>
+					<neverTargetIncapacitated>false</neverTargetIncapacitated>
+					<neverTargetHostileFaction>false</neverTargetHostileFaction>
+				</targetParams>
+				<soundCast>PsychicInsanityLanceCast</soundCast>
+			</li>
+		</verbs>
+		<comps>
+			<li Class="CompProperties_ApparelReloadable">
+				<maxCharges>2</maxCharges>
+				<ammoDef>ComponentIndustrial</ammoDef>
+				<ammoCountPerCharge>2</ammoCountPerCharge>
+				<destroyOnEmpty>false</destroyOnEmpty>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>charge</chargeNoun>
+				<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+			</li>
+			<li>
+				<compClass>AV_Mechtech.CompTargetEffect_MechanoidStateRemover</compClass>		<!-- this is the result--> 
+			</li>
+			<li Class="CompProperties_TargetEffect_FleckOnTarget">
+				<fleckDef>PsycastPsychicEffect</fleckDef>
+			</li>
+			<li Class="CompProperties_TargetEffect_FleckConnecting">
+				<fleckDef>PsycastPsychicLine</fleckDef>
+			</li>
+			<li Class="CompProperties_Styleable"></li>
+		</comps>
+		<allowedArchonexusCount>1</allowedArchonexusCount>
+	</ThingDef>
+
+	<!-- biocode retuner -->		
+	<ThingDef ParentName="ApparelNoQualityBase">
+		<defName>AV_BiocodeRetuner</defName>
+		<label>biocode retuner pack</label>
+		<description>A one time use biocode retuner capable of changing biocoded equipment.</description>
+		<graphicData>
+			<texPath>Things/Item/Apparel/AV_BiocodeRetuner/AV_BiocodeRetuner</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<techLevel>Spacer</techLevel>
+		<tradeTags Inherit='False'>	
+			<li>AV_Mechtech_Spacer</li>
+			<li>AV_Mechtech</li>
+		</tradeTags>
+		<statBases>
+			<Mass>0.5</Mass>
+			<EquipDelay>2</EquipDelay>
+			<!-- <MarketValue>150</MarketValue> -->
+			<MaxHitPoints>80</MaxHitPoints>
+		</statBases>
+		<tickerType>Normal</tickerType>
+		<thingCategories>
+			<li>ApparelUtility</li>
+		</thingCategories>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<scoreOffset>4</scoreOffset>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<ignoredByNonViolent>false</ignoredByNonViolent>
+			<wearPerDay>0</wearPerDay>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Belt</li>
+			</layers>
+			<wornGraphicPath>Things/Item/Apparel/AV_BiocodeRetuner/AV_BiocodeRetuner</wornGraphicPath>
+			<wornGraphicData>
+				<renderUtilityAsPack>true</renderUtilityAsPack>
+				<north>
+					<offset>(0,-0.15)</offset>
+				</north>
+				<south>
+					<offset>(0,-0.15)</offset>
+				</south>
+				<east>
+					<offset>(-0.35,-0.1)</offset>
+					<thin><offset>(0.05,0)</offset></thin>
+					<hulk><offset>(-0.15,0)</offset></hulk>
+					<fat> <offset>(-0.20,0)</offset></fat>
+				</east>
+				<west>
+					<offset>(0.35,-0.1)</offset>
+					<thin><offset>(-0.05,0)</offset></thin>
+					<hulk><offset>(0.15,0)</offset></hulk>
+					<fat> <offset>(0.20,0)</offset></fat>
+				</west>
+				<male>  <scale>(0.4,0.4)</scale></male>
+				<female><scale>(0.4,0.4)</scale></female>
+				<thin>  <scale>(0.35,0.35)</scale></thin>
+				<hulk>  <scale>(0.45,0.45)</scale></hulk>
+				<fat>   <scale>(0.45,0.45)</scale></fat>
+			</wornGraphicData>
+		</apparel>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedPack</unfinishedThingDef>
+			<researchPrerequisite>AV_Biotuning</researchPrerequisite>
+			<recipeUsers>
+				<li>SubcoreEncoder</li>
+			</recipeUsers>
+			<workAmount>10000</workAmount>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Machining</soundWorking>
+			<skillRequirements>
+				<Crafting>10</Crafting>
+			</skillRequirements>
+			<displayPriority>340</displayPriority>
+		</recipeMaker>
+		<costList>
+			<Steel>60</Steel>
+			<SubcoreHigh>1</SubcoreHigh>
+			<ComponentSpacer>2</ComponentSpacer>
+		</costList>
+		<resourceReadoutPriority>Middle</resourceReadoutPriority>
+		<tradeNeverStack>true</tradeNeverStack>
+		<smeltable>true</smeltable>
+		<burnableByRecipe>false</burnableByRecipe>
+		<drawGUIOverlay>false</drawGUIOverlay>
+		<relicChance>3</relicChance>
+		<verbs>
+			<li>
+				<verbClass>AV_Mechtech.Verb_CastTargetEffectLances_Recoder</verbClass> 
+				<label>biocode retuner</label>
+				<hasStandardCommand>true</hasStandardCommand>
+				<targetable>true</targetable>
+				<onlyManualCast>True</onlyManualCast>
+				<violent>false</violent>
+				<range>34.9</range>
+				<warmupTime>0.5</warmupTime>
+				<invalidTargetPawn>Not biocodeable</invalidTargetPawn>
+				<targetParams>
+					<canTargetBuildings>false</canTargetBuildings>
+					<canTargetAnimals>false</canTargetAnimals>
+					<canTargetHumans>false</canTargetHumans>
+					<canTargetMechs>false</canTargetMechs>
+					<canTargetItems>true</canTargetItems>
+					<mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>			
+				</targetParams>
+				<soundCast>PsychicInsanityLanceCast</soundCast>
+			</li>
+		</verbs>
+		<comps>
+			<li Class="CompProperties_ApparelReloadable">
+				<maxCharges>1</maxCharges>
+				<ammoDef>ComponentIndustrial</ammoDef>
+				<ammoCountPerCharge>1</ammoCountPerCharge>
+				<destroyOnEmpty>true</destroyOnEmpty>
+				<hotKey>Misc4</hotKey>
+				<chargeNoun>charge</chargeNoun>
+				<displayGizmoWhileUndrafted>false</displayGizmoWhileUndrafted>
+			</li>
+			<li>
+				<compClass>AV_Mechtech.CompTargetEffect_Recoder</compClass>		<!-- this is the result--> 
+			</li>
+			<li Class="CompProperties_TargetEffect_FleckOnTarget">
+				<fleckDef>PsycastPsychicEffect</fleckDef>
+			</li>
+			<li Class="CompProperties_TargetEffect_FleckConnecting">
+				<fleckDef>PsycastPsychicLine</fleckDef>
+			</li>
+			<li Class="CompProperties_Styleable"></li>
+		</comps>
+		<allowedArchonexusCount>1</allowedArchonexusCount>
+	</ThingDef>
+
+	<!-- mechanitors guard --> <!--
+	<ThingDef ParentName="ApparelBase">
+		<defName>AV_MechanitorGuard</defName>
+		<label>mechanitor's guard</label>
+		<description>A projectile-repulsion device. It will attempt to stop incoming projectiles or shrapnel, but does nothing against melee attacks or heat. It prevents the wearer from firing out, and shuts down instantly if hit by EMP.</description>
+		<thingClass>Apparel</thingClass>
+		<graphicData>
+			<texPath>Things/Item/Apparel/AV_BiocodeRetuner/AV_BiocodeRetuner</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<tickerType>Normal</tickerType>
+		<techLevel>Spacer</techLevel>
+		<statBases>
+			<Mass>3</Mass>
+			<WorkToMake>14000</WorkToMake>
+			<Flammability>0.4</Flammability>
+			<EnergyShieldRechargeRate>0.13</EnergyShieldRechargeRate>
+			<EnergyShieldEnergyMax>1.1</EnergyShieldEnergyMax>
+			<EquipDelay>2</EquipDelay>
+		</statBases>
+		<thingSetMakerTags>
+			<li>RewardStandardQualitySuper</li>
+		</thingSetMakerTags>
+		<costList>
+			<ComponentIndustrial>2</ComponentIndustrial>
+			<Steel>50</Steel>
+			<Plasteel>20</Plasteel>
+		</costList>
+		<recipeMaker>
+			<unfinishedThingDef>UnfinishedBelt</unfinishedThingDef>
+			<researchPrerequisite>ShieldBelt</researchPrerequisite>
+			
+
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Machining</soundWorking>
+			<recipeUsers>
+				<li>TableMachining</li>
+			</recipeUsers>
+			<useIngredientsForColor>false</useIngredientsForColor>
+			<skillRequirements>
+				<Crafting>6</Crafting>
+			</skillRequirements>
+			<displayPriority>300</displayPriority>
+		</recipeMaker>
+		<thingCategories>
+			<li>ApparelUtility</li>
+		</thingCategories>
+		<apparel>
+			<countsAsClothingForNudity>false</countsAsClothingForNudity>
+			<careIfWornByCorpse>false</careIfWornByCorpse>
+			<careIfDamaged>false</careIfDamaged>
+			<wearPerDay>0</wearPerDay>
+			<bodyPartGroups>
+				<li>Waist</li>
+			</bodyPartGroups>
+			<layers>
+				<li>Belt</li>
+			</layers>
+			<tags>
+				<li>BeltDefense</li>
+			</tags>
+			<developmentalStageFilter>Child, Adult</developmentalStageFilter>
+			<wornGraphicPath>Things/Item/Apparel/AV_BiocodeRetuner/AV_BiocodeRetuner</wornGraphicPath>
+			<wornGraphicData>
+				<renderUtilityAsPack>true</renderUtilityAsPack>
+				<north>
+					<offset>(0,-0.15)</offset>
+				</north>
+				<south>
+					<offset>(0,-0.15)</offset>
+				</south>
+				<east>
+					<offset>(-0.35,-0.1)</offset>
+					<thin><offset>(0.05,0)</offset></thin>
+					<hulk><offset>(-0.15,0)</offset></hulk>
+					<fat> <offset>(-0.20,0)</offset></fat>
+				</east>
+				<west>
+					<offset>(0.35,-0.1)</offset>
+					<thin><offset>(-0.05,0)</offset></thin>
+					<hulk><offset>(0.15,0)</offset></hulk>
+					<fat> <offset>(0.20,0)</offset></fat>
+				</west>
+				<male>  <scale>(0.4,0.4)</scale></male>
+				<female><scale>(0.4,0.4)</scale></female>
+				<thin>  <scale>(0.35,0.35)</scale></thin>
+				<hulk>  <scale>(0.45,0.45)</scale></hulk>
+				<fat>   <scale>(0.45,0.45)</scale></fat>
+			</wornGraphicData>
+		</apparel>
+		<colorGenerator Class="ColorGenerator_Options">
+			<options>
+				<li>
+					<weight>10</weight>
+					<only>(0.33,0.33,0.33,1)</only>
+				</li>
+				<li>
+					<weight>10</weight>
+					<only>(0.65,0.65,0.65,1)</only>
+				</li>
+				<li>
+					<weight>6</weight>
+					<min>(0.3,0.3,0.3,1)</min>
+					<max>(0.5,0.5,0.5,1)</max>
+				</li>
+				<li>
+					<weight>10</weight>
+					<only>(0.9,0.9,0.9,1)</only>
+				</li>
+			</options>
+		</colorGenerator>
+		<comps>
+			<li Class="CompProperties_Shield" />
+		</comps>
+		<allowedArchonexusCount>1</allowedArchonexusCount>
+		<tradeTags>
+			<li>AV_Mechtech_Spacer</li>
+			<li>AV_Mechtech</li>
+		</tradeTags>
+	</ThingDef>
+-->
+
+			<!-- <researchPrerequisite>AV_Biotuning</researchPrerequisite> -->
+			
+
+
+</Defs>

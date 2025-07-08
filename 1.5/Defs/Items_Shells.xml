@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- waster shell -->
+	<ThingDef ParentName="MakeableShellBase">
+		<defName>AV_Shell_Waste</defName>
+		<label>waster shell</label>
+		<description>An artillery shell containing compressed toxic waste. When fired, it will stick into the ground and pollute the area while releasing tox gas for some time before expiring.\n\nTox gas burns the lungs and eyes, causing a temporary shortness of breath and reduction in sight. Continued exposure to tox gas results in toxic buildup that can be lethal.</description>
+		<possessionCount>2</possessionCount>
+		<graphicData>
+			<texPath>Things/Item/Resource/Shell/AV_ShellWaster</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<statBases>
+			<MarketValue>20</MarketValue>	<!-- 55 is high explosive shell -->
+			<Mass>20</Mass>
+		</statBases>
+		<tradeability>All</tradeability>
+		<costList>
+			<Steel>10</Steel>
+			<AV_CompressedWaste>1</AV_CompressedWaste>			
+		</costList>
+		<recipeMaker>
+			<researchPrerequisite>AV_MechanoidShells</researchPrerequisite>
+			<displayPriority>120</displayPriority>
+		</recipeMaker>
+		<tradeTags>
+			<li>AV_Mechtech</li>
+			<li>AV_Mechtech_Spacer</li>
+		</tradeTags>
+		<comps>
+			<li Class="CompProperties_Explosive">
+				<explosiveDamageType>ToxGas</explosiveDamageType>
+				<explosiveRadius>6</explosiveRadius>
+				<postExplosionGasType>ToxGas</postExplosionGasType>
+				<wickTicks>30~60</wickTicks>
+			</li>
+			<li Class="CompProperties_Dissolution">
+				<dissolutionAfterDays>150</dissolutionAfterDays>
+				<dissolutinFactorIndoors>0.1</dissolutinFactorIndoors>
+				<!-- instantly explodes when on 0-->
+				<dissolutionFactorRain>2</dissolutionFactorRain>
+			</li>
+			<li Class="CompProperties_DissolutionEffectPollution">
+				<cellsToPollutePerDissolution>18</cellsToPollutePerDissolution>
+				<tilePollutionPerDissolution>0.0005</tilePollutionPerDissolution>
+				<waterTilePollutionFactor>24</waterTilePollutionFactor>
+			</li>
+			<li Class="CompProperties_GasOnDamage">
+				<type>ToxGas</type>
+				<damageFactor>6</damageFactor>
+				<useStackCountAsFactor>true</useStackCountAsFactor>
+			</li>
+
+			<li>
+				<compClass>CompDissolutionEffect_Goodwill</compClass>
+			</li>
+		</comps>
+		<projectileWhenLoaded>AV_Bullet_Shell_Waster</projectileWhenLoaded>
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseBullet">
+		<defName>AV_Bullet_Shell_Waster</defName>
+		<label>waster shell</label>
+		<graphicData>
+			<texPath>Things/Projectile/ShellTox</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+		<thingClass>AV_Mechtech.Projectile_ToxicShell</thingClass>
+		<projectile>
+			<damageDef>ToxGas</damageDef>
+			<speed>41</speed>
+			<explosionRadius>0.1</explosionRadius>
+			<flyOverhead>true</flyOverhead>
+			<soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+			<soundExplode>ToxicShellLanded</soundExplode>
+			<soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+			<soundAmbient>MortarRound_Ambient</soundAmbient>
+			<postExplosionSpawnThingDef>AV_Shell_Toxic_Releasing</postExplosionSpawnThingDef>
+			<postExplosionSpawnThingDefWater>AV_Shell_Toxic_Releasing_Water</postExplosionSpawnThingDefWater>
+		</projectile>
+	</ThingDef>
+	
+	<ThingDef Name="AV_Shell_Toxic_Releasing_Base" Abstract="True">
+		<label>waster shell</label>
+		<selectable>false</selectable>
+		<tickerType>Normal</tickerType>
+		<thingClass>ThingWithComps</thingClass>
+		<useHitPoints>false</useHitPoints>
+		<rotatable>false</rotatable>
+		<comps>
+			<li Class="CompProperties_ReleaseGas">
+				<gasType>ToxGas</gasType>
+				<cellsToFill>20</cellsToFill>
+				<durationSeconds>10</durationSeconds>
+				<effecterReleasing>ToxGasReleasing</effecterReleasing>
+			</li>
+			<li Class="CompProperties_DestroyAfterDelay">
+				<delayTicks>30000</delayTicks>	<!-- 1/2 day -->
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="AV_Shell_Toxic_Releasing_Base">
+		<defName>AV_Shell_Toxic_Releasing</defName>
+		<graphicData>
+			<texPath>Things/Item/Resource/Shell/AV_ShellWasterLanded</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="Shell_Toxic_Releasing_Base">
+		<defName>AV_Shell_Toxic_Releasing_Water</defName>
+		<graphicData>
+			<texPath>Things/Item/Resource/Shell/AV_ShellWasterLanded_Water</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+		</graphicData>
+	</ThingDef>
+  
+
+	<!-- mechanoid shell -->
+	<ThingDef ParentName="MakeableShellBase">
+        <defName>AV_Shell_Mechanoid_Deployment</defName>
+        <label>mechanoid deployment shell</label>
+        <description>A shell filled with a sleeping warurchin. On impact it will activate and hunt down any hostile creatures. While this makes a good surprise attack, their data processing is limited which makes them see nearly everybody as hostile.</description>
+        <graphicData>
+			<texPath>Things/Item/Resource/Shell/AV_ShellDeployment</texPath>
+            <graphicClass>Graphic_StackCount</graphicClass>
+        </graphicData>
+        <projectileWhenLoaded>AV_Bullet_Mechanoid_Deployment_Shell</projectileWhenLoaded>
+        <costList>
+            <Steel>30</Steel>
+			<Chemfuel>10</Chemfuel>
+            <!-- <SubcoreBasic>1</SubcoreBasic> -->
+        </costList>
+        <recipeMaker>
+            <researchPrerequisite>AV_MechanoidShells</researchPrerequisite>
+        </recipeMaker>
+		<tradeTags>
+			<li>AV_Mechtech</li>
+			<li>AV_Mechtech_Spacer</li>
+		</tradeTags>
+    </ThingDef>
+		
+    <ThingDef ParentName="BaseBullet">
+        <defName>AV_Bullet_Mechanoid_Deployment_Shell</defName>
+        <label>mechanoid deployment shell</label>
+        <graphicData>
+            <texPath>Things/Projectile/ShellHighExplosive</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+            <shaderType>TransparentPostLight</shaderType>
+        </graphicData>
+        <thingClass>AV_Mechtech.Projectile_MechanoidShell</thingClass>
+        <projectile>
+            <damageDef>Smoke</damageDef>
+            <speed>41</speed>
+            <explosionRadius>0.1</explosionRadius>
+            <flyOverhead>true</flyOverhead>
+            <soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+            <soundExplode>MortarBomb_Explode</soundExplode>
+            <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+            <soundAmbient>MortarRound_Ambient</soundAmbient>
+			<postExplosionSpawnThingDef>AV_Shell_Deploy_Releasing</postExplosionSpawnThingDef>
+			<postExplosionSpawnThingDefWater>AV_Shell_Deploy_Releasing_Water</postExplosionSpawnThingDefWater>			
+        </projectile>
+    </ThingDef>
+	
+	<ThingDef Name="AV_Shell_Deploy_Releasing_Base" Abstract="True">	<!-- just for shell to stick to ground instead of disappear -->
+		<label>deployment shell</label>
+		<selectable>false</selectable>
+		<tickerType>Normal</tickerType>
+		<thingClass>ThingWithComps</thingClass>
+		<useHitPoints>false</useHitPoints>
+		<rotatable>false</rotatable>
+		<comps>
+			<li Class="CompProperties_DestroyAfterDelay">
+				<delayTicks>30000</delayTicks>	<!-- 1/2 day -->
+			</li>
+		</comps>
+	</ThingDef>
+	
+	<ThingDef ParentName="AV_Shell_Deploy_Releasing_Base">
+		<defName>AV_Shell_Deploy_Releasing</defName>
+		<graphicData>
+			<texPath>Things/Item/Resource/Shell/AV_ShellDeploymentLanded</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="AV_Shell_Deploy_Releasing_Base">
+		<defName>AV_Shell_Deploy_Releasing_Water</defName>
+		<graphicData>
+			<texPath>Things/Item/Resource/Shell/AV_ShellDeploymentLanded_water</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>Transparent</shaderType>
+		</graphicData>
+	</ThingDef>
+ 
+
+</Defs>

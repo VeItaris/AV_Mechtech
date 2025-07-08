@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Patch>
+
+	<!-- Mech recipes -->
+	
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="MechGestator"]/recipes</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MechGestator"]/recipes</xpath>
+			<order>Prepend</order>
+			<value>
+				<li>AV_Gestate_Reshaper</li>
+			</value>
+		</match>
+	</Operation>
+
+ 	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/RecipeDef[defName = "ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/RecipeDef[defName = "ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
+			<value>
+				<li>Corpse_AV_Mech_Reshaper</li>				
+			</value>
+		</match>
+	</Operation>
+
+
+	<!-- ingestible bioferrite -->
+<!--
+ 	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName = "Bioferrite"]</xpath>
+		<match Class="PatchOperationConditional">
+			<xpath>/Defs/ThingDef[defName = "Bioferrite"]/ingestible</xpath>
+			<match Class="PatchOperationConditional">
+				<xpath>/Defs/ThingDef[defName = "Bioferrite"]/ingestible/outcomeDoers</xpath>
+				<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs/ThingDef[defName = "Bioferrite"]/ingestible</xpath>
+				<value>
+					<outcomeDoers>
+						
+					</outcomeDoers>
+				</value>
+			</nomatch>
+			</match>
+			<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs/ThingDef[defName = "Bioferrite"]</xpath>
+				<value>
+					<ingestible>
+						<outcomeDoers>
+				
+						</outcomeDoers>
+					</ingestible>
+				</value>
+			</nomatch>
+		</match>
+	</Operation>
+
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName = "Bioferrite"]/ingestible/outcomeDoers</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[defName = "Bioferrite"]/ingestible/outcomeDoers</xpath>
+			<value>
+				<li Class="AV_Mechtech.IngestionOutcomeDoer_Neurill">
+					<hediffDef>AV_NeurillHigh</hediffDef>
+					<hediffDef_nonMechanitor>AV_NeurillHigh_nonMechanitor</hediffDef_nonMechanitor>
+					<severity>0.75</severity>
+					<toleranceChemical>AV_Neurill</toleranceChemical>
+				</li>
+			</value>
+		</match>
+	</Operation>
+		
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName = "Bioferrite"]/ingestible</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[defName = "Bioferrite"]/ingestible</xpath>
+			<value>
+				<preferability>NeverForNutrition</preferability>
+				<foodType>Processed</foodType>
+				<baseIngestTicks>100</baseIngestTicks>
+				<chairSearchRadius>0</chairSearchRadius>
+				<ingestSound>Ingest_Pill</ingestSound>
+				<ingestHoldUsesTable>false</ingestHoldUsesTable>
+				<ingestCommandString>Feed on {0}</ingestCommandString>
+				<ingestReportString>Feeding on {0}.</ingestReportString>
+				<maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+				<defaultNumToIngestAtOnce>1</defaultNumToIngestAtOnce>
+			</value>
+		</match>
+	</Operation>
+ -->
+		
+
+	<!-- ingestible shard -->
+<!-- 
+ 	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName = "Shard"]</xpath>
+		<match Class="PatchOperationConditional">
+			<xpath>/Defs/ThingDef[defName = "Shard"]/ingestible</xpath>
+			<match Class="PatchOperationConditional">
+				<xpath>/Defs/ThingDef[defName = "Shard"]/ingestible/outcomeDoers</xpath>
+				<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs/ThingDef[defName = "Shard"]/ingestible</xpath>
+				<value>
+					<outcomeDoers>
+						
+					</outcomeDoers>
+				</value>
+			</nomatch>
+			</match>
+			<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs/ThingDef[defName = "Shard"]</xpath>
+				<value>
+					<ingestible>
+						<outcomeDoers>
+				
+						</outcomeDoers>
+					</ingestible>
+				</value>
+			</nomatch>
+		</match>
+	</Operation>
+
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName = "Shard"]/ingestible/outcomeDoers</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[defName = "Shard"]/ingestible/outcomeDoers</xpath>
+			<value>
+				<li Class="AV_Mechtech.IngestionOutcomeDoer_Neurill">
+					<hediffDef>AV_NeurillHigh</hediffDef>
+					<hediffDef_nonMechanitor>AV_NeurillHigh_nonMechanitor</hediffDef_nonMechanitor>
+					<severity>0.75</severity>
+					<toleranceChemical>AV_Neurill</toleranceChemical>
+				</li>
+			</value>
+		</match>
+	</Operation>
+		
+	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/ThingDef[defName = "Shard"]/ingestible</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[defName = "Shard"]/ingestible</xpath>
+			<value>
+				<preferability>NeverForNutrition</preferability>
+				<foodType>Processed</foodType>
+				<baseIngestTicks>100</baseIngestTicks>
+				<chairSearchRadius>0</chairSearchRadius>
+				<ingestSound>Ingest_Pill</ingestSound>
+				<ingestHoldUsesTable>false</ingestHoldUsesTable>
+				<ingestCommandString>Feed on {0}</ingestCommandString>
+				<ingestReportString>Feeding on {0}.</ingestReportString>
+				<maxNumToIngestAtOnce>1</maxNumToIngestAtOnce>
+				<defaultNumToIngestAtOnce>1</defaultNumToIngestAtOnce>
+			</value>
+		</match>
+	</Operation>
+
+
+    --> 
+</Patch>

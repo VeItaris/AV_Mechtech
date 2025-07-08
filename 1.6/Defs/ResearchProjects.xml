@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<!-- Compressed Mechtech -->	
+	<ResearchProjectDef>
+		<defName>AV_Compressed_Mechtech</defName>
+		<label>compressed mechtech</label>
+		<tab>AV_Research</tab>
+		<techLevel>Industrial</techLevel>
+		<description>Gestate small mechanoids using compressed material.</description>
+		<baseCost>400</baseCost>
+		<prerequisites>
+			<li>BasicMechtech</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>1.7</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->compressed mechtech</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_story->experimented with mechanoid tech</li>
+				<li>subject_gerund->compressing mechtech</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+<!-- Subcore Manipulation -->	
+	<ResearchProjectDef>
+		<defName>AV_SubcoreManipulation</defName>
+		<label>subcore manipulation</label>
+		<tab>AV_Research</tab>
+		<techLevel>Spacer</techLevel>
+		<description>Copy engrams of existing subcores.</description>
+		<baseCost>800</baseCost>
+		<prerequisites>
+			<li>AV_Compressed_Mechtech</li>
+			<li>StandardMechtech</li>
+			<li>MicroelectronicsBasics</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredAnalyzed>
+			<li>PowerfocusChip</li>
+		</requiredAnalyzed>
+		<researchViewX>3</researchViewX>
+		<researchViewY>2.4</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->subcore manipulation</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_story->experimented with mechanoid tech</li>
+				<li>subject_gerund->manipulating subcores</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+<!-- data scrambling -->	
+	<ResearchProjectDef>
+		<defName>AV_Mechanoidhacking</defName>
+		<label>data scrambling</label>
+		<tab>AV_Research</tab>
+		<techLevel>Spacer</techLevel>
+		<description>Learn how to manipulate mechanoid data processors from afar.</description>
+		<baseCost>2000</baseCost>
+		<prerequisites>
+			<li>AV_SubcoreManipulation</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredAnalyzed>
+			<li>PowerfocusChip</li>
+		</requiredAnalyzed>
+		<researchViewX>4</researchViewX>
+		<researchViewY>3.1</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->data scrambling</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_story->experimented with mechanoid tech</li>
+				<li>subject_gerund->data scrambling</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+
+
+<!-- basic mechlinks -->	
+	<ResearchProjectDef>
+		<defName>AV_BasicMechlinks</defName>
+		<label>basic mechlinks</label>
+		<tab>AV_Research</tab>
+		<techLevel>Spacer</techLevel>
+		<description>Learn to build basic mechlinks to create your own mechanitors with limited capabilities. Allows disassembling of mechlinks for signal chips.</description>
+		<baseCost>1500</baseCost>
+		<prerequisites>
+			<li>AV_Compressed_Mechtech</li>
+			<li>BasicMechtech</li>
+			<li>MicroelectronicsBasics</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredAnalyzed>
+			<li>SignalChip</li>
+		</requiredAnalyzed>
+		<researchViewX>3</researchViewX>
+		<researchViewY>1.7</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->basic mechlinks</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_story->experimented with mechanoid tech</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_story->legalized mechlinks across several coreworlds, when he had the power to do so</li>
+				<li>subject_gerund->linking to mechanoids</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>	
+
+<!-- mechlink tuning -->			
+	<ResearchProjectDef>
+		<defName>AV_MechlinkTuning</defName>
+		<label>mechlink tuning</label>
+		<tab>AV_Research</tab>
+		<techLevel>Spacer</techLevel>
+		<description>Push the limit of basic mechlink implants.</description>
+		<baseCost>1000</baseCost>
+		<prerequisites>
+			<li>AV_BasicMechlinks</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<requiredAnalyzed>
+			<li>PowerfocusChip</li>
+		</requiredAnalyzed>
+		<researchViewX>4</researchViewX>
+		<researchViewY>1.7</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->mechlink tuning</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_story->experimented with mechanoid tech</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_gerund->worked for a crazy mechanitor</li>
+				<li>subject_story->legalized mechlinks across several coreworlds, when he had the power to do so</li>
+				<li>subject_gerund->tuning mechlinks</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+<!-- advanced mechlinks -->			
+	<ResearchProjectDef>
+		<defName>AV_Mechlinks</defName>
+		<label>advanced mechlinks</label>
+		<tab>AV_Research</tab>
+		<techLevel>Ultra</techLevel>
+		<description>Use advanced technology to enhance basic mechlink to advanced ones.</description>
+		<baseCost>1000</baseCost>
+		<prerequisites>
+			<li>AV_Biotuning</li>
+			<li>AV_MechlinkTuning</li>
+			<li>HighMechtech</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<researchViewX>5</researchViewX>
+		<researchViewY>1.7</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->advanced mechlinks</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_story->experimented with mechanoid tech</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_story->legalized mechlinks across several coreworlds, when he had the power to do so</li>
+				<li>subject_gerund->advancing mechlinks</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+<!-- subcore Biotuning -->			
+	<ResearchProjectDef>
+		<defName>AV_Biotuning</defName>
+		<label>subcore biotuning</label>
+		<tab>AV_Research</tab>
+		<techLevel>Spacer</techLevel>
+		<description>Learn to (re-)tune subcores to individuals.</description>
+		<baseCost>1000</baseCost>
+		<prerequisites>
+			<li>AV_SubcoreManipulation</li>
+			<li>Fabrication</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<requiredAnalyzed>
+			<li>NanostructuringChip</li>
+		</requiredAnalyzed>
+		<researchViewX>4</researchViewX>
+		<researchViewY>2.4</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->subcore biotuning</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_story->experimented with mechanoid tech</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_story->legalized mechlinks across several coreworlds, when he had the power to do so</li>
+				<li>subject_gerund->biotuning subcores</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+
+<!-- subcored clothing / Carbon Panels -->			
+	<ResearchProjectDef>
+		<defName>AV_ShapedClothing</defName>
+		<label>subcored clothing</label>
+		<tab>AV_Research</tab>
+		<techLevel>Spacer</techLevel>
+		<description>Use advanced technology to craft biocoded clothing with enhanced properties.</description>
+		<baseCost>1000</baseCost>
+		<prerequisites>
+			<li>AV_Biotuning</li>
+			<li>AV_AdvancedNeutroControl</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<researchViewX>5</researchViewX>
+		<researchViewY>3.8</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->shaped clothing</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_story->experimented with mechanoid tech</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_gerund->advancing clothing</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+<!-- Subdermal Implants -->	
+	<ResearchProjectDef>
+		<defName>AV_SubdermalImplants</defName>
+		<label>subcored implants</label>
+		<tab>AV_Research</tab>
+		<techLevel>Spacer</techLevel>
+		<description>Create implants which use subcores as their main computing power.</description>
+		<baseCost>1500</baseCost>
+		<prerequisites>
+			<li>Bionics</li>
+			<li>AV_Biotuning</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<researchViewX>5</researchViewX>
+		<researchViewY>2.4</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->subcored implants</li>
+				<li>subject->subdermal implants</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_story->experimented with mechanoid tech</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_gerund->implanting cyberware</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+
+<!-- neuropods -->		
+	<ResearchProjectDef>
+		<defName>AV_MicroPod</defName>
+		<label>cultivation pods</label>
+		<tab>AV_Research</tab>
+		<techLevel>Industrial</techLevel>
+		<description>Fabricate the perfect enviroment to cultivate microorganism on a large scale. Needed for the production of neurofoam.</description>
+		<baseCost>850</baseCost>
+		<prerequisites>
+			<li>Machining</li>	
+			<li>DrugProduction</li>
+			<!-- <li>Smithing</li> -->
+		</prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>5.2</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->micro pods</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_gerund->growing microorganisms</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+<!-- hemogen paste -->		
+	<ResearchProjectDef>
+		<defName>AV_Hemogen_Extraction</defName>
+		<label>hemogen paste</label>
+		<tab>AV_Research</tab>
+		<techLevel>Industrial</techLevel>
+		<description>Extract tiny amounts of hemogen from neurofoam. For those special guests.</description>
+		<baseCost>400</baseCost>
+		<prerequisites>
+			<li>AV_MicroPod</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>5.2</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->hemogen extraction</li>
+				<li>subject_story->joined a short-lived sanguophage meeting on a cult world</li>
+				<li>subject_story->experimented with blood to help reduce sanguophage killings</li>
+				<li>subject_story->experimented with neurofoam to enable mass production</li>
+				<li>subject_story->legalized hemogen extraction across several coreworlds, when he had the power to do so</li>
+				<li>subject_gerund->extract hemogen</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+	
+
+<!-- neurofoam refinement -->		
+	<ResearchProjectDef>
+		<defName>AV_Neutroamine_Production</defName>
+		<label>neurofoam refinement</label>
+		<tab>AV_Research</tab>
+		<techLevel>Industrial</techLevel>
+		<description>Refine neurofoam into neutroamine in a lengthy process.</description>
+		<baseCost>600</baseCost>
+		<prerequisites>
+			<li>DrugProduction</li>
+		</prerequisites>
+		<researchViewX>0</researchViewX>
+		<researchViewY>4.5</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->neurofoam refinement</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_story->experimented with mechanoid tech</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_gerund->refining neurofoam</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+<!-- Neutroamine Industries -->		
+	<ResearchProjectDef>
+		<defName>AV_Neutroamine_Industrialisation</defName>
+		<label>neutroamine industrialisation</label>
+		<tab>AV_Research</tab>
+		<techLevel>Industrial</techLevel>
+		<description>Use Neutroamine to power machines with a chemical process. Those machines work even while a solar flare is ongoing.</description>
+		<baseCost>1000</baseCost>
+		<prerequisites>
+			<li>AV_Neutroamine_Production</li>
+			<li>Smithing</li>
+		</prerequisites>
+		<researchViewX>1</researchViewX>
+		<researchViewY>3.8</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->neutroamine industrialisation</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_gerund->industrialising neutroamine</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+<!-- Adv Neutroamine Control -->		
+	<ResearchProjectDef>
+		<defName>AV_AdvancedNeutroControl</defName>
+		<label>advanced neutroamine control</label>
+		<tab>AV_Research</tab>
+		<techLevel>Spacer</techLevel>
+		<description>Use a pulsing cell to limit the chemical cooling process of neutroamine to humanfriendly temperature.\n\nThis also decreases time for neurofoam and neutroamine production from micro pods by 25%.</description>
+		<baseCost>1000</baseCost>
+		<prerequisites>
+			<li>AV_Neutroamine_Industrialisation</li>
+			<li MayRequire="Veltaris.Jade">AV_PulsingCells</li>
+		</prerequisites>
+		<researchViewX>2</researchViewX>
+		<researchViewY>3.8</researchViewY>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->advanced neutroamine control</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_gerund->controlling neutroamine reaction</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+<!-- neuroferium refinement -->		
+	<ResearchProjectDef>
+		<defName>AV_Neuroferium</defName>
+		<label>neuroferium</label>
+		<tab>AV_Research</tab>
+		<techLevel>Ultra</techLevel>
+		<description>Refine luziferium and neurofoam into neuroferium. When ingested neurofierum increases wound healing and can heal scars or even regrow limbs, although this causes severe pain. It is not addictive, but can lead to a long-lasting coma.</description>
+		<!--<techprintCount MayRequire="Ludeon.RimWorld.Royalty">1</techprintCount>
+		<techprintCommonality MayRequire="Ludeon.RimWorld.Royalty">3</techprintCommonality>	         like CataphractArmor
+		<techprintMarketValue MayRequire="Ludeon.RimWorld.Royalty">2500</techprintMarketValue>  -->	
+		<!-- below gets patched with loadorders, otherwise errors out -->	
+		<!-- <heldByFactionCategoryTags MayRequire="Ludeon.RimWorld.Royalty">
+			<li>Empire</li>
+			<li>Outlander</li>
+		</heldByFactionCategoryTags>	 -->	
+		<baseCost>3000</baseCost>
+		<prerequisites>
+			<li>AV_Neutroamine_Production</li>
+		</prerequisites>
+		<researchViewX>5</researchViewX>
+		<researchViewY>4.5</researchViewY>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->neuroferium</li>
+				<li>subject_story->visited a mechanoid driven glitterworld</li>
+				<li>subject_gerund->worked in a glitterworld research facility to improve living standards</li>
+				<li>subject_gerund->refining neuroferium</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+
+<!-- Waste Containment -->	
+	<ResearchProjectDef>
+		<defName>AV_WasteContainment</defName>
+		<label>waste containment</label>
+		<tab>AV_Research</tab>
+		<techLevel>Industrial</techLevel>
+		<description>Store toxic wastepacks in sealed steelcanister, allowing much safer storage.</description>
+		<researchViewX>0</researchViewX>
+		<researchViewY>1.7</researchViewY>
+		<baseCost>400</baseCost>
+		<prerequisites>
+			<li>Smithing</li>
+			<!-- <li>Machining</li> -->	
+		</prerequisites>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->waste containment</li>
+				<li>subject_story->visited a wasteland colony</li>
+				<li>subject_gerund->waste containing</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+<!-- Mechanoid shells -->	
+	<ResearchProjectDef>
+		<defName>AV_MechanoidShells</defName>
+		<label>mechanoid shells</label>
+		<tab>AV_Research</tab>
+		<techLevel>Industrial</techLevel>
+		<description>Fabricate special assault mortar shells.</description>
+		<researchViewX>0</researchViewX>
+		<researchViewY>2.4</researchViewY>
+		<baseCost>600</baseCost>
+		<prerequisites>
+			<li>Mortars</li>
+		</prerequisites>
+		<generalRules>
+			<rulesStrings>
+				<li>subject->mechanoid warfare</li>
+				<li>subject_story->joined a bloody war against the mechanoid swarm</li>
+				<li>subject_story->joined a hunt on a rouge mechanitor and their creations</li>
+				<li>subject_gerund->fabricating shells</li>
+			</rulesStrings>
+		</generalRules>
+	</ResearchProjectDef>
+
+
+
+</Defs>

@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- Mechlink Limit Remover -->	
+	<ThingDef ParentName="MechanitorImplantBase">	
+		<defName>AV_Mechlink_Unlimiter</defName>
+		<label>mechlink limit remover</label>
+		<description>A neural implant from the days when mechlinks were still in the development phase, usually traded on black markets. It gives the user the ability to irrevocably trade brain capacity for increased mechlink features. While it can increase a mechanitor's power immensely, many individuals took it too far and became braindead, earning this implant the nickname "brain limiter." It can be self-installed without surgery, but there is no way to safely remove it.\n\n&lt;color=#f8f32b&gt;Each Stage gains:\n 10% reduced consciousness\n +2 bandwidth\n +10% bandwidth\n +10% mech workspeed\n +10% mech repair speed\n +15% mech gestation speed\n +5% psychic sensitivity&lt;/color&gt;\nCan be stacked up to 9 times.</description>
+		<descriptionHyperlinks>
+			<HediffDef>AV_Mechlink_UnlimiterImplant</HediffDef>
+		</descriptionHyperlinks>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToMake>450</WorkToMake>
+			<Beauty>-4</Beauty>
+			<Mass>1</Mass>
+			<MarketValue>1200</MarketValue>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Item/Health/AV_mechanitor_implant</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.80</drawSize>
+			<color>(154,124,104)</color>
+		</graphicData>
+		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>	
+		<tradeTags>
+			<li>AV_Mechtech_Implant</li>
+			<li>ExoticMisc</li>
+		</tradeTags>
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Smith</soundWorking>
+			<unfinishedThingDef>UnfinishedHealthItemBionic</unfinishedThingDef>
+			<skillRequirements>
+				<Crafting>8</Crafting>
+			</skillRequirements>
+			<researchPrerequisite>AV_MechlinkTuning</researchPrerequisite>
+			<recipeUsers>
+				<li>SubcoreEncoder</li>
+			</recipeUsers>
+		</recipeMaker>
+		<costList>
+				<Plasteel>20</Plasteel>
+				<SignalChip>1</SignalChip>
+			</costList>
+		<comps>
+			<li Class="CompProperties_Forbiddable"/>
+			<li Class="CompProperties_Usable">
+				<compClass>AV_Framework.CompUsableImplant_Mechanitor</compClass>
+				<useJob>UseItem</useJob>
+				<useLabel>Implant mechlink limit remover</useLabel>
+			</li>
+			<li Class="CompProperties_UseEffectInstallImplant">
+				<hediffDef>AV_Mechlink_UnlimiterImplant</hediffDef>
+				<bodyPart>Brain</bodyPart>
+				<canUpgrade>false</canUpgrade>
+				<maxSeverity>2</maxSeverity>	<!-- probably only used for upgrades? doesn't limit hediff max severity -->
+			</li>
+		</comps>
+		<tradeability>All</tradeability>
+	</ThingDef>
+
+	<HediffDef>
+		<defName>AV_Mechlink_UnlimiterImplant</defName>
+		<hediffClass>AV_Mechtech.Hediff_MechlinkUnlimiter</hediffClass>
+		<descriptionHyperlinks>
+			<ThingDef>AV_Mechlink_Unlimiter</ThingDef>
+		</descriptionHyperlinks>
+		<label>mechlink unlimiter</label>
+		<description>An oldschool black market neural implant from the days when mechlinks were still in the development phase. It gives the user the ability to irrevocably trade brain capacity for additional bandwidth.\n\n&lt;color=#f8f32b&gt;Each Stage gains:\n 10% reduced consciousness\n +2 bandwidth\n +10% bandwidth\n +10% mech workspeed\n +10% mech repair speed\n +15% mech gestation speed\n +5% psychic sensitivity&lt;/color&gt;\nCan be stacked up to 9 times.</description>
+		<defaultLabelColor>(0.6, 0.6, 1.0)</defaultLabelColor>
+		<isBad>false</isBad>
+		<priceImpact>true</priceImpact>
+		<initialSeverity>1</initialSeverity>
+		<minSeverity>0</minSeverity>
+		<maxSeverity>9</maxSeverity>
+		<keepOnBodyPartRestoration>True</keepOnBodyPartRestoration>
+		<stages>
+			<li>
+				<minSeverity>0</minSeverity>	
+			</li>
+			
+			<li>
+				<label>stage 1</label>
+				<minSeverity>1</minSeverity>	
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<postFactor>0.9</postFactor>
+					</li>
+				</capMods>
+				<statOffsets>
+					<MechBandwidth>2</MechBandwidth>
+					<WorkSpeedGlobalOffsetMech>0.1</WorkSpeedGlobalOffsetMech>
+					<MechRepairSpeed>0.1</MechRepairSpeed>
+					<MechFormingSpeed>0.15</MechFormingSpeed>
+					<PsychicSensitivity>0.05</PsychicSensitivity>
+				</statOffsets>
+				<statFactors>
+					<MechBandwidth>1.1</MechBandwidth>
+				</statFactors>
+			</li>
+			
+			<li>
+				<label>stage 2</label>
+				<minSeverity>2</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<postFactor>0.8</postFactor>
+					</li>
+				</capMods>
+				<statOffsets>
+					<MechBandwidth>4</MechBandwidth>
+					<WorkSpeedGlobalOffsetMech>0.2</WorkSpeedGlobalOffsetMech>
+					<MechRepairSpeed>0.2</MechRepairSpeed>
+					<MechFormingSpeed>0.3</MechFormingSpeed>
+					<PsychicSensitivity>0.1</PsychicSensitivity>
+				</statOffsets>
+				<statFactors>
+					<MechBandwidth>1.2</MechBandwidth>
+				</statFactors>
+			</li>
+			
+			<li>
+				<label>stage 3</label>
+				<minSeverity>3</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<postFactor>0.7</postFactor>
+					</li>
+				</capMods>
+				<statOffsets>
+					<MechBandwidth>6</MechBandwidth>
+					<WorkSpeedGlobalOffsetMech>0.3</WorkSpeedGlobalOffsetMech>
+					<MechRepairSpeed>0.3</MechRepairSpeed>
+					<MechFormingSpeed>0.45</MechFormingSpeed>
+					<PsychicSensitivity>0.15</PsychicSensitivity>
+				</statOffsets>
+				<statFactors>
+					<MechBandwidth>1.3</MechBandwidth>
+				</statFactors>
+			</li>
+			
+			<li>
+				<label>stage 4</label>
+				<minSeverity>4</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<postFactor>0.6</postFactor>
+					</li>
+				</capMods>
+				<statOffsets>
+					<MechBandwidth>8</MechBandwidth>
+					<WorkSpeedGlobalOffsetMech>0.4</WorkSpeedGlobalOffsetMech>
+					<MechRepairSpeed>0.4</MechRepairSpeed>
+					<MechFormingSpeed>0.6</MechFormingSpeed>
+					<PsychicSensitivity>0.2</PsychicSensitivity>
+				</statOffsets>
+				<statFactors>
+					<MechBandwidth>1.4</MechBandwidth>
+				</statFactors>
+			</li>
+			<li>
+				<label>stage 5</label>
+				<minSeverity>5</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<postFactor>0.5</postFactor>
+					</li>
+				</capMods>
+				<statOffsets>
+					<MechBandwidth>10</MechBandwidth>
+					<WorkSpeedGlobalOffsetMech>0.5</WorkSpeedGlobalOffsetMech>
+					<MechRepairSpeed>0.5</MechRepairSpeed>
+					<MechFormingSpeed>0.75</MechFormingSpeed>
+					<PsychicSensitivity>0.25</PsychicSensitivity>
+				</statOffsets>
+				<statFactors>
+					<MechBandwidth>1.5</MechBandwidth>
+				</statFactors>
+			</li>
+			<li>
+				<label>stage 6</label>
+				<minSeverity>6</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<postFactor>0.4</postFactor>
+					</li>
+				</capMods>
+				<statOffsets>
+					<MechBandwidth>12</MechBandwidth>
+					<WorkSpeedGlobalOffsetMech>0.6</WorkSpeedGlobalOffsetMech>
+					<MechRepairSpeed>0.6</MechRepairSpeed>
+					<MechFormingSpeed>0.9</MechFormingSpeed>
+					<PsychicSensitivity>0.3</PsychicSensitivity>
+				</statOffsets>
+				<statFactors>
+					<MechBandwidth>1.6</MechBandwidth>
+				</statFactors>
+			</li>
+			<li>
+				<label>stage 7</label>
+				<minSeverity>7</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<postFactor>0.3</postFactor>
+					</li>
+				</capMods>
+				<statOffsets>
+					<MechBandwidth>14</MechBandwidth>
+					<WorkSpeedGlobalOffsetMech>0.7</WorkSpeedGlobalOffsetMech>
+					<MechRepairSpeed>0.7</MechRepairSpeed>
+					<MechFormingSpeed>1.05</MechFormingSpeed>
+					<PsychicSensitivity>0.35</PsychicSensitivity>
+				</statOffsets>
+				<statFactors>
+					<MechBandwidth>1.7</MechBandwidth>
+				</statFactors>
+			</li>
+			<li>
+				<label>stage 8</label>
+				<minSeverity>8</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<postFactor>0.2</postFactor>
+					</li>
+				</capMods>
+				<statOffsets>
+					<MechBandwidth>16</MechBandwidth>
+					<WorkSpeedGlobalOffsetMech>0.8</WorkSpeedGlobalOffsetMech>
+					<MechRepairSpeed>0.8</MechRepairSpeed>
+					<MechFormingSpeed>1.2</MechFormingSpeed>
+					<PsychicSensitivity>0.4</PsychicSensitivity>
+				</statOffsets>
+				<statFactors>
+					<MechBandwidth>1.8</MechBandwidth>
+				</statFactors>
+			</li>
+			<li>
+				<label>stage 9</label>
+				<minSeverity>9</minSeverity>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<postFactor>0.1</postFactor>
+					</li>
+				</capMods>
+				<statOffsets>
+					<MechBandwidth>18</MechBandwidth>
+					<WorkSpeedGlobalOffsetMech>0.9</WorkSpeedGlobalOffsetMech>
+					<MechRepairSpeed>0.9</MechRepairSpeed>
+					<MechFormingSpeed>1.35</MechFormingSpeed>
+					<PsychicSensitivity>0.45</PsychicSensitivity>
+				</statOffsets>
+				<statFactors>
+					<MechBandwidth>1.9</MechBandwidth>
+				</statFactors>
+			</li>
+			
+		</stages>
+		
+	</HediffDef> 
+
+
+	<!-- Basic Mechlink -->
+	<ThingDef ParentName="MechanitorImplantBase">
+		<defName>AV_BasicMechlink</defName>
+		<label>basic mechlink</label>
+		<description>A bionic implant that allows direct control of mechanoids. Compared to a real mechlink this device is quite limited, which allowed it to be sold to the public without the risk of individuals building armies. It is not as psychically binding as a real mechlink, making the removal (and destruction of it) by surgery possible. Not suitable for most additional mechanitor add-on implants.\n\n Can not be removed from corpses.</description>
+		<!-- <thingClass>AV_Mechtech.BasicMechlink</thingClass> -->
+		<descriptionHyperlinks>
+			<HediffDef>MechlinkImplant</HediffDef>
+			<HediffDef>AV_BasicMechlinkImplant</HediffDef>
+		</descriptionHyperlinks>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToMake>3200</WorkToMake>
+			<Beauty>-4</Beauty>
+			<Mass>1</Mass>
+			<MarketValue>800</MarketValue>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		
+		<tradeTags>	
+			<li>AV_Mechtech_Implant</li>
+		</tradeTags>
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Smith</soundWorking>
+			<unfinishedThingDef>UnfinishedHealthItemBionic</unfinishedThingDef>
+			<skillRequirements>
+				<Crafting>8</Crafting>
+			</skillRequirements>
+			<researchPrerequisite>AV_BasicMechlinks</researchPrerequisite>
+			<recipeUsers>
+				<li>SubcoreEncoder</li>
+			</recipeUsers>
+		</recipeMaker>
+		<costList>
+			<Plasteel>20</Plasteel>
+			<ComponentSpacer>2</ComponentSpacer>
+			<SignalChip>1</SignalChip>
+		</costList>
+		<graphicData>
+			<texPath>Things/Item/Apparel/BasicMechlink/AV_Mechlink</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.65</drawSize>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Forbiddable"/>
+			<li Class="CompProperties_Usable">
+				<compClass>AV_Framework.CompUsableImplant_NoMechanitor</compClass>
+				<useJob>InstallMechlink</useJob>
+				<useLabel>Install {0_label} to become mechanitor</useLabel>
+			</li>
+			<li Class="CompProperties_UseEffectInstallImplant">
+				<compClass>CompUseEffect_InstallImplantMechlink</compClass>
+				<hediffDef>AV_BasicMechlinkImplant</hediffDef>
+				<bodyPart>Brain</bodyPart>
+				<requiresPsychicallySensitive>true</requiresPsychicallySensitive>
+			</li>
+			<li Class="CompProperties_UseEffectPlaySound">
+				<soundOnUsed>MechlinkInstalled</soundOnUsed>
+			</li>
+			<!--
+			<li Class="CompProperties_UseEffectGiveQuest">
+				<quest>MechanitorStartingMech</quest>
+				<skipIfMechlinkAlreadySentMechs>true</skipIfMechlinkAlreadySentMechs>
+			</li>  
+			-->
+		</comps>
+		<tradeability>All</tradeability>
+	</ThingDef>
+
+    <HediffDef ParentName="ImplantHediffBase">
+		<defName>AV_BasicMechlinkImplant</defName>
+		<hediffClass>Hediff_Mechlink</hediffClass>
+		<label>basic mechlink</label>
+		<description>A bionic implant that allows direct control of mechanoids. Compared to a real mechlink this device is quiet limited, which allowed selling it to the public without getting individuals building armies.\n\nMechlinks are used by soldiers to control war mechs, and by workers to control labor mechs. A person with a mechlink is known as a mechanitor.\n\nMechlinks are self-installable. Pressed into the back of the throat, the unit injects itself through the flesh to clamp inside the base of the skull where it meets the spinal cord. There, it threads a web of ultrafine wires throughout nearby neuronal tissue to make the direct mental link between the user and the mechanoid control band.\n\nMechlinks are not simply devices for sending radio signals to mechanoids, because mechanoids are not merely robots. In addition to traditional computers, mechanoids have a dim psychic presence, so fluently controlling them requires a psychic connection. By linking mechanitor and mechanoid both psychically and electromagnetically, the mechlink permits deeper control than screen-and-button interfaces.\n\nSince the mechlink interlaces deep within the brain tissue, it can only be removed after death.\n\nNote: A mechanitor must be capable of smithing work to gestate mechanoids.</description>
+		<descriptionShort>A bionic implant that allows direct control of mechanoids.</descriptionShort>
+		<isBad>false</isBad>
+		<duplicationAllowed>false</duplicationAllowed>
+		<removeOnRedressIfNotOfKind>
+			<li>Mechanitor</li>
+			<li>Mechanitor_Basic</li>
+		</removeOnRedressIfNotOfKind>
+		<stages>
+			<li>
+				<statOffsets>
+					<MechBandwidth>2</MechBandwidth>
+					<MechControlGroups>1</MechControlGroups>
+					<MechRepairSpeed>-0.5</MechRepairSpeed>
+					<WorkSpeedGlobalOffsetMech>-0.2</WorkSpeedGlobalOffsetMech>
+					<MechFormingSpeed>-0.5</MechFormingSpeed>
+				</statOffsets>
+			</li>
+		</stages>
+		<comps>
+			<li Class="AV_Framework.HediffCompProperties_ChooseMechanitorColor"/>
+			<!-- comp below only shows letter, does nothing for reusing the implant -->
+			<!--
+			<li Class="HediffCompProperties_LetterOnDeath">
+				<letterDef>NeutralEvent</letterDef>
+				<letterLabel>Reusable {HEDIFF_label} available.</letterLabel>
+				<letterText>{PAWN} has died with a {HEDIFF_label} installed. This can be removed and installed by someone else.</letterText>
+				<onlyIfNoMechanitorDied>true</onlyIfNoMechanitorDied>
+			</li>
+			-->
+		</comps>
+		<modExtensions>
+            <li Class="AV_Framework.IsMechlink">
+				<isMechlink>true</isMechlink>
+			</li>
+        </modExtensions>
+    </HediffDef>
+
+	<RecipeDef ParentName="SurgeryFlesh">
+		<defName>AV_RemoveBasicMechlink</defName>
+		<label>dissolve basic mechlink</label>
+		<description>This special medical operation removes the basic mechlink by a infusion of bacteriophage mechanites. The implant wont survive.</description>
+		<workerClass>AV_Framework.Recipe_DissolveMechlink</workerClass>
+		<jobString>Dissolving basic mechlink.</jobString>
+		<workAmount>1000</workAmount>
+		<hideBodyPartNames>true</hideBodyPartNames>
+		<targetsBodyPart>false</targetsBodyPart>
+		<isViolation>true</isViolation>
+		<descriptionHyperlinks>
+			<ThingDef>AV_BasicMechlink</ThingDef>
+		</descriptionHyperlinks>
+		<uiIconThing>AV_BasicMechlink</uiIconThing>
+		<anesthetize>true</anesthetize>
+		<!-- <workSkillLearnFactor>2</workSkillLearnFactor> -->
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>MedicineUltratech</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>Medicine</li>
+			</categories>
+		</fixedIngredientFilter>
+	</RecipeDef>
+ 
+ 
+	<!-- Mechlink upgrader -->
+	<ThingDef ParentName="MechanitorImplantBase">	
+		<defName>AV_MechlinkUpgrader</defName>
+		<label>mechlink enhancer</label>
+		<description>A device for upgrading a basic mechlink to the real deal. It can be self-installed without surgery.</description>
+		<descriptionHyperlinks><HediffDef>MechlinkImplant</HediffDef></descriptionHyperlinks>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToMake>3200</WorkToMake>
+			<Beauty>-4</Beauty>
+			<Mass>1</Mass>
+			<MarketValue>3000</MarketValue>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Item/Health/AV_mechanitor_implant</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.80</drawSize>
+			<color>(154,124,104)</color>
+		</graphicData>
+		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Smith</soundWorking>
+			<unfinishedThingDef>UnfinishedHealthItemBionic</unfinishedThingDef>
+			<skillRequirements>
+				<Crafting>12</Crafting>
+			</skillRequirements>
+			<researchPrerequisite>AV_Mechlinks</researchPrerequisite>
+			<recipeUsers>
+				<li>SubcoreEncoder</li>
+			</recipeUsers>
+		</recipeMaker>
+		<tradeTags>	
+			<li>AV_Mechtech_Implant</li>
+		</tradeTags>
+		<costList>
+			<Plasteel>60</Plasteel>
+			<ComponentSpacer>4</ComponentSpacer>
+			<NanostructuringChip>1</NanostructuringChip>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Forbiddable"/>
+			<li Class="CompProperties_Usable">
+				<compClass>CompUsable</compClass>
+				<useJob>UseItem</useJob>
+				<useLabel>Implant mechlink upgrader</useLabel>
+				<userMustHaveHediff>AV_BasicMechlinkImplant</userMustHaveHediff>
+			</li>
+			<li Class="AV_Mechtech.CompProperties_UseEffectUpgradeMechlink">
+				<compClass>AV_Mechtech.CompUseEffect_UpgradeMechlink</compClass>
+				<hediffDef>MechlinkImplant</hediffDef>
+				<hediffDefToRemove>AV_BasicMechlinkImplant</hediffDefToRemove>
+				<bodyPart>Brain</bodyPart>
+				<canUpgrade>false</canUpgrade>
+				<maxSeverity>2</maxSeverity>	
+			</li>
+		</comps>
+		<tradeability>All</tradeability>
+	</ThingDef>
+
+
+	<!-- recipy disassemble mechlink -->
+	<RecipeDef>
+		<defName>AV_DisassembleMechlink</defName>
+		<label>disassemble mechlink</label>
+		<description>Recover a signal chip from an uninstalled mechlink. Any other components of the mechlink are wasted.</description>
+		<researchPrerequisite>AV_BasicMechlinks</researchPrerequisite>
+		<jobString>Disassembling mechlink.</jobString>
+		<workAmount>600</workAmount>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<effectWorking>Smith</effectWorking>
+		<soundWorking>Recipe_Machining</soundWorking>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Mechlink</li>
+						<li>AV_BasicMechlink</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Mechlink</li>	
+				<li>AV_BasicMechlink</li>				
+			</thingDefs>
+		</fixedIngredientFilter>
+		<workSkill>Crafting</workSkill>
+		<skillRequirements>
+			<Crafting>8</Crafting>
+		</skillRequirements>
+		<!-- 
+		<products>
+			<SignalChip>1</SignalChip>
+		</products> 
+		-->
+		<recipeUsers>
+			<li>SubcoreEncoder</li>
+		</recipeUsers>
+		<mechanitorOnlyRecipe>true</mechanitorOnlyRecipe>
+		<modExtensions>
+            <li Class="AV_Framework.CreateThingOnProduction">
+				<CreateItemOnSpawn>true</CreateItemOnSpawn>
+				<Thingdef>SignalChip</Thingdef>
+                <Itemcount>1</Itemcount>
+            </li>
+        </modExtensions>
+	</RecipeDef>
+
+
+
+
+
+
+
+
+
+	<!-- Bandnode expander -->	
+	<ThingDef ParentName="MechanitorImplantBase">	
+		<defName>AV_BandnodeExpander</defName>
+		<label>bandnode expander</label>
+		<description>A neural implant which optimizes the interaction between a mechlink and bandnodes tuned to it. Each implant increases the bandwidth gained from bandnodes by 50%.\n\nThis implant can be installed up to 2 times to increase its effect.</description>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToMake>3200</WorkToMake>
+			<Beauty>-4</Beauty>
+			<Mass>1</Mass>
+			<MarketValue>600</MarketValue>
+			<DeteriorationRate>0</DeteriorationRate>
+			<MaxInstallCount>2</MaxInstallCount>
+		</statBases>
+		<graphicData>
+			<texPath>Things/Item/Health/AV_mechanitor_implant</texPath>	<!-- <texPath>Things/Item/Health/HealthItem</texPath> -->	
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.80</drawSize>
+			<color>(154,124,104)</color>
+		</graphicData>
+		<thingSetMakerTags><li>RewardStandardMidFreq</li></thingSetMakerTags>	
+		<tradeTags>
+			<li>AV_Mechtech_Implant</li>
+			<li>ExoticMisc</li>
+		</tradeTags>
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Smith</soundWorking>
+			<unfinishedThingDef>UnfinishedHealthItemBionic</unfinishedThingDef>
+			<skillRequirements>
+				<Crafting>8</Crafting>
+			</skillRequirements>
+			<researchPrerequisite>AV_MechlinkTuning</researchPrerequisite>
+			<recipeUsers>
+				<li>SubcoreEncoder</li>
+			</recipeUsers>
+		</recipeMaker>
+		<costList>
+			<ComponentIndustrial>4</ComponentIndustrial>
+			<ComponentSpacer>2</ComponentSpacer>
+			<PowerfocusChip>1</PowerfocusChip>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Forbiddable"/>
+			<li Class="CompProperties_Usable">
+				<compClass>AV_Framework.CompUsableImplant_Mechanitor</compClass>
+				<useJob>UseItem</useJob>
+				<useLabel>Implant bandnode expander</useLabel>
+			</li>
+			<li Class="CompProperties_UseEffectInstallImplant">
+				<hediffDef>AV_BandnodeExpanderImplant</hediffDef>
+				<bodyPart>Brain</bodyPart>
+				<canUpgrade>true</canUpgrade>
+				<maxSeverity>2</maxSeverity>
+			</li>
+		</comps>
+		<tradeability>All</tradeability>
+	</ThingDef>
+
+	<HediffDef>
+		<defName>AV_BandnodeExpanderImplant</defName>
+		<!-- <hediffClass>Hediff_Level</hediffClass>-->	
+		<hediffClass>AV_Mechtech.Hediff_BandnodeExpander</hediffClass>	
+		<descriptionHyperlinks><ThingDef>AV_BandnodeExpander</ThingDef></descriptionHyperlinks>
+		<label>bandnode expander</label>
+		<description>A neural implant which optimizes the interaction between a mechlink and a bandnodes tuned to it. This increases the bandwidth gained from bandnodes.</description>
+		<defaultLabelColor>(0.6, 0.6, 1.0)</defaultLabelColor>
+		<isBad>false</isBad>
+		<priceImpact>true</priceImpact>
+		<initialSeverity>1</initialSeverity>
+		<minSeverity>0</minSeverity>
+		<maxSeverity>2</maxSeverity>
+		<levelIsQuantity>true</levelIsQuantity>
+		<duplicationAllowed>false</duplicationAllowed>
+		<keepOnBodyPartRestoration>True</keepOnBodyPartRestoration>
+		<stages>
+			<li>
+				<minSeverity>1</minSeverity>
+			</li>
+			<li>
+				<minSeverity>2</minSeverity>
+			</li>
+		</stages>
+	</HediffDef> 
+
+
+
+</Defs>

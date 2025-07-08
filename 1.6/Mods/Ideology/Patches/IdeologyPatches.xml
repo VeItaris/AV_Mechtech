@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Patch>
+
+	<!-- Mech recipes -->
+	
+	<!-- companoid sphere mech -->	
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="MechGestator"]/recipes</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MechGestator"]/recipes</xpath>
+			<order>Prepend</order>
+			<value>
+				<li>AV_Gestate_Companion</li>
+			</value>
+		</match>
+	</Operation>
+
+ 	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/RecipeDef[defName = "ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/RecipeDef[defName = "ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
+			<value>
+				<li>Corpse_AV_Mech_Companion</li>				
+			</value>
+		</match>
+	</Operation>
+
+	<!-- Royal lancer -->	
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="LargeMechGestator"]/recipes</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="LargeMechGestator"]/recipes</xpath>
+			<order>Prepend</order>
+			<value>
+				<li>AV_Gestate_Royallancer</li>
+			</value>
+		</match>
+	</Operation>
+
+ 	<Operation Class="PatchOperationConditional">
+		<xpath>/Defs/RecipeDef[defName = "ResurrectHeavyMech"]/fixedIngredientFilter/thingDefs</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/RecipeDef[defName = "ResurrectHeavyMech"]/fixedIngredientFilter/thingDefs</xpath>
+			<value>
+				<li>Corpse_AV_Mech_Royallancer</li>				
+			</value>
+		</match>
+	</Operation>	
+	
+</Patch>

@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- Neuroferium -->
+	<ThingDef ParentName="MakeableDrugPillBase">
+		<defName>AV_Neuroferium</defName>
+		<label>neuroferium</label>
+		<description>Refined luciferium. It enhances  wound healing and can heal scars or even regrow missing body parts, but not without causing severe pain. It is not addictive and was once marketed as a cheap miracle cure to replace luciferium. The refining process takes a long time and is easy to mess up, which can cause the mechanites in the consumer's body to go haywire. A faulty batch sends the consumer in a long lasting coma, while the working product cures the patient after a week of severe pain.</description>
+		<graphicData>
+			<texPath>Things/Item/Drug/AV_Neuroferium</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<socialPropernessMatters>false</socialPropernessMatters>
+		<rotatable>false</rotatable>
+		<statBases>
+			<WorkToMake>3000</WorkToMake>
+			<MarketValue>318</MarketValue>	<!-- default for work and mat would be 159 -->
+			<Mass>0.005</Mass>
+		</statBases>
+		<techLevel>Ultra</techLevel>
+		<ingestible>
+			<drugCategory>Medical</drugCategory>
+			<baseIngestTicks>100</baseIngestTicks>
+			<ingestSound>Ingest_Pill</ingestSound>
+			<ingestHoldOffsetStanding>
+				<northDefault>
+					<offset>(0.21,0,0.05)</offset>
+				</northDefault>
+			</ingestHoldOffsetStanding>
+			<ingestHoldUsesTable>false</ingestHoldUsesTable>
+			<ingestCommandString>Take {0}</ingestCommandString>
+			<ingestReportString>Taking {0}.</ingestReportString>
+			<useEatingSpeedStat>true</useEatingSpeedStat>
+			<outcomeDoers>
+				<li Class="IngestionOutcomeDoer_GiveHediff">
+					<hediffDef>AV_NeuroferiumHigh</hediffDef>
+					<severity>1.0</severity>
+				</li>
+				<li Class="AV_Mechtech.IngestionOutcomeDoer_Neuroferium">
+					<hediffDef>AV_NeuroferiumPoisoning</hediffDef>
+				</li>
+			</outcomeDoers>
+		</ingestible>
+		<recipeMaker>
+			<researchPrerequisite>AV_Neuroferium</researchPrerequisite>
+			<skillRequirements>
+				<Medicine>6</Medicine>
+				<Crafting>4</Crafting>
+			</skillRequirements>
+			<recipeUsers>
+				<li>DrugLab</li>
+			</recipeUsers>
+		</recipeMaker>
+		<costList>
+			<AV_Neurofoam>8</AV_Neurofoam>
+			<Luciferium>2</Luciferium>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Drug">
+				<chemical>Luciferium</chemical>
+				<addictiveness>0</addictiveness>
+				<needLevelOffset>0.1</needLevelOffset>
+				<listOrder>200</listOrder>
+				<overdoseSeverityOffset>0.18~0.35</overdoseSeverityOffset>
+				<largeOverdoseChance>0.005</largeOverdoseChance>
+			</li>
+			<li Class="CompProperties_Drug">
+				<chemical>AV_Neurill</chemical>
+				<addictiveness>0</addictiveness>
+				<needLevelOffset>0.1</needLevelOffset>
+				<listOrder>200</listOrder>
+				<overdoseSeverityOffset>0.18~0.35</overdoseSeverityOffset>
+				<largeOverdoseChance>0.005</largeOverdoseChance>
+			</li>
+		</comps>
+		<tradeTags>
+			<li>ExoticMisc</li>
+			<li>AV_Mechtech_Spacer</li>
+		</tradeTags>
+	</ThingDef>
+
+	
+	<!-- Neuroferium high -->
+	<HediffDef>
+		<defName>AV_NeuroferiumHigh</defName>
+		<hediffClass>HediffWithComps</hediffClass>
+		<label>neuroferium</label>
+		<description>Neuroferium mechanites working within the bloodstream cousing immense pain and enhanced cell regeneration even capeable of removing scars or regrowing lost bodyparts.</description>
+		<defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+		<scenarioCanAdd>true</scenarioCanAdd>
+		<maxSeverity>1.0</maxSeverity>
+		<isBad>false</isBad>
+		<comps>
+			<li Class="AV_Mechtech.HediffCompProperties_HealPermanentWounds_time">
+				<DaysToHeal>3.0</DaysToHeal>
+			</li>			
+			<li Class="HediffCompProperties_SeverityPerDay">
+				<severityPerDay>-0.1</severityPerDay>			<!-- should be (maxSeverity / (DaysToHeal * times heal is applied) + buffer) * -1 -->
+				<showDaysToRecover>true</showDaysToRecover>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<painFactor>1.5</painFactor>
+				<painOffset>0.3</painOffset>
+				<socialFightChanceFactor>0.5</socialFightChanceFactor>
+				<statOffsets>
+					<RestFallRateFactor>0.6</RestFallRateFactor>
+					<InjuryHealingFactor>0.5</InjuryHealingFactor>
+					<ImmunityGainSpeed>0.5</ImmunityGainSpeed>	
+				</statOffsets>
+				<capMods><!-- 
+					<li>
+						<capacity>Consciousness</capacity>
+						<offset>-0.10</offset>
+					</li>
+					<li>
+						<capacity>Manipulation</capacity>
+						<offset>-0.15</offset>
+					</li>
+					<li>
+						<capacity>Moving</capacity>
+						<offset>-0.20</offset>
+					</li> -->
+				</capMods>
+				<mentalStateGivers>
+					<li>
+						<mentalState>Wander_Psychotic</mentalState>
+						<mtbDays>10</mtbDays>
+					</li>
+				</mentalStateGivers>
+			</li>
+		</stages>
+	</HediffDef>
+
+
+	<!-- Neuroferium Poisoning, old version with kill, does not kill vamps -->
+	
+	<!-- 
+	<HediffDef ParentName="DiseaseBase">
+		<defName>AV_NeuroferiumPoisoning</defName>
+		<label>Neuroferium poisoning</label>
+		<labelNoun>Poisend by neuroferium</labelNoun>
+		<description>Neuroferium mechanites ran wild and killed this pawn.</description>
+		<minSeverity>0.2</minSeverity>
+		<initialSeverity>0.2</initialSeverity>
+		<maxSeverity>1</maxSeverity>
+		<lethalSeverity>0.1</lethalSeverity>
+	</HediffDef>
+	 -->
+	 
+	<HediffDef ParentName="DiseaseBase">
+		<defName>AV_NeuroferiumPoisoning</defName>
+		<label>neuroferium poisoning</label>
+		<labelNoun>Poisoned by neuroferium</labelNoun>
+		<description>Neuroferium mechanites are running wild, severly disrupting bodily functions. It takes a long time for them to stop working, but it can be accelerated with a large amount of glitterworld medicine.</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<preventsCrawling>true</preventsCrawling>
+		<comps>
+		<!-- 
+			<li Class="HediffCompProperties_ChanceToRemove">
+			<intervalTicks>60000</intervalTicks>
+			<chance>0.01</chance>
+			</li>
+		-->
+			<li Class="HediffCompProperties_Disappears">
+				<disappearsAfterTicks>1800000~2400000</disappearsAfterTicks> <!-- 30 ! 45 days like psycic abasia -->
+				<showRemainingTime>true</showRemainingTime>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<painFactor>2.0</painFactor>
+				<painOffset>0.3</painOffset>
+				<capMods>
+					<li>
+						<capacity>Moving</capacity>
+						<setMax>0.1</setMax>
+					</li>
+				</capMods>
+				<statOffsets>
+					<ImmunityGainSpeed>-0.5</ImmunityGainSpeed>	
+				</statOffsets>
+			</li>
+		</stages>
+	</HediffDef>
+
+	<RecipeDef ParentName="SurgeryFlesh">
+		<defName>AV_CureNeuroferiumPoisoning</defName>
+		<label>anti-neuroferium mechanite infusion</label>
+		<description>This special medical operation uses a massive dose of mechanites to hunt down neuroferium mechanites to cures a patient's neuroferium posioning, but consumes a large amount of glitterworld medicine.</description>
+		<workerClass>Recipe_RemoveHediff</workerClass>
+		<jobString>Infusing anti-neuroferium mechanites.</jobString>
+		<workAmount>2000</workAmount>
+		<hideBodyPartNames>true</hideBodyPartNames>
+		<isViolation>false</isViolation>
+		<targetsBodyPart>false</targetsBodyPart>
+		<removesHediff>AV_NeuroferiumPoisoning</removesHediff>
+		<successfullyRemovedHediffMessage>{0} has successfully cured {1}'s neuroferium poisoning.</successfullyRemovedHediffMessage>
+		<skillRequirements>
+			<Medicine>5</Medicine>
+		</skillRequirements>
+		<ingredients>
+		<li>
+			<filter>
+				<thingDefs>
+					<li>MedicineUltratech</li>
+				</thingDefs>
+			</filter>
+			<count>10</count>
+		</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>Medicine</li>
+			</categories>
+		</fixedIngredientFilter>
+	</RecipeDef>
+ 
+</Defs>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Patch>
+
+	<!-- Techprints
+
+	<Operation Class="PatchOperationConditional">
+	<xpath>Defs/ResearchProjectDef[defName="AV_Cryopods"]</xpath>
+		<match Class="PatchOperationConditional">
+		<xpath>Defs/ResearchProjectDef[defName="AV_Cryopods"]/heldByFactionCategoryTags</xpath>
+			<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ResearchProjectDef[defName="AV_Cryopods"]</xpath>
+				<order>Prepend</order>
+				<value>
+					<heldByFactionCategoryTags MayRequire="Ludeon.RimWorld.Royalty">
+						<li>Empire</li>
+					</heldByFactionCategoryTags>
+				</value>
+			</nomatch>
+			<match Class="PatchOperationAdd">
+				<xpath>Defs/ResearchProjectDef[defName="AV_Cryopods"]/heldByFactionCategoryTags</xpath>
+				<order>Prepend</order>
+				<value>
+					<li>Empire</li>
+				</value>
+			</match>
+		</match>
+	</Operation>
+
+
+	<Operation Class="PatchOperationConditional">
+	<xpath>Defs/ResearchProjectDef[defName="AV_Neuroferium"]</xpath>
+		<match Class="PatchOperationConditional">
+		<xpath>Defs/ResearchProjectDef[defName="AV_Neuroferium"]/heldByFactionCategoryTags</xpath>
+			<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ResearchProjectDef[defName="AV_Neuroferium"]</xpath>
+				<order>Prepend</order>
+				<value>
+					<heldByFactionCategoryTags MayRequire="Ludeon.RimWorld.Royalty">
+						<li>Empire</li>
+					</heldByFactionCategoryTags>
+				</value>
+			</nomatch>
+			<match Class="PatchOperationAdd">
+				<xpath>Defs/ResearchProjectDef[defName="AV_Neuroferium"]/heldByFactionCategoryTags</xpath>
+				<order>Prepend</order>
+				<value>
+					<li>Empire</li>
+				</value>
+			</match>
+		</match>
+	</Operation>
+
+ -->
+
+
+
+
+
+
+
+		
+		<!-- 
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ResearchProjectDef[defName="AV_Neuroferium"]</xpath>
+			<order>Prepend</order>
+			<value>
+				<heldByFactionCategoryTags>
+					<li>Empire</li>
+				</heldByFactionCategoryTags>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ResearchProjectDef[defName="AV_Neuroferium"]/heldByFactionCategoryTags</xpath>
+			<order>Prepend</order>
+			<value>
+				<li>Empire</li>
+			</value>
+		</match>
+	</Operation>
+
+		<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ResearchProjectDef[defName="AV_Neuroferium"]/heldByFactionCategoryTags</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ResearchProjectDef[defName="AV_Neuroferium"]</xpath>
+			<order>Prepend</order>
+			<value>
+				<heldByFactionCategoryTags MayRequire="Ludeon.RimWorld.Royalty">
+					<li>Empire</li>
+				</heldByFactionCategoryTags>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ResearchProjectDef[defName="AV_Neuroferium"]/heldByFactionCategoryTags</xpath>
+			<order>Prepend</order>
+			<value>
+				<li>Empire</li>
+			</value>
+		</match>
+	</Operation>
+	 -->	
+	
+	<!-- 
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ResearchProjectDef[defName="AV_Cryopods"]/heldByFactionCategoryTags</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ResearchProjectDef[defName="AV_Cryopods"]</xpath>
+			<order>Prepend</order>
+			<value>
+				<heldByFactionCategoryTags MayRequire="Ludeon.RimWorld.Royalty">
+					<li>Empire</li>
+					
+				</heldByFactionCategoryTags>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ResearchProjectDef[defName="AV_Cryopods"]/heldByFactionCategoryTags</xpath>
+			<order>Prepend</order>
+			<value>
+				<li>Empire</li>
+			</value>
+		</match>
+	</Operation>
+ -->	
+</Patch>

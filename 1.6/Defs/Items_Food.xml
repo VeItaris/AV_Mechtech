@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+	<!-- Neurofoam-->
+	<ThingDef ParentName="OrganicProductBase">
+		<defName>AV_Neurofoam</defName>
+		<label>neurofoam</label>
+		<description>A bland paste of microorganisms, bioengineered to serve as fuel for biopods or as emergency food. Babies won't mind it, but children and adults will be annoyed if they are forced to eat it.</description>
+		<thingCategories>
+			<li>Foods</li>
+		</thingCategories>
+		<graphicData>
+			<texPath>Things/Item/Resource/NeutroFoam</texPath> 
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<statBases>
+			<MarketValue>1.00</MarketValue>
+			<Mass>0.15</Mass>
+			<Nutrition>0.15</Nutrition>
+			<FoodPoisonChanceFixedHuman>0.0</FoodPoisonChanceFixedHuman>
+		</statBases>
+		<stackLimit>75</stackLimit>
+		<ingestible>
+			<foodType>Fluid</foodType>
+			<preferability>MealAwful</preferability>	
+			<tasteThought>AV_AteNeurofoam</tasteThought>			
+			<ingestEffect>EatVegetarian</ingestEffect>
+			<ingestSound>Meal_Eat</ingestSound>
+			<babiesCanIngest>true</babiesCanIngest>
+		</ingestible>
+		<tradeability>All</tradeability>
+		<tradeTags Inherit="False">
+			<li>AV_Mechtech</li>
+			<li>AV_Mechtech_Spacer</li>
+		</tradeTags>
+		<comps>
+			<li Class="CompProperties_Ingredients">	<!-- Do we even need this??? -->
+				<performMergeCompatibilityChecks>false</performMergeCompatibilityChecks>
+				<noIngredientsFoodKind>NonMeat</noIngredientsFoodKind>
+			</li>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>10</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li><!--
+			<li Class="CompProperties_Studiable">
+				<studyAmountToComplete>5</studyAmountToComplete>
+				<completedLetterTitle>{PARENT_label} studied: {RESEARCH} unlocked</completedLetterTitle>
+				<completedLetterText>By studying the {PARENT_label}, {STUDIER_labelShort} has acquired the insight needed for the research project(s) {RESEARCH}.\n\nYour researchers can now use research benches to begin researching how to actually use the technology.</completedLetterText>
+				<completedLetterDef>PositiveEvent</completedLetterDef>
+			</li> -->
+		</comps>
+		<modExtensions>
+			<li MayRequire="Dubwise.DubsBadHygiene" Class="DubsBadHygiene.WaterExt">
+				<water>0.1</water>
+				<UseForWashing>false</UseForWashing>
+				<SeekForThirst>false</SeekForThirst>
+			</li>
+		</modExtensions>
+		<allowedArchonexusCount>200</allowedArchonexusCount>
+	</ThingDef>
+
+	<!-- Bad thought-->
+	<ThoughtDef>
+		<defName>AV_AteNeurofoam</defName> 
+		<showBubble>true</showBubble>
+		<icon>Things/Mote/ThoughtSymbol/Food</icon>
+		<durationDays>1</durationDays>
+		<stages>
+			<li>
+				<label>ate neurofoam</label>
+				<description>I had to eat neurofoam. Utterly disgusting.</description>
+				<baseMoodEffect>-6</baseMoodEffect>
+			</li>
+		</stages>
+		<nullifyingGenes>
+			<li MayRequire="Veltaris.Xenos">AV_Spacer_Stomach</li>	
+		</nullifyingGenes>
+	</ThoughtDef>
+
+	<!-- make neutroamine-->
+	<RecipeDef>
+		<defName>AV_Make_Neutroamine</defName>
+		<label>make neutroamine</label>
+		<description>Refine neurofoam into pure neutroamine, removing all nutrition.</description>
+		<researchPrerequisite>AV_Neutroamine_Production</researchPrerequisite>
+		<jobString>Making neutroamine.</jobString>
+		<workAmount>2000</workAmount>
+		<workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_CookMeal</soundWorking>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>AV_Neurofoam</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>AV_Neurofoam</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<workSkill>Intellectual</workSkill>
+		<skillRequirements>
+			<Intellectual>8</Intellectual>
+		</skillRequirements>
+		<products>
+			<Neutroamine>1</Neutroamine>
+		</products>
+		<displayPriority>1430</displayPriority>
+		<recipeUsers>
+			<li>DrugLab</li>
+		</recipeUsers>
+	</RecipeDef>
+
+	<!-- hemogen paste-->
+	<ThingDef ParentName="OrganicProductBase">
+		<defName>AV_HemogenPaste</defName>
+		<label>hemogen paste</label>
+		<description>A bland paste of hemogen-like microorganisms, for these special guests. It has a worse hemogen density compared to human blood.</description>
+		<thingCategories>
+			<li>Foods</li>
+		</thingCategories>
+		<graphicData>
+			<texPath>Things/Item/Resource/AV_HemogenPaste</texPath> 
+			<graphicClass>Graphic_StackCount</graphicClass>
+		</graphicData>
+		<socialPropernessMatters>false</socialPropernessMatters>
+		<statBases>
+			<MarketValue>1.00</MarketValue>
+			<Mass>0.15</Mass>
+			<Nutrition>0.02</Nutrition>
+			<FoodPoisonChanceFixedHuman>0.00</FoodPoisonChanceFixedHuman>
+		</statBases>
+		<stackLimit>75</stackLimit>
+		<ingestible>
+			<foodType>Fluid</foodType>
+			<preferability>DesperateOnly</preferability>
+			<canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
+			<specialThoughtDirect>IngestedHemogenPack</specialThoughtDirect>
+			<ingestEffect>EatVegetarian</ingestEffect>
+			<ingestSound>HemogenPack_Consume</ingestSound>
+			<outcomeDoers>
+				<li Class="IngestionOutcomeDoer_OffsetHemogen">
+					<offset>0.15</offset>
+				</li>
+			</outcomeDoers>
+		</ingestible>
+		<tradeability>None</tradeability>
+		<comps>
+			<li Class="CompProperties_Ingredients">
+				<performMergeCompatibilityChecks>false</performMergeCompatibilityChecks>
+				<noIngredientsFoodKind>NonMeat</noIngredientsFoodKind>
+			</li>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>20</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+		<allowedArchonexusCount>200</allowedArchonexusCount>
+	</ThingDef>
+
+	<!-- make hemogen paste-->
+	<RecipeDef>
+		<defName>AV_Make_HemogenPaste</defName>
+		<label>make hemogen paste</label>
+		<description>Extract neurofoam into hemogen-like paste, this is a wasteful process.</description>
+		<researchPrerequisite>AV_Hemogen_Extraction</researchPrerequisite>
+		<jobString>Making hemogen paste.</jobString>
+		<workAmount>2000</workAmount>
+		<workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_CookMeal</soundWorking>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>AV_Neurofoam</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>AV_Neurofoam</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<workSkill>Intellectual</workSkill>
+		<skillRequirements>
+			<Intellectual>4</Intellectual>
+		</skillRequirements>
+		<products>
+			<AV_HemogenPaste>1</AV_HemogenPaste>
+		</products>
+		<displayPriority>1430</displayPriority>
+		<recipeUsers>
+			<li>DrugLab</li>
+		</recipeUsers>
+	</RecipeDef>
+
+	<!-- make hemogen packs-->
+	<RecipeDef>
+		<defName>AV_Make_HemogenPack</defName>
+		<label>make hemogen packs</label>
+		<description>Refine hemogen packs into synthetic blood.</description>
+		<researchPrerequisite>AV_Hemogen_Extraction</researchPrerequisite>
+		<jobString>Making synthetic blood.</jobString>
+		<workAmount>2000</workAmount>
+		<workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_CookMeal</soundWorking>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>AV_HemogenPaste</li>
+					</thingDefs>
+				</filter>
+				<count>3</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>AV_HemogenPaste</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<workSkill>Intellectual</workSkill>
+		<skillRequirements>
+			<Intellectual>8</Intellectual>
+		</skillRequirements>
+		<products>
+			<HemogenPack>1</HemogenPack>
+		</products>
+		<displayPriority>1430</displayPriority>
+		<recipeUsers>
+			<li>DrugLab</li>
+		</recipeUsers>
+	</RecipeDef>
+
+
+</Defs>

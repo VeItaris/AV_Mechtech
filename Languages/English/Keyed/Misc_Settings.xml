@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+
+    <!-- labels -->
+    <AV_SettingsLabel_general>general</AV_SettingsLabel_general>
+    <AV_SettingsLabel_hacking>hacking</AV_SettingsLabel_hacking>
+    <AV_SettingsLabel_difficulty>difficulty</AV_SettingsLabel_difficulty>
+          
+    <!-- buttons -->
+    <AV_SettingsButtonLabel_reset>reset to default</AV_SettingsButtonLabel_reset>
+	<!-- <AV_SettingsButtonLabel_LogMechDrop>log mech drop list</AV_SettingsButtonLabel_LogMechDrop> -->
+	<AV_SettingsButtonLabel_LogMechSpot>log mechs for spot</AV_SettingsButtonLabel_LogMechSpot>
+		
+	
+	<!-- checkboxes -->
+    <AV_SettingsBoxLabel_AssignMechOverlay>show assigned overlay for mechanoid spots</AV_SettingsBoxLabel_AssignMechOverlay>
+	<AV_SettingsBoxDesc_AssignMechOverlay>shows the name of the assigned mech on their mech spots.</AV_SettingsBoxDesc_AssignMechOverlay>
+	
+    <AV_SettingsBoxLabel_UnassignMechOverlay>show unassigned overlay for mechanoid spots</AV_SettingsBoxLabel_UnassignMechOverlay>
+	<AV_SettingsBoxDesc_UnassignMechOverlay>shows the unassigned label on unassigned mech spots.</AV_SettingsBoxDesc_UnassignMechOverlay>
+	
+    <AV_SettingsBoxLabel_MessageSpawner>show message on neurofoam production</AV_SettingsBoxLabel_MessageSpawner>
+    <AV_SettingsBoxDesc_MessageSpawner>Shows a message like vanilla spawner on neurofoam production</AV_SettingsBoxDesc_MessageSpawner>
+		
+	
+    <AV_SettingsBoxLabel_MessageBiocodeable>show created biocodeable message</AV_SettingsBoxLabel_MessageBiocodeable>
+	<AV_SettingsBoxDesc_MessageBiocodeable>show a message on creation of biocodeable gear before pawns decide to just biocode them.</AV_SettingsBoxDesc_MessageBiocodeable>
+	
+	<AV_SettingsBoxLabel_SinistreAllowedWithoutMonolith>allow non-player sinistre to spawn without active monolith</AV_SettingsBoxLabel_SinistreAllowedWithoutMonolith>
+    <AV_SettingsBoxDesc_SinistreAllowedWithoutMonolith>doesn't change anything without the anomaly DLC.</AV_SettingsBoxDesc_SinistreAllowedWithoutMonolith>
+		
+	
+
+	
+	<!-- slider -->
+	
+    <AV_SettingsSliderLabel_HackingMaxBandwidth>maximum bandwith for hacking lances</AV_SettingsSliderLabel_HackingMaxBandwidth>
+	<AV_SettingsSliderDesc_HackingMaxBandwidth>this option just changes the bandwidth cost limit of the hacking lance, it wont allow hacking of boss mechs.</AV_SettingsSliderDesc_HackingMaxBandwidth>
+	
+    <AV_SettingsSliderLabel_NeuroferiumDeath>chance for neuroferium side effects</AV_SettingsSliderLabel_NeuroferiumDeath>
+	<AV_SettingsSliderDesc_MechDrop_NeuroferiumDeath>chance for neuroferium mechanites to run wild when injested.</AV_SettingsSliderDesc_MechDrop_NeuroferiumDeath>
+	
+
+</LanguageData>

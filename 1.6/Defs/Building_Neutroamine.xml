@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+ 	<!-- Neutroamine freezer -->
+	<ThingDef ParentName="FurnitureBase">
+		<defName>AV_NeutroamineFreezer</defName>
+		<label>neutro freezer</label>
+		<description>A chemical cooler which brings the temperature around it just below the freezing point of water.\nBuildings powered by neutroamine have no problems with power fluctuations or solar flares, but are expensive to maintain.</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Furniture/AV_NeutroamineFreezer</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+			<drawSize>2,2</drawSize>
+		</graphicData>
+		<size>(2,1)</size>
+		<uiIconScale>1.0</uiIconScale>	
+	    <altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>50</pathCost>
+		<blockWind>true</blockWind>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>0.40</fillPercent>
+		<tickerType>Normal</tickerType>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsPower</li>
+		</thingCategories>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>800</WorkToBuild>
+			<Mass>10</Mass>
+			<Beauty>0</Beauty>
+			<Flammability>1.0</Flammability>
+		</statBases>	
+		<tradeTags Inherit='False'>	
+			<li>AV_Mechtech_Spacer</li>
+			<li>AV_Mechtech</li>
+		</tradeTags>		
+		<building>
+			<destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+		</building>	
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+		<costList>
+			<Plasteel>60</Plasteel> 
+			<Silver>100</Silver> 
+			<ComponentIndustrial>2</ComponentIndustrial>
+		</costList>
+		<placeWorkers>
+			<li>PlaceWorker_CoolerSimple</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>-17</heatPerSecond>
+				<heatPushMinTemperature>-5</heatPushMinTemperature>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>2.5</fuelConsumptionRate>
+				<fuelCapacity>20.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>Neutroamine</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>0</initialFuelPercent>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+				<targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+				<initialConfigurableTargetFuelLevel>20</initialConfigurableTargetFuelLevel>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>3</glowRadius>
+				<glowColor>(78, 226, 229, 0)</glowColor>
+			</li>	
+			<li Class="CompProperties_Breakdownable"/>
+		</comps>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<designationCategory>Temperature</designationCategory>
+		<uiOrder>2021</uiOrder>
+		<staticSunShadowHeight>0.2</staticSunShadowHeight>
+		<constructEffect>ConstructMetal</constructEffect>
+		<designationHotKey>Misc4</designationHotKey>
+		<canOverlapZones>false</canOverlapZones>	
+		<researchPrerequisites>
+			<li>AV_Neutroamine_Industrialisation</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+ 	<!-- Adv. Neutroamine cooler -->
+	<ThingDef ParentName="FurnitureBase">
+		<defName>AV_CoolingCell</defName>
+		<label>neutro cooler</label>
+		<description>A chemical cooler that reduces the temperature around it. An internal pulse cell is limiting that process to reach comfortable temperature for humans. Not suitable for cooling food.\nBuildings powered by neutroamine have no problems with power fluctuations or solar flares, but are expensive to maintain.</description>
+		<category>Building</category>
+		<graphicData>
+			<texPath>Things/Building/Furniture/AV_Cooler</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+			<drawSize>1,1</drawSize>
+		</graphicData>
+		<size>(1,1)</size>
+		<uiIconScale>1.0</uiIconScale>	
+	    <altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>50</pathCost>
+		<blockWind>true</blockWind>
+		<castEdgeShadows>true</castEdgeShadows>
+		<fillPercent>0.40</fillPercent>
+		<tickerType>Normal</tickerType>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsPower</li>				<!-- change this? -->
+		</thingCategories>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>800</WorkToBuild>
+			<Mass>10</Mass>
+			<Beauty>0</Beauty>
+			<Flammability>1.0</Flammability>
+		</statBases>		
+		<building>
+			<destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+		</building>
+		<constructionSkillPrerequisite>4</constructionSkillPrerequisite>		
+		<costList>
+			<AV_EnergyCell MayRequire="Veltaris.Jade">1</AV_EnergyCell>
+			<Plasteel>40</Plasteel> 
+			<ComponentIndustrial>1</ComponentIndustrial>
+		</costList>
+		<tradeTags Inherit='False'>	
+			<li>AV_Mechtech_Spacer</li>
+			<li>AV_Mechtech</li>
+		</tradeTags>	
+		<placeWorkers>
+			<li>PlaceWorker_CoolerSimple</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<comps>
+			<li Class="CompProperties_HeatPusher">
+				<compClass>CompHeatPusherPowered</compClass>
+				<heatPerSecond>-17</heatPerSecond>
+				<heatPushMinTemperature>19</heatPushMinTemperature>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>0.5</fuelConsumptionRate>
+				<fuelCapacity>5.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>Neutroamine</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>0</initialFuelPercent>
+				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+				<!-- 
+				<targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+				<initialConfigurableTargetFuelLevel>5</initialConfigurableTargetFuelLevel>
+				-->
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>3</glowRadius>
+				<glowColor>(78, 226, 229, 0)</glowColor>
+			</li>	
+			<li Class="CompProperties_Breakdownable"/>
+		</comps>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<designationCategory>Temperature</designationCategory>
+		<uiOrder>2021</uiOrder>
+		<staticSunShadowHeight>0.2</staticSunShadowHeight>
+		<constructEffect>ConstructMetal</constructEffect>
+		<designationHotKey>Misc4</designationHotKey>
+		<canOverlapZones>false</canOverlapZones>	
+		<researchPrerequisites>
+			<li>AV_AdvancedNeutroControl</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+ 	<!-- wall light -->	 
+	<ThingDef ParentName="LampBase">
+		<defName>AV_NeutroamineWallLight</defName>
+		<label>neutro wall light</label>
+		<description>A neutroamine-powered wall lamp that lights an area. People need light to move and work at full speed. Needs to be refueled by hand. Can be safely placed outdoors.\nBuildings powered by neutroamine have no problems with power fluctuations or solar flares, but are expensive to maintain.</description>	
+		<rotatable>true</rotatable>
+		<tickerType>Normal</tickerType>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/WallLight/AV_NeutroWallLight</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawOffsetNorth>(0,0,0.9)</drawOffsetNorth>
+			<drawOffsetSouth>(0,0,-0.9)</drawOffsetSouth>
+			<drawOffsetWest>(-0.9,0,0)</drawOffsetWest>
+			<drawOffsetEast>(0.9,0,0)</drawOffsetEast>
+			<damageData>
+				<enabled>false</enabled>
+			</damageData>
+		</graphicData>				
+		<uiIconPath>Things/Building/WallLight/AV_NeutroWallLight_UI_Icon</uiIconPath>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<costList>
+			<Steel>10</Steel>
+			<Silver>20</Silver> 
+		</costList>
+		<statBases>
+			<WorkToBuild>330</WorkToBuild>
+			<MaxHitPoints>35</MaxHitPoints>
+			<Mass>2</Mass>
+		</statBases>
+		<uiOrder>2991</uiOrder>
+		<passability>Standable</passability>
+		<pathCost>0</pathCost>
+		<overrideMinifiedRot>North</overrideMinifiedRot>
+		<minifiedDrawOffset>(0, 0, 0.2)</minifiedDrawOffset>
+		<building>
+			<isEdifice>false</isEdifice>
+			<isAttachment>true</isAttachment>
+		</building>
+		<tradeTags>	
+			<li>AV_Mechtech</li>
+			<li>AV_Mechtech_Spacer</li>
+		</tradeTags>	
+		<placeWorkers>
+			<li>Placeworker_AttachedToWall</li>
+		</placeWorkers>		
+		<comps>
+			<li Class="CompProperties_Glower">
+				<glowRadius>9</glowRadius>	<!-- 11 is normal wall light -->	
+				<glowColor>(78, 226, 229, 0)</glowColor>
+				<colorPickerEnabled>false</colorPickerEnabled>
+				<darklightToggle>false</darklightToggle>
+			</li>
+			<li Class="CompProperties_Refuelable">
+				<fuelConsumptionRate>0.15</fuelConsumptionRate>	<!-- consumption per day -->
+				<fuelCapacity>2.0</fuelCapacity>
+				<fuelFilter>
+					<thingDefs>
+						<li>Neutroamine</li>
+					</thingDefs>
+				</fuelFilter>
+				<initialFuelPercent>0</initialFuelPercent>
+				<showAllowAutoRefuelToggle>false</showAllowAutoRefuelToggle>
+				<targetFuelLevelConfigurable>false</targetFuelLevelConfigurable>
+				<initialConfigurableTargetFuelLevel>2</initialConfigurableTargetFuelLevel>
+			</li>
+		</comps>
+		<researchPrerequisites Inherit='False'>
+			<li>AV_Neutroamine_Industrialisation</li>
+		</researchPrerequisites>
+	</ThingDef>
+
+</Defs>

@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+
+
+	<!-- sinistre buff --> 
+	<HediffDef>
+		<defName>AV_SinistrePower</defName>
+		<label>sinistre power</label>
+		<hediffClass>HediffWithComps</hediffClass>
+		<description>This mech is infused with the power of a sinistre.</description>
+		<isBad>false</isBad>
+		<showGizmosOnCorpse>false</showGizmosOnCorpse>
+		<minSeverity>0</minSeverity>
+		<maxSeverity>4</maxSeverity>
+		<stages>
+			<li>
+				<minSeverity>0</minSeverity>	
+			</li>
+			<li>
+				<label>stage 1</label>
+				<minSeverity>1</minSeverity>
+				<statOffsets>
+					<MoveSpeed>3</MoveSpeed>
+				</statOffsets>		
+				<statFactors>
+					<IncomingDamageFactor>0.8</IncomingDamageFactor>
+					<MechEnergyUsageFactor>0.8</MechEnergyUsageFactor>
+				</statFactors>					
+			</li>
+			<li>
+				<label>stage 2</label>
+				<minSeverity>2</minSeverity>
+				<statOffsets>
+					<MoveSpeed>3</MoveSpeed>
+				</statOffsets>	
+				<statFactors>
+					<IncomingDamageFactor>0.7</IncomingDamageFactor>
+					<MechEnergyUsageFactor>0.6</MechEnergyUsageFactor>
+				</statFactors>				
+			</li>
+			<li>
+				<label>stage 3</label>
+				<minSeverity>3</minSeverity>
+				<statOffsets>
+					<MoveSpeed>3</MoveSpeed>
+				</statOffsets>	
+				<statFactors>
+					<IncomingDamageFactor>0.6</IncomingDamageFactor>
+					<MechEnergyUsageFactor>0.4</MechEnergyUsageFactor>
+				</statFactors>				
+			</li>
+			<li>
+				<label>stage 4</label>
+				<minSeverity>4</minSeverity>
+				<statOffsets>
+					<MoveSpeed>3</MoveSpeed>	
+				</statOffsets>	
+				<statFactors>
+					<IncomingDamageFactor>0.5</IncomingDamageFactor>
+					<MechEnergyUsageFactor>0.2</MechEnergyUsageFactor>
+				</statFactors>				
+			</li>
+		</stages>
+		<comps>
+			<li Class="AV_Framework.HediffCompPropertie_UpdateGraphic"/>
+			<li Class="HediffCompProperties_DisappearsOnDeath"/>
+		</comps>
+	</HediffDef>
+
+    <!-- apparition -->  
+    <ThingDef ParentName="BasePawn">
+		<defName>AV_Apparition</defName>
+		<label>apparition</label>
+		<description>An unstable everchanging shadow of bioferrite spikes controlled by an ominous beeing. Dissolves itself after a short time.</description>
+		<statBases>
+			<MoveSpeed>7.2</MoveSpeed>
+			<Flammability>0.00</Flammability>
+			<MeatAmount>0</MeatAmount>
+			<ComfyTemperatureMin>-100</ComfyTemperatureMin>
+			<ComfyTemperatureMax>250</ComfyTemperatureMax>
+			<MinimumContainmentStrength>110</MinimumContainmentStrength>
+			<StaggerDurationFactor>2</StaggerDurationFactor>
+			<ToxicResistance>1</ToxicResistance>
+			<ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">1</ToxicEnvironmentResistance>
+			<ArmorRating_Blunt>0.10</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.20</ArmorRating_Sharp>
+			<PsychicSensitivity>0</PsychicSensitivity>
+		</statBases>
+		<tradeability>None</tradeability>
+		<onlyShowInspectString>true</onlyShowInspectString>
+		<hideMainDesc>true</hideMainDesc>
+		<race>
+			<body>Metalhorror</body>
+			<fleshType>EntityMechanical</fleshType>
+			<thinkTreeMain>Metalhorror</thinkTreeMain>
+			<thinkTreeConstant>MetalhorrorConstant</thinkTreeConstant>
+			<intelligence>ToolUser</intelligence>
+			<foodType>None</foodType>
+			<needsRest>false</needsRest>
+			<hasGenders>false</hasGenders>
+			<bloodDef IsNull="True"/>
+			<hasMeat>false</hasMeat>
+			<lifeExpectancy>250</lifeExpectancy>
+			<baseHealthScale>0.40</baseHealthScale>
+			<gestationPeriodDays>10</gestationPeriodDays>
+			<soundMeleeDodge>Pawn_MeleeDodge</soundMeleeDodge>
+			<disableIgniteVerb>true</disableIgniteVerb>
+			<trainability>None</trainability>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_WarUrchin_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_WarUrchin_Death</soundDeath>
+					<soundCall>Pawn_Mech_WarUrchin_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<hasCorpse>false</hasCorpse>
+				<!--
+			<deathAction>
+				<workerClass>AV_Framework.DeathActionWorker_VanishMech</workerClass>
+			</deathAction> -->
+		</race>
+		<comps Inherit="False">
+			<li Class="CompProperties_MechPowerCell">
+				<totalPowerTicks>7500</totalPowerTicks>	<!-- 3h -->
+				<labelOverride>stability</labelOverride>
+				<tooltipOverride>Dissolves harmlessly when stability reaches zero.</tooltipOverride>
+			</li>
+			<li Class="CompProperties_EffecterOnDeath">
+				<effecterDef>MetalhorrorDeath</effecterDef>
+			</li>
+		</comps>
+		<inspectorTabs Inherit="False">
+			<li>ITab_Pawn_Health</li>
+			<li>ITab_Pawn_Needs</li>
+			<li>ITab_Pawn_Character</li>
+			<li MayRequire="Ludeon.RimWorld.Anomaly">ITab_Entity</li>
+			<li>ITab_Pawn_Log</li>
+		</inspectorTabs>
+		<tools>
+			<li>
+				<label>spike</label>
+				<labelNoLocation>spike</labelNoLocation>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>7</power>
+				<cooldownTime>1.8</cooldownTime>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+		</tools>
+			
+		<killedLeavingsRanges>
+			<Bioferrite>0~15</Bioferrite>
+		</killedLeavingsRanges>
+    </ThingDef>
+    
+    <PawnKindDef ParentName="LightMechanoidKind">
+		<defName>AV_Apparition</defName>
+		<label>apparition</label>
+		<labelPlural>apparition</labelPlural>
+		<race>AV_Apparition</race>
+		<allowInMechClusters>false</allowInMechClusters>
+		<forceNoDeathNotification>true</forceNoDeathNotification>
+		<forceDeathOnDowned>true</forceDeathOnDowned>
+		<defaultFactionType>Entities</defaultFactionType>
+		<immuneToGameConditionEffects>true</immuneToGameConditionEffects>
+		<immuneToTraps>true</immuneToTraps>
+		<collidesWithPawns>false</collidesWithPawns>
+		<overrideDebugActionCategory>Entity</overrideDebugActionCategory>
+		<combatPower>30</combatPower>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Anomalies/AV_Sinistre</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.0</drawSize>
+					<shadowData>
+						<volume>(0.2, 0.3, 0.2)</volume>
+					</shadowData>
+				</bodyGraphicData>
+			</li>
+		</lifeStages>   
+		<abilities>
+			<!-- <li>EntitySkip</li> --> 
+		</abilities>
+    </PawnKindDef>
+
+	<!-- add renaming as a comp gizmo... -->
+	   <!-- Sinistre --> 
+    <ThingDef ParentName="BasePawn">
+		<defName>AV_Sinistre</defName>
+		<label>sinistre</label>
+		<thingClass>AV_Mechtech.SinistrePawn</thingClass>
+		<description>An unstable, ever-changing, spiky shadow that blinks in and out of existence. It is not native to this plane of existence and not powerful enough to remain on it for a longer periode of time.\nWhile this makes it a short lived thread - it can not be killed, as it has no physical form. It attaches itself to a shard of abnormal power and feeds on any bioferrite or other shards it can find. With the right tools, it can be tricked into attaching itself to a shard-bearing mechanoid, forming a symbiotic relationship.\n\nTo instable to capture and examine on a holding platform.</description>
+		<drawOffscreen>true</drawOffscreen>
+		<hideStats>false</hideStats>
+		<hiddenWhileUndiscovered>false</hiddenWhileUndiscovered>
+		<soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+		<statBases>
+			<MoveSpeed>7.2</MoveSpeed>
+			<Flammability>0.00</Flammability>
+			<MeatAmount>0</MeatAmount>
+			<ComfyTemperatureMin>-100</ComfyTemperatureMin>
+			<ComfyTemperatureMax>250</ComfyTemperatureMax>
+			<MinimumContainmentStrength>110</MinimumContainmentStrength>
+			<StaggerDurationFactor>0</StaggerDurationFactor>
+			<ToxicResistance>1</ToxicResistance>
+			<ToxicEnvironmentResistance MayRequire="Ludeon.RimWorld.Biotech">1</ToxicEnvironmentResistance>
+			<ArmorRating_Blunt>0.20</ArmorRating_Blunt>
+			<ArmorRating_Sharp>0.40</ArmorRating_Sharp>
+			<PsychicSensitivity>0</PsychicSensitivity>
+			<IncomingDamageFactor>0.5</IncomingDamageFactor>
+		</statBases>
+		<tradeability>None</tradeability>
+		<onlyShowInspectString>false</onlyShowInspectString>
+		<hideMainDesc>false</hideMainDesc>
+		<race>
+			<body>Metalhorror</body>
+			<fleshType>EntityMechanical</fleshType> 
+			<thinkTreeMain>AV_Sinistre_ThinkTree</thinkTreeMain>
+			<thinkTreeConstant>AV_Sinistre_ThinkTreeConstant</thinkTreeConstant>
+			<intelligence>ToolUser</intelligence>
+			<foodType>None</foodType>
+			<needsRest>false</needsRest>
+			<hasGenders>false</hasGenders>
+			<bloodDef IsNull="True"/>
+			<hasMeat>false</hasMeat>
+			<lifeExpectancy>250</lifeExpectancy>
+			<baseHealthScale>1.0</baseHealthScale>
+			<gestationPeriodDays>10</gestationPeriodDays>
+			<soundMeleeDodge>Pawn_MeleeDodge</soundMeleeDodge>
+			<disableIgniteVerb>true</disableIgniteVerb>
+			<trainability>None</trainability>
+			<lifeStageAges>
+				<li>
+					<def>MechanoidFullyFormed</def>
+					<minAge>0</minAge>
+					<soundWounded>Pawn_Mech_WarUrchin_Wounded</soundWounded>
+					<soundDeath>Pawn_Mech_WarUrchin_Death</soundDeath>
+					<soundCall>Pawn_Mech_WarUrchin_Call</soundCall>
+				</li>
+			</lifeStageAges>
+			<hasCorpse>false</hasCorpse>
+			<!-- deathaction worker only works when we have a corpse
+			<deathAction>
+				<workerClass>AV_Mechtech.DeathActionWorker_Sinistre</workerClass>
+			</deathAction> -->
+		</race>
+		<comps Inherit="False">
+			<li Class="CompProperties_MechPowerCell">
+				<totalPowerTicks>30000</totalPowerTicks>
+				<labelOverride>stability</labelOverride>
+				<tooltipOverride>Dissolves harmlessly when stability reaches zero.</tooltipOverride>
+			</li>
+			<li Class="CompProperties_InspectString">
+				<compClass>CompInspectStringEmergence</compClass>
+				<inspectString>Emerged from {SOURCEPAWN_labelShort}.</inspectString>
+			</li>
+			<li Class="CompProperties_EffecterOnDeath">
+				<effecterDef>MetalhorrorDeath</effecterDef>
+			</li>
+			<li Class="AV_Mechtech.CompProperties_SinistreNeeds"/>
+			<!-- add renaming as a comp gizmo... -->
+		</comps>
+		<inspectorTabs Inherit="False">
+			<li>ITab_Pawn_Health</li>
+			<li>ITab_Pawn_Needs</li>
+			<li>ITab_Pawn_Character</li>
+			<li MayRequire="Ludeon.RimWorld.Anomaly">ITab_Entity</li>
+			<li>ITab_Pawn_Log</li>
+		</inspectorTabs>
+		<tools>
+			<li>
+				<label>spike</label>
+				<labelNoLocation>spike</labelNoLocation>
+				<capacities>
+					<li>Stab</li>
+				</capacities>
+				<power>7</power>
+				<cooldownTime>1.8</cooldownTime>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li>
+				<label>left blade</label>
+				<labelNoLocation>blade</labelNoLocation>
+				<capacities>
+					<li>Cut</li>
+					<li>Stab</li>
+				</capacities>
+				<power>20</power>
+				<cooldownTime>2</cooldownTime>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+			<li>
+				<label>right blade</label>
+				<labelNoLocation>blade</labelNoLocation>
+				<capacities>
+					<li>Cut</li>
+					<li>Stab</li>
+				</capacities>
+				<power>20</power>
+				<cooldownTime>2</cooldownTime>
+				<alwaysTreatAsWeapon>true</alwaysTreatAsWeapon>
+			</li>
+		</tools>	
+		<!-- 
+		<killedLeavingsRanges>
+			<Bioferrite>5~30</Bioferrite>
+			<AV_SinistreEssence>0~1</AV_SinistreEssence>
+		</killedLeavingsRanges>
+		 -->
+    </ThingDef>
+	
+    <PawnKindDef>
+		<defName>AV_Sinistre</defName>
+		<label>sinistre</label>
+		<labelPlural>sinistres</labelPlural>
+		<race>AV_Sinistre</race>
+		<overrideDeathOnDownedChance>1</overrideDeathOnDownedChance>
+		<forceNoDeathNotification>true</forceNoDeathNotification>
+		<forceDeathOnDowned>true</forceDeathOnDowned>
+		<defaultFactionType>Entities</defaultFactionType>
+		<immuneToGameConditionEffects>true</immuneToGameConditionEffects>
+		<immuneToTraps>true</immuneToTraps>
+		<collidesWithPawns>false</collidesWithPawns>
+		<overrideDebugActionCategory>Entity</overrideDebugActionCategory>
+		<combatPower>200</combatPower>
+		<lifeStages>
+			<li>
+				<bodyGraphicData>
+					<texPath>Things/Pawn/Anomalies/AV_Sinistre</texPath>
+					<graphicClass>Graphic_Multi</graphicClass>
+					<drawSize>1.5</drawSize>
+					<shadowData>
+						<volume>(0.2, 0.3, 0.2)</volume>
+					</shadowData>
+				</bodyGraphicData>
+				 <!-- do we need this?
+				 <silhouetteGraphicData>
+					<texPath>UI/CodexEntries/AV_Sinistre</texPath>
+					<graphicClass>Graphic_Single</graphicClass>
+					<drawSize>1.5</drawSize>
+				</silhouetteGraphicData> -->  
+			</li>
+		</lifeStages> 	<!-- 
+		<startingHediffs>
+			<li>
+				<def>AV_NeedsBioferrite</def>
+				<chance>1</chance>
+			</li>
+		</startingHediffs>		-->	
+		<abilities>
+			<!-- <li>EntitySkip</li> --> 
+		</abilities>
+    </PawnKindDef>	
+
+	<!-- 
+	patch AutoUndrafter.ShouldAutoUndraft for sinistre takeover
+	pawn.drafter.Drafted = false; 
+	MechanitorUtility.CanDraftMech
+	
+	
+	-->
+ 
+	<ThinkTreeDef>
+		<defName>AV_Sinistre_ThinkTree</defName>
+		<thinkRoot Class="ThinkNode_Priority">
+			<subNodes>
+
+				<!-- Despawned -->
+				<li Class="ThinkNode_Subtree">
+					<treeDef>Despawned</treeDef>
+				</li>
+			
+				<li Class="ThinkNode_Subtree">
+					<treeDef>MentalStateCritical</treeDef>
+				</li>
+
+				<!-- React to close melee threat -->
+				<li Class="JobGiver_ReactToCloseMeleeThreat" />
+			
+				<!-- Lord directives -->
+				<li Class="ThinkNode_Subtree">
+					<treeDef>LordDuty</treeDef>
+				</li>
+	 
+				<!-- player sinistre -->
+				<li Class="ThinkNode_ConditionalPlayerControlledColonist">
+					<subNodes>
+						<!-- Feed whenever hungry -->
+						<li Class="AV_Mechtech.ThinkNode_ConditionalSinistreHungry">
+							<subNodes>
+								<li Class="AV_Mechtech.JobGiver_SinistreBinge"/>
+							</subNodes>	
+						</li>
+						<!-- Fight when nothing else to do -->
+						<li Class="JobGiver_AIFightEnemies">
+							<targetAcquireRadius>30</targetAcquireRadius>
+							<targetKeepRadius>35</targetKeepRadius>
+						</li>
+						<!-- patrol around -->
+						<li Class="JobGiver_WanderColony" />
+					</subNodes>	
+				</li>
+				
+				<!-- ENEMY sinistre -->
+				<li Class="ThinkNode_ConditionalPlayerControlledColonist">
+					<invert>true</invert>
+					<subNodes>
+						<!-- Feed whenever you can -->
+						<li Class="AV_Mechtech.ThinkNode_ConditionalSinistreCouldEat">
+							<subNodes>
+								<li Class="AV_Mechtech.JobGiver_SinistreBinge"/>
+							</subNodes>	
+						</li>
+						<!-- wander around when you are full -->
+						<li Class="AV_Mechtech.ThinkNode_ConditionalSinistreCouldEat">
+							<invert>true</invert>
+							<subNodes>
+								<li Class="ThinkNode_Tagger">
+									<subNodes>
+										<li Class="JobGiver_ShamblerWander">
+											<wanderRadius>12</wanderRadius>
+										</li>
+									</subNodes>
+								</li>
+							</subNodes>
+						</li>
+						<!-- Fight when nothing else to do -->
+						<li Class="JobGiver_AIFightEnemies">
+							<targetAcquireRadius>30</targetAcquireRadius>
+							<targetKeepRadius>35</targetKeepRadius>
+						</li>
+						<li Class="JobGiver_AIGotoNearestHostile" />
+					</subNodes>	
+				</li>
+
+				<!-- Fight enemies -->
+				<li Class="JobGiver_AIFightEnemies">
+					<targetAcquireRadius>30</targetAcquireRadius>
+					<targetKeepRadius>35</targetKeepRadius>
+				</li>
+				
+				<li Class="JobGiver_WanderAnywhere" />
+				
+				
+				<li Class="JobGiver_IdleError"/>
+			</subNodes>
+		</thinkRoot>
+	</ThinkTreeDef>
+
+	<ThinkTreeDef>
+		<defName>AV_Sinistre_ThinkTreeConstant</defName>
+		<thinkRoot Class="ThinkNode_Priority">
+			<subNodes>
+        
+				<!-- Despawned -->
+				<li Class="ThinkNode_Subtree">
+					<treeDef>Despawned</treeDef>
+				</li>
+
+				<li Class="ThinkNode_ConditionalCanDoLordJobNow">
+					<subNodes>
+						<!-- Lord directives -->
+						<li Class="ThinkNode_Subtree">
+							<treeDef>LordDutyConstant</treeDef>
+						</li>
+					</subNodes>
+				</li>
+			</subNodes>
+		</thinkRoot>
+	</ThinkTreeDef>
+
+
+	<EntityCodexEntryDef>
+		<defName>AV_Sinistre</defName>
+		<label>sinistre</label>
+		<description>An unstable, ever-changing, spiky shadow that blinks in and out of existence. It is not native to this plane of existence and not powerful enough to remain on it for a longer periode of time.\nWhile this makes it a short lived thread - it can not be killed, as it has no physical form. It attaches itself to a shard of abnormal power and feeds on any bioferrite or other shards it can find. With the right tools, it can be tricked into attaching itself to a shard-bearing mechanoid, forming a symbiotic relationship.\n\nTo instable to capture and examine on a holding platform.</description>
+		<uiIconPath>UI/CodexEntries/AV_Sinistre</uiIconPath>
+		<category>Basic</category>
+		<linkedThings>
+			<li>AV_Sinistre</li>
+			<li>AV_Apparition</li>
+		</linkedThings>
+		<orderInCategory>1301</orderInCategory>
+	</EntityCodexEntryDef>
+
+<!-- 
+	<NeedDef>
+		<defName>AV_BioferriteNeed</defName>
+		<needClass>Need_Food</needClass>
+		<label>bioferrite</label>
+		<description>The amount of bioferrite or shards this creature has consumed recently. If it is at zero, the creature will become more unstable and may go on a rampage.</description>
+		<baseLevel>0</baseLevel>
+		<minIntelligence>ToolUser</minIntelligence>
+		<colonistAndPrisonersOnly>true</colonistAndPrisonersOnly>
+		<onlyIfCausedByHediff>true</onlyIfCausedByHediff>
+	</NeedDef>
+ --> 
+	<!-- sinistre buff
+	<HediffDef>
+		<defName>AV_NeedsBioferrite</defName>
+		<label>bioferrite need</label>
+		<hediffClass>HediffWithComps</hediffClass>
+		<description>This should not be visible. Only used to make sinistre need bioferrite as food.</description>
+		<isBad>false</isBad>
+		<showGizmosOnCorpse>false</showGizmosOnCorpse>
+		<minSeverity>0</minSeverity>
+		<maxSeverity>1</maxSeverity>
+		<causesNeed>AV_BioferriteNeed</causesNeed>
+		<stages>
+			<li>
+				<minSeverity>0</minSeverity>	
+			</li>
+			<li>
+				<becomeVisible>true</becomeVisible>
+				<minSeverity>1</minSeverity>		
+			</li>
+		</stages>
+	</HediffDef>
+ --> 
+
+	<IncidentDef ParentName="AnomalyIncidentBase">
+		<defName>AV_SinistreArriving</defName>
+		<label>sinistre arriving</label>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
+		<workerClass>AV_Mechtech.IncidentWorker_SinistreArriving</workerClass>
+		<baseChance>0.1</baseChance>
+		<minAnomalyThreatLevel>0</minAnomalyThreatLevel>
+		<minPopulation>1</minPopulation>
+		<earliestDay>0</earliestDay>
+		<category>Special</category>
+		<minRefireDays>60</minRefireDays>
+		<hidden>true</hidden>
+	</IncidentDef>  
+  
+	<ThingDef ParentName="ResourceBase">
+		<defName>AV_SinistreEssence</defName>
+		<label>sinistre essence</label>
+		<description>A scavenged fragment of a sinistre. It can be used to empower a mechanoid with sinistre power or to increase the bond of a reshaper-mech and its sinistre.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/AV_SinistreEssence</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<soundInteract>Metal_Drop</soundInteract>
+		<soundDrop>Standard_Drop</soundDrop>
+		<stackLimit>5</stackLimit>
+		<healthAffectsPrice>false</healthAffectsPrice>
+		<genericMarketSellable>false</genericMarketSellable>
+		<useHitPoints>false</useHitPoints>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<MarketValue>400</MarketValue>
+			<Mass>0.6</Mass>
+			<Flammability>0</Flammability>
+			<DeteriorationRate>0</DeteriorationRate>
+		</statBases>
+		<intricate>true</intricate>
+		<thingCategories>
+			<li>ItemsMisc</li>
+		</thingCategories>
+		<comps>
+			<li Class="AV_Mechtech.CompProperties_Usable_SinistreEssence">
+				<useLabel>Use essence on </useLabel>
+				<useDuration>600</useDuration>
+				<ignoreOtherReservations>true</ignoreOtherReservations>
+				<useJob>AV_UseSinistreEssence</useJob>
+			</li>
+		</comps>
+	</ThingDef> 
+  
+  	<JobDef>
+		<defName>AV_UseSinistreEssence</defName>
+		<driverClass>AV_Mechtech.JobDriver_SinistreEssence</driverClass>
+		<reportString>using TargetA.</reportString>
+		<casualInterruptible>false</casualInterruptible>
+		<suspendable>false</suspendable>
+		<alwaysShowWeapon>false</alwaysShowWeapon>
+    </JobDef>
+  
+  
+  <!-- 
+	<MentalStateDef ParentName="BaseMentalState">
+		<defName>Berserk</defName>
+		<stateClass>MentalState_Berserk</stateClass>
+		<label>berserk</label>
+		<category>Aggro</category>
+		<blockInteractionInitiationExcept>
+			<li>Insult</li>
+		</blockInteractionInitiationExcept>
+		<blockInteractionRecipientExcept>
+			<li>Insult</li>
+		</blockInteractionRecipientExcept>
+    <blockRandomInteraction>true</blockRandomInteraction>
+    <moodRecoveryThought>Catharsis</moodRecoveryThought>
+    <blockNormalThoughts>true</blockNormalThoughts>
+    <nameColor>(0.9,0.2,0.5)</nameColor>
+    <beginLetter>{0} has gone berserk.\n\n[PAWN_pronoun] will attack anyone [PAWN_pronoun] sees.</beginLetter>
+    <beginLetterDef>ThreatSmall</beginLetterDef>
+    <minTicksBeforeRecovery>40000</minTicksBeforeRecovery>
+    <maxTicksBeforeRecovery>60000</maxTicksBeforeRecovery>
+    <recoveryMtbDays>0.166</recoveryMtbDays>
+    <recoveryMessage>{0}'s berserk rage has come to an end.</recoveryMessage>
+    <baseInspectLine>Mental state: Berserk</baseInspectLine>
+    <stateEffecter>Berserk</stateEffecter>
+    <tale>MentalStateBerserk</tale>
+    <recoverFromSleep>true</recoverFromSleep>
+    <inCaravanCanDo>true</inCaravanCanDo>
+  </MentalStateDef>
+    	-->
+  <!--  
+   <MentalStateDef ParentName="BaseMentalState">
+    <defName>AV_BioferriteCraving</defName>
+    <stateClass>MentalState_BingingDrug</stateClass>
+    <workerClass>MentalStateWorker_BingingDrug</workerClass>
+    <label>bioferrite craving</label>
+    <category>Misc</category>
+    <prisonersCanDo>false</prisonersCanDo>
+    <colonistsOnly>true</colonistsOnly>
+    <minTicksBeforeRecovery>40000</minTicksBeforeRecovery>
+    <maxTicksBeforeRecovery>60000</maxTicksBeforeRecovery>
+    <recoveryMtbDays>0.133</recoveryMtbDays>
+    <recoverFromSleep>true</recoverFromSleep>
+    <nameColor>(0.5, 0.9, 0.5)</nameColor>
+    <moodRecoveryThought>Catharsis</moodRecoveryThought>
+    <baseInspectLine>Mental state: Binging on bioferrite</baseInspectLine>
+    <allowBeatfire>true</allowBeatfire>
+	<inCaravanCanDo>false</inCaravanCanDo>
+  </MentalStateDef>
+	-->
+    <JobDef>
+		<defName>AV_SinistreIngest</defName>
+		<driverClass>AV_Mechtech.JobDriver_SinistreIngest</driverClass>
+		<reportString>consuming TargetA.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+  
+  
+  
+  
+</Defs>
