@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Verse;
 
 namespace AV_Mechtech
@@ -56,14 +57,14 @@ namespace AV_Mechtech
 
                 if (pawn.RaceProps.IsMechanoid)
                 {
-                    AddAuraBuff(pawn);
+                    AddAuraBuff(pawn, true);
                     continue;
                 }
 
  
                 if (pawn.RaceProps.Humanlike && (MechanitorUtility.IsMechanitor(pawn) || HasUseableApparel(pawn)))
                 {
-                    AddAuraBuff(pawn);
+                    AddAuraBuff(pawn, false);
                 }
             }
         }
@@ -84,12 +85,24 @@ namespace AV_Mechtech
             return false;
         }
 
-        public void AddAuraBuff(Pawn pawn)
+        public void AddAuraBuff(Pawn pawn, bool IsMech)
         {
-            Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(Props.hediff);
+            HediffDef hediffDefToGive;
+
+            if (IsMech)
+            {
+                hediffDefToGive = Props.hediffMechs;
+            }
+            else
+            {
+                hediffDefToGive = Props.hediffHumans;
+            }
+
+            Hediff hediff = pawn.health.hediffSet.GetFirstHediffOfDef(hediffDefToGive);
+
             if (hediff == null)
             {
-                hediff = pawn.health.AddHediff(Props.hediff, pawn.health.hediffSet.GetBrain());
+                hediff = pawn.health.AddHediff(hediffDefToGive, pawn.health.hediffSet.GetBrain());
                 hediff.Severity = Props.initialSeverity;
                 HediffComp_Link hediffComp_Link = hediff.TryGetComp<HediffComp_Link>();
                 if (hediffComp_Link != null)

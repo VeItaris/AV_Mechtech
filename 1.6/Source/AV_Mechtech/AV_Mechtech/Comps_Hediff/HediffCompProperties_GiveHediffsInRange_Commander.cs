@@ -15,7 +15,9 @@ namespace AV_Mechtech
 
         public TargetingParameters targetingParameters;
 
-        public HediffDef hediff;
+        public HediffDef hediffMechs;
+
+        public HediffDef hediffHumans;
 
         public ThingDef mote;
 

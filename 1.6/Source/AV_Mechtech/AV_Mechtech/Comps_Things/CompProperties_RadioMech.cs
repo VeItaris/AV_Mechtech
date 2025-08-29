@@ -17,6 +17,9 @@ namespace AV_Mechtech
         public ThingDef mote;
 
         public EffecterDef radioswitchEffect;
+
+        public string spaceComment;
+
         public CompProperties_RadioMech()
         {
             compClass = typeof(Comp_RadioMech);

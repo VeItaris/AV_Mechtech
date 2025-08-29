@@ -56,6 +56,7 @@
 			<Luciferium>2</Luciferium>
 		</costList>
 		<comps>
+			<!--
 			<li Class="CompProperties_Drug">
 				<chemical>Luciferium</chemical>
 				<addictiveness>0</addictiveness>
@@ -64,6 +65,7 @@
 				<overdoseSeverityOffset>0.18~0.35</overdoseSeverityOffset>
 				<largeOverdoseChance>0.005</largeOverdoseChance>
 			</li>
+			-->
 			<li Class="CompProperties_Drug">
 				<chemical>AV_Neurill</chemical>
 				<addictiveness>0</addictiveness>

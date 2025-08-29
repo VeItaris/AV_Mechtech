@@ -112,7 +112,7 @@
 			<li>
 				<bodyGraphicData>
 					<!-- texPath & maskPath are only used for UI, the mech itself is drawn with a custom rendertree --> 
-					<texPath>Things/Pawn/Mechanoid/AV_Tarantula/Empty/AV_Tarantula</texPath>
+					<texPath>Things/Pawn/Mechanoid/AV_Tarantula/Empty/AV_TarantulaAncient</texPath>
 					<maskPath>Things/Pawn/Mechanoid/AllegianceOverlays/AV_Tarantula</maskPath>	
 					<shaderType>CutoutWithOverlay</shaderType>
 					<graphicClass>Graphic_Multi</graphicClass>
@@ -212,7 +212,7 @@
 		</statBases>
 		<verbs>
 			<li>	<!-- half bulletcount over same time --> 
-				<verbClass>Verb_Shoot</verbClass>	<!-- make custom for offset --> 
+				<verbClass>Verb_Shoot</verbClass>
 				<hasStandardCommand>true</hasStandardCommand>
 				<defaultProjectile>Bullet_ChargeBlasterHeavy</defaultProjectile>
 				<warmupTime>1.25</warmupTime>

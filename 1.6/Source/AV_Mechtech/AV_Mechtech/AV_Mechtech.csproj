@@ -44,7 +44,6 @@
     <Compile Include="Abilities\Sinistre\GameComponent_Sinistre.cs" />
     <Compile Include="Abilities\Sinistre\SinistrePawn.cs" />
     <Compile Include="Abilities\Sinistre\ThinkNode_ConditionalSinistreCouldEat.cs" />
-    <Compile Include="Ability_Rocketswarm.cs" />
     <Compile Include="Abilities\Sinistre\CompAbilityEffect_SinistreOvertake.cs" />
     <Compile Include="Abilities\Sinistre\CompAbilityEffect_CallSinistreShadows.cs" />
     <Compile Include="Abilities\Sinistre\CompAbilityEffect_CallSinistre.cs" />

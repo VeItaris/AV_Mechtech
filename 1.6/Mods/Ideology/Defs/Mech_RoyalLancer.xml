@@ -95,11 +95,12 @@
 				<chanceFactor>0.2</chanceFactor>
 			</li>
 		</tools>
-		<comps><!-- there is probably a better way for this - add hediff in race and make it permanent - done --> 
+		<comps><!-- there is probably a better way for this - add hediff in race and make it permanent - done
 			<li Class="AV_Framework.CompProperties_GiveHediffsWhenAlive">
 				<compClass>AV_Framework.Comp_GiveHediffsWhenAlive</compClass>
 				<hediff>AV_MechCombatCommand</hediff>		
 			</li>
+			 --> 
 		</comps>
 		<!-- 
 		<killedLeavingsPlayerHostile>
@@ -149,7 +150,10 @@
 			<!-- <li>MechanoidGunMedium</li>	 charge lance -->
 			<li>AV_Royallancer_gun</li>
 		</weaponTags>    
-		<controlGroupPortraitZoom>1.5</controlGroupPortraitZoom>  
+		<controlGroupPortraitZoom>1.5</controlGroupPortraitZoom>
+		<abilities>
+			<li>AV_Lancer_CombatCommand</li>
+		</abilities>
 	</PawnKindDef>
 
 	<RecipeDef ParentName="BaseMechanoidRecipe">
@@ -220,7 +224,7 @@
 	<HediffDef ParentName="DiseaseBase">
 		<defName>AV_MechCombatCommand</defName>
 		<label>combat command</label>
-		<description>By encouraging and guiding this mech enhances the focus of nearby allies.</description>
+		<description>By encouraging and guiding this mech enhances the focus of nearby allies at the cost of its own energy.</description>
 		<defaultLabelColor>(0.52, 1, 0.95)</defaultLabelColor>
 		<makesSickThought>false</makesSickThought>
 		<initialSeverity>0.01</initialSeverity> 
@@ -237,31 +241,25 @@
 					<mote>Mote_CombatCommand</mote>
 					<hideMoteWhenNotDrafted>true</hideMoteWhenNotDrafted>
 					<targetingParameters>
-					
 					    <canTargetBuildings>false</canTargetBuildings>
 						<canTargetAnimals>false</canTargetAnimals>
 						<canTargetMechs>true</canTargetMechs>
-						<!-- <onlyTargetColonists>true</onlyTargetColonists> -->
-					
-					<!-- 
-						<canTargetPawns>true</canTargetPawns>
-						<canTargetBuildings>false</canTargetBuildings>
-						<canTargetHumans>false</canTargetHumans>
-						<canTargetMechs>true</canTargetMechs>
-						<canTargetAnimals>false</canTargetAnimals>
-						<canTargetMutants>false</canTargetMutants>
-						 -->
-						<!-- <onlyTargetColonists>false</onlyTargetColonists> -->
-						<!-- <neverTargetHostileFaction>true</neverTargetHostileFaction> -->
-						
 					</targetingParameters>
-					<hediff>AV_MechCombatCommand_Buff</hediff>
-				</li>					
+					<hediffMechs>AV_MechCombatCommand_Buff</hediffMechs>
+					<hediffHumans>AV_MechCombatCommand_Buff_humans</hediffHumans>
+				</li>
+				<li Class="HediffCompProperties_Disappears">
+					<showRemainingTime>true</showRemainingTime>
+					<disappearsAfterTicks>30000</disappearsAfterTicks>
+				</li>				
 			</comps>			
 		<stages>
 			<li>
 				<!-- <label>general</label>  -->
 				<minSeverity>0.01</minSeverity>
+				<statOffsets>
+					<MechEnergyUsageFactor>2.0</MechEnergyUsageFactor>
+				</statOffsets>
 			</li>
 		</stages>
 	</HediffDef>
@@ -299,6 +297,40 @@
 			</li>				
 		</stages>
 	</HediffDef>
+
+	<HediffDef>
+		<defName>AV_MechCombatCommand_Buff_humans</defName>
+		<label>combat command</label>
+		<description>Abilities are boosted thanks to a nearby mechanoid commander.</description>
+		<hediffClass>HediffWithComps</hediffClass>
+		<defaultLabelColor>(0.52, 1, 0.95)</defaultLabelColor>
+		<comps>
+			<li Class="HediffCompProperties_Disappears">
+				<showRemainingTime>false</showRemainingTime>
+				<disappearsAfterTicks>600</disappearsAfterTicks>
+			</li>
+			<li Class="HediffCompProperties_DisappearsOnDeath"/>			
+			<li Class="HediffCompProperties_Link">
+				<requireLinkOnOtherPawn>false</requireLinkOnOtherPawn>
+				<maxDistance>9.9</maxDistance>
+				<customMote>AV_Mote_HelperMode_LinkLine</customMote>
+				<showName>true</showName>	<!-- true means name of source is shown on pawn hediff-->
+			</li>
+		</comps>
+		<isBad>false</isBad>
+		<stages>
+			<li>
+				<statOffsets>
+					<ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+					<AimingDelayFactor>-0.1</AimingDelayFactor>
+					<MeleeHitChance>1</MeleeHitChance>
+					<MeleeDodgeChance>5</MeleeDodgeChance>
+				</statOffsets>
+			</li>				
+		</stages>
+	</HediffDef>
+
+
 
 	<!-- weapon--> 
 	<ThingDef ParentName="LightMechanoidGunRanged">
@@ -341,7 +373,7 @@
 				<hasStandardCommand>true</hasStandardCommand>
 				<defaultProjectile>Bullet_ChargeLance</defaultProjectile>
 				<warmupTime>1.7</warmupTime>
-				<range>29.9</range>
+				<range>32.9</range>
 				<soundCast>ChargeLance_Fire</soundCast>
 				<soundCastTail>GunTail_Heavy</soundCastTail>
 				<muzzleFlashScale>9</muzzleFlashScale>
@@ -442,5 +474,63 @@
 			</li>
 		</comps>
 	</ThingDef>
+
+
+
+	<AbilityDef>
+		<defName>AV_Lancer_CombatCommand</defName>
+		<label>combat command</label>
+		<description>Create an aura that boosts the combat skills of allied mechanoids. The effect lasts 12 hours and remains attached to the leader for the duration. This boost also works for pawns with a mechlink or gunlink at half the effect.</description>
+		<jobDef>CastAbilityOnThing</jobDef>
+		<targetRequired>False</targetRequired>
+		<canUseAoeToGetTargets>False</canUseAoeToGetTargets>
+		<iconPath>UI/Abilities/AV_LancerCommand</iconPath>
+		<warmupMoteSocialSymbol>UI/Gizmos/AV_waves</warmupMoteSocialSymbol>
+		<stunTargetWhileCasting>True</stunTargetWhileCasting>
+		<showPsycastEffects>False</showPsycastEffects>
+		<displayGizmoWhileUndrafted>True</displayGizmoWhileUndrafted>
+		<disableGizmoWhileUndrafted>False</disableGizmoWhileUndrafted>
+			<!-- <groupDef>Leader</groupDef> --> 
+		<hotKey>Misc12</hotKey>
+		<uiOrder>3</uiOrder>
+		<warmupStartSound>CombatCommand_Warmup</warmupStartSound>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+		<aiCanUse>true</aiCanUse>
+		<cooldownTicksRange>30000~30000</cooldownTicksRange>
+		<statBases>
+			<Ability_Duration>500</Ability_Duration>	<!-- why the hell is this seconds and not ticks...   = 1day = 60k = 1k seconds --> 
+			<Ability_EffectRadius>9.9</Ability_EffectRadius>
+		</statBases>
+		<verbProperties>
+			<verbClass>Verb_CastAbility</verbClass>
+			<warmupTime>0.5</warmupTime>
+			<range>9.9</range>
+			<drawAimPie>False</drawAimPie>
+		<requireLineOfSight>False</requireLineOfSight>
+		<targetParams>
+			<canTargetSelf>true</canTargetSelf>
+			<canTargetPawns>false</canTargetPawns>
+			<canTargetBuildings>false</canTargetBuildings>
+			<canTargetAnimals>false</canTargetAnimals>
+			<canTargetHumans>false</canTargetHumans>
+			<canTargetMechs>false</canTargetMechs>
+		</targetParams>
+		</verbProperties>
+		<comps>
+			<li Class="CompProperties_AbilityGiveHediff">
+				<compClass>CompAbilityEffect_GiveHediff</compClass>
+				<hediffDef>AV_MechCombatCommand</hediffDef>
+				<onlyBrain>True</onlyBrain>
+				<onlyApplyToSelf>True</onlyApplyToSelf>
+				<replaceExisting>true</replaceExisting>
+			</li>
+		</comps>
+		<modExtensions>
+			<li Class="AV_Framework.SelfCastAbilityOnDraft"></li>
+		</modExtensions>
+	</AbilityDef>
+
+
+
 
 </Defs>

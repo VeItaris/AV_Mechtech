@@ -87,7 +87,7 @@
 			</li>
         </modExtensions>
 		<placeWorkers>
-			<li>AV_Framework.PlaceWorker_NeverAdjectentPsycicDisturber</li>
+			<li>PlaceWorker_BandNode</li>
 		</placeWorkers>
 	</ThingDef>
 

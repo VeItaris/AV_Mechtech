@@ -1,10 +1,13 @@
 ﻿using RimWorld;
+using RimWorld.Planet;
 using RimWorld.QuestGen;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -23,7 +26,8 @@ namespace AV_Mechtech
         private Mote mote;
 
         private int moteTimer = 60;
-        private int maxTicks  = 60;
+
+        private int maxTicks = 60;
 
         private Pawn RadioTransmitter()
         {
@@ -43,6 +47,32 @@ namespace AV_Mechtech
                 mote.Maintain();
             }
         }
+
+
+        private int SpaceCounter = 0;
+
+        public override void CompTickRare()
+        {
+            base.CompTickRare();
+
+            SpaceCounter += 250;
+
+            if(SpaceCounter >= 30000)   // twice a day
+            {
+                if (parent.Map != null && parent.Map.Tile.LayerDef.isSpace)
+                {
+                    Vector3 loc = parent.DrawPos;
+                    
+                    loc.z += 0.75f;
+                    MoteMaker.ThrowText(loc, parent.Map, "AV_IMINSPACE".Translate(), UnityEngine.Color.white, 3.0f);
+                }
+                SpaceCounter = 0;
+            }
+
+            
+        }
+
+
 
         public void ChangeSeverity(float serverity)
         {

@@ -46,10 +46,6 @@ namespace AV_Mechtech
             Scribe_Values.Look(ref FirstApply, "FirstApply");
         }
 
-        public override void CompTick()
-        {
-            //Log.Message("[AV]Mechtech: Comptick normal");
-        }
 
         public override void CompTickRare()
         {
@@ -63,14 +59,13 @@ namespace AV_Mechtech
             {
                 return;
             }
-
             if (Props.UseCooldown)
             {
                 if (TicksForCooldown >= Props.CooldownTicks || FirstApply)
                 {
                     GiveHediff();
                 }
-                else if (ParentAsPawn.health.hediffSet.GetFirstHediffOfDef(Props.hediff) != null)   //cooldown only ticks when the pawn has no hediff!
+                else if (ParentAsPawn.health.hediffSet.GetFirstHediffOfDef(Props.hediff) == null)   //cooldown only ticks when the pawn has no hediff!
                 {
                     TicksForCooldown += 250; // tick rare = 250
                 }
@@ -83,6 +78,7 @@ namespace AV_Mechtech
 
 
         }
+
 
         public void GiveHediff()
         {
@@ -104,12 +100,6 @@ namespace AV_Mechtech
             
         }
 
-
-        //NeedsGraphicUpdate
-        public override void CompTickLong()
-        {
-            //doesnt work here
-        }
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
@@ -135,13 +125,6 @@ namespace AV_Mechtech
 
             yield return command_Action2;
 
-            /*
-            if (!pawn.IsColonyMech || pawn.GetOverseer() == null)
-            {
-                yield break;
-            }
-
-            */
         }
 
     }

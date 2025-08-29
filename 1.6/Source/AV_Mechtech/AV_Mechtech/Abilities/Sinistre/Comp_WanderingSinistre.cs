@@ -122,6 +122,14 @@ namespace AV_Mechtech
 
         public override void CompTickRare()
         {
+            /*
+            if (powerHediff != null && powerHediff.Severity != powerStage)
+            {
+                Log.Message("this powerstage fix is NOT working");
+                powerHediff.Severity = powerStage;
+            }
+            */
+
             if (SinistreAttached)
             {
                 TryAddSinistrePowerHediff();
@@ -159,7 +167,12 @@ namespace AV_Mechtech
             }
             else if (HasSinistrePower)
             {
-                Hediff h = ParentAsPawn.health.AddHediff(MechtechDefOfs.AV_SinistrePower);
+                //ParentAsPawn.health.hediffSet.HasHediff(MechtechDefOfs.AV_SinistrePower);
+
+                ParentAsPawn.health.hediffSet.TryGetHediff(MechtechDefOfs.AV_SinistrePower, out Hediff h);
+
+
+                //Hediff h = ParentAsPawn.health.AddHediff(MechtechDefOfs.AV_SinistrePower);
                 ParentAsPawn.health.RemoveHediff(h);
             }
         }
@@ -183,7 +196,7 @@ namespace AV_Mechtech
         {
             if (!HasSinistrePower)
             {
-                Hediff h = ParentAsPawn.health.AddHediff(MechtechDefOfs.AV_SinistrePower);
+                Hediff h = ParentAsPawn.health.GetOrAddHediff(MechtechDefOfs.AV_SinistrePower);
                 h.Severity = powerStage;
             }
         }

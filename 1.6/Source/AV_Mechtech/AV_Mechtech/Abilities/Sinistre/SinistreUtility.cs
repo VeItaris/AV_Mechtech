@@ -6,20 +6,19 @@ using System.Threading.Tasks;
 using UnityEngine;
 using RimWorld;
 using Verse;
-using AV_Framework;
 
 namespace AV_Mechtech
 {
     public static class SinistreUtility
     {
+        public static readonly int ResourceCost_CallSinistreShadows = 15;    // per shadow
+        public static readonly int PowerStageNeeded_CallSinistreShadows = 2;
+
         public static readonly int ResourceCost_CallSinistre = 30;
         public static readonly int PowerStageNeeded_CallSinistre = 3;
 
         public static readonly int ResourceCost_CallBackSinistre = 0;
         public static readonly int PowerStageNeeded_CallBackSinistre = 3;
-
-        public static readonly int ResourceCost_CallSinistreShadows = 15;    // per shadow
-        public static readonly int PowerStageNeeded_CallSinistreShadows = 2;
 
         public static readonly int ResourceCost_SinistreOvertake = 30;
         public static readonly int PowerStageNeeded_SinistreOvertake = 4;

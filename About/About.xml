@@ -36,7 +36,7 @@
 		
 	</loadBefore>
 	<modIconPath IgnoreIfNoMatchingField="True">UI/ModIcon/AV_Mechtech</modIconPath>
-	<modVersion>2.02.04</modVersion>
+	<modVersion>2.03.02</modVersion>
     <packageId>Veltaris.Mechtech</packageId>
     <description>This is my love letter and content addition for the mechanitor playstyle of the biotech DLC.</description>
 </ModMetaData>

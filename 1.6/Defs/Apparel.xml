@@ -50,12 +50,15 @@
             </li>
         </modExtensions>		
 		<equippedStatOffsets>
-			<ToxicEnvironmentResistance>0.1</ToxicEnvironmentResistance>			
+			<ToxicEnvironmentResistance>0.1</ToxicEnvironmentResistance>	
+			<VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.20</VacuumResistance>
+			<!-- needs to be below 0.23 so that starjacks still need a helmet -->
 			<BladderRateMultiplier MayRequire="Dubwise.DubsBadHygiene">-0.1</BladderRateMultiplier>	
 			<ThirstRateMultiplier MayRequire="Dubwise.DubsBadHygiene">-0.1</ThirstRateMultiplier>
 			<HygieneRateMultiplier MayRequire="Dubwise.DubsBadHygiene">-0.1</HygieneRateMultiplier>
 			<DecompressionResistance MayRequire="kentington.saveourship2">0.75</DecompressionResistance>	<!-- EVA suit: 0.75 -->
 			<VacuumSpeedMultiplier MayRequire="kentington.saveourship2">0.1</VacuumSpeedMultiplier>	<!-- EVA suit: 4, this is not a multiplier, its an offset! -->
+			
 		</equippedStatOffsets>	
 		<thingCategories>
 			<li>Apparel</li>
