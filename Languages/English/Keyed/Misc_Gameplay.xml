@@ -85,5 +85,14 @@
 	<AV_Message_SinistreRoam>{PAWN}'s sinistre consumed all bioferrite to form itself and has decided to roam the area for a bit.</AV_Message_SinistreRoam>
 	<AV_Message_SinistreRoamHostile>{PAWN}'s sinistre is starved of bioferrite and went out of control.</AV_Message_SinistreRoamHostile>
 	<AV_Message_ReshaperPowerUp>{PAWN}'s bond to its sinistre increased.</AV_Message_ReshaperPowerUp>
-		
+	<AV_SinistreBioferriteNeed>Sinistre bioferrite need</AV_SinistreBioferriteNeed>
+
+	<!-- JobDriver_SinistreIngest -->
+	<AV_SinistreGiftOvereating>A sinistre left a part of its essencs do to overeating!</AV_SinistreGiftOvereating> 
+	
+	<!-- SinistrePawn -->
+	<AV_SinistreGiftDeath>While dissolving, a sinistre left a part of its essence!</AV_SinistreGiftDeath> 
+	
+
+
 </LanguageData>

@@ -1,21 +1,9 @@
 ﻿using AV_Framework;
 using RimWorld;
-using RimWorld.QuestGen;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using TMPro;
-using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using UnityEngine.UIElements;
 using Verse;
-using Verse.AI;
 using Verse.AI.Group;
-using Verse.Noise;
-using Verse.Sound;
 
 namespace AV_Mechtech
 {
@@ -80,6 +68,10 @@ namespace AV_Mechtech
 
             if(parent is Pawn && comp != null)
             { 
+                if(comp_SinistreNeeds != null && comp_SinistreNeeds.BioferriteNeed < 0.15f)
+                {
+                    comp_SinistreNeeds.BioferriteNeed = 0.15f; //fix so it can not get stuck in an endless RAGE when reviving the mech with a gestator
+                }
             }
             else
             {
@@ -93,11 +85,6 @@ namespace AV_Mechtech
 
         public bool HasSinistrePower => ParentAsPawn?.health?.hediffSet?.GetFirstHediffOfDef(MechtechDefOfs.AV_SinistrePower) != null;
 
-        //private int TicksTillRimworldThicksItShouldDiscard = 0;
-
-
-
-
 
         public override void CompTick()
         {
@@ -107,28 +94,10 @@ namespace AV_Mechtech
             }
             Sinistre.markedForDiscard = false; //discarding does not care
 
-            /*
-            if (Sinistre.Discarded)
-            {
-                Log.Error("AV_Mechtech.Comp_WanderingSinistre: sinistre was dicarded after ~" + TicksTillRimworldThicksItShouldDiscard + " ticks");
-                
-            }
-            else
-            {
-                TicksTillRimworldThicksItShouldDiscard++;
-            }
-            */
         }
 
         public override void CompTickRare()
         {
-            /*
-            if (powerHediff != null && powerHediff.Severity != powerStage)
-            {
-                Log.Message("this powerstage fix is NOT working");
-                powerHediff.Severity = powerStage;
-            }
-            */
 
             if (SinistreAttached)
             {
@@ -167,12 +136,8 @@ namespace AV_Mechtech
             }
             else if (HasSinistrePower)
             {
-                //ParentAsPawn.health.hediffSet.HasHediff(MechtechDefOfs.AV_SinistrePower);
-
                 ParentAsPawn.health.hediffSet.TryGetHediff(MechtechDefOfs.AV_SinistrePower, out Hediff h);
 
-
-                //Hediff h = ParentAsPawn.health.AddHediff(MechtechDefOfs.AV_SinistrePower);
                 ParentAsPawn.health.RemoveHediff(h);
             }
         }
@@ -326,7 +291,7 @@ namespace AV_Mechtech
             {
                 //if(hediff.def != MechtechDefOfs.AV_NeedsBioferrite)
                 //{
-                    Sinistre.health.RemoveHediff(hediff);
+                Sinistre.health.RemoveHediff(hediff);
                 //}
             }
         }
@@ -411,7 +376,7 @@ namespace AV_Mechtech
                     }
                     else
                     {
-                        SpawnSinistre();
+                        SpawnSinistre(roam: true);
                     }
                 };
                 yield return command_Action_Spawn_Sinistre_Roam;
@@ -488,7 +453,15 @@ namespace AV_Mechtech
 
         }
 
+        public override string CompInspectStringExtra()
+        {
+            if (comp_SinistreNeeds != null)
+            {
+                return "AV_SinistreBioferriteNeed".Translate() + ": " + comp_SinistreNeeds.BioferriteNeed.ToStringPercent() + "(-" + "PerDay".Translate(SinistreUtility.HungerPerDay.ToStringPercent() +")");
+            }
 
+            return null;
+        }
 
     }
 }

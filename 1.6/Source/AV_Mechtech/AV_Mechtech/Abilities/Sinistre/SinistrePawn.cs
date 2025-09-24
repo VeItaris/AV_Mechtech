@@ -20,36 +20,31 @@ namespace AV_Mechtech
 
         public void TryDropEssence()
         {
-            //Log.Message("Drop essence");
-
             Map map = base.Map;
-            Map map2 = (prevMap = base.MapHeld);
+
+            if(map == null)
+            {
+                map = base.MapHeld;
+                if (map == null)
+                {
+                    return;
+                }
+            }
+
             Comp_SinistreNeeds comp = this.TryGetComp<Comp_SinistreNeeds>();
 
-            if (comp != null && comp.BioferriteNeed >= 1f)
+            if (comp != null && comp.BioferriteNeed >= 0.90f)
             {
-                if (map != null)
+                comp.BioferriteNeed -= 1f;
+
+                Thing essence = ThingMaker.MakeThing(MechtechDefOfs.AV_SinistreEssence);
+                essence.stackCount = 1;
+
+                GenPlace.TryPlaceThing(essence, base.PositionHeld, map, ThingPlaceMode.Near, out var lastResultingThing);
+                if (lastResultingThing != null)
                 {
-                    comp.BioferriteNeed -= 0.8f;
-
-                    Thing chip = ThingMaker.MakeThing(MechtechDefOfs.AV_SinistreEssence);
-                    chip.stackCount = 1;
-
-                    GenPlace.TryPlaceThing(chip, base.PositionHeld, map, ThingPlaceMode.Near, out var lastResultingThing);
-                }
-                else if (map2 != null)
-                {
-                    comp.BioferriteNeed -= 0.8f;
-
-                    Thing chip = ThingMaker.MakeThing(MechtechDefOfs.AV_SinistreEssence);
-                    chip.stackCount = 1;
-
-                    GenPlace.TryPlaceThing(chip, base.PositionHeld, map, ThingPlaceMode.Near, out var lastResultingThing);
-
-                }
-                else
-                {
-                    Log.Warning("AV_Mechtech.SinistrePawn.DropEssence: Failed to check sinistre essence drop, skipping...");
+                    Messages.Message("AV_SinistreGiftDeath".Translate(), lastResultingThing, MessageTypeDefOf.PositiveEvent);
+                    //Find.LetterStack.ReceiveLetter("sinistre boon", "AV_SinistreGift".Translate(), LetterDefOf.PositiveEvent, lastResultingThing);
                 }
             }
 
@@ -57,16 +52,12 @@ namespace AV_Mechtech
 
 
 
-
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
             TryDropEssence();
-
-            //Log.Warning("SinistrePawn -> Destroy!");
             if (Faction == Faction.OfPlayer)
             {
                 gameComp.SavePawn(this);
-                //DeSpawn();    // throws error
             }
             else
             {
@@ -74,26 +65,6 @@ namespace AV_Mechtech
             }
 
         }
-
-        /*
-           Comp_SinistreNeeds comp = corpse.InnerPawn.TryGetComp<Comp_SinistreNeeds>();
-
-            Log.Message("DeathActionWorker_Sinistre 1");
-
-            if (comp != null && comp.BioferriteNeed >= 1f)
-            {
-                comp.BioferriteNeed -= 1f;
-
-                Thing chip = ThingMaker.MakeThing(MechtechDefOfs.AV_SinistreEssence);
-                chip.stackCount = 1;
-
-                GenPlace.TryPlaceThing(chip, corpse.PositionHeld, corpse.MapHeld, ThingPlaceMode.Near, out var lastResultingThing);
-            }
-
-            Log.Message("DeathActionWorker_Sinistre 2");
- 
-         
-        */
 
 
 
@@ -106,7 +77,6 @@ namespace AV_Mechtech
             {
                 gameComp.SavePawn(this);
             }
-            //Log.Warning("SinistrePawn -> Kill!");
             base.Kill(dinfo, exactCulprit);
         }
         

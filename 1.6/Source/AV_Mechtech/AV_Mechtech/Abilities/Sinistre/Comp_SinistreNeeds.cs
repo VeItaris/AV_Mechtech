@@ -1,23 +1,7 @@
-﻿using AV_Framework;
-using RimWorld;
-using RimWorld.QuestGen;
-using System;
+﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using TMPro;
-using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using UnityEngine.UIElements;
 using Verse;
-using Verse.AI;
-using Verse.AI.Group;
-using Verse.Noise;
-using Verse.Sound;
-using static Verse.ThingFilterUI;
+
 
 namespace AV_Mechtech
 {
@@ -29,41 +13,37 @@ namespace AV_Mechtech
 
         public float BioferriteNeed = 0.5f; // we start above 0 so we don't instantly rage
 
-        public float BioterriteNeedPerRareTick => SinistreUtility.BioterriteNeedPerDay / 240;
+        public float BioterriteNeedPerRareTick => (SinistreUtility.BioterriteNeedPerDay / 24);   //60.000 (1day) / 250(tick rare) = 24  //
 
-        public float HungerAmount => (BioferriteNeed - Props.maximumNeed) * -1;
+       
+        public float HungerPerRareTick => BioterriteNeedPerRareTick * SinistreUtility.BioferriteSatisfyNeed;
 
-        public bool IsFull => BioferriteNeed < SinistreUtility.BioferriteHungryThreshold;
+        public float HungerAmount => Props.maximumNeed - BioferriteNeed;
+
+        public bool IsFull => BioferriteNeed < SinistreUtility.BioferriteFull;
 
         public bool IsHungry => BioferriteNeed <= SinistreUtility.BioferriteHungryThreshold;
 
         public bool IsExtremlyHungry => BioferriteNeed <= SinistreUtility.BioferriteExtremlyHungryThreshold;
 
-        public bool MightEat => BioferriteNeed <= 1f;
+        public bool MightEat => BioferriteNeed <= SinistreUtility.BioferriteCouldEatThreshold;
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             base.PostSpawnSetup(respawningAfterLoad);
-            /*
-            if (ShouldBeDespawned)
-            {
-                Log.Error("Comp_SinistreNeeds -> despawning");
-                parent.DeSpawn();
-                ShouldBeDespawned = false;
-            }
-            */
         }
 
-       // public bool ShouldBeDespawned = false;
         public override void CompTickRare()
         {
             if(ParentAsPawn.Spawned)
             {
-                BioferriteNeed -= BioterriteNeedPerRareTick * SinistreUtility.SpawnedHungryFactor;
+                //Log.Message("Sinistre hunger increased by " + (HungerPerRareTick * SinistreUtility.SpawnedHungryFactor) + "\nTotal BioferriteNeed = " + BioferriteNeed);
+                BioferriteNeed -= (HungerPerRareTick * SinistreUtility.SpawnedHungryFactor);
             }
             else
             {
-                BioferriteNeed -= BioterriteNeedPerRareTick;
+                //Log.Message("Sinistre hunger increased by " + (HungerPerRareTick * SinistreUtility.SpawnedHungryFactor) + "\nTotal BioferriteNeed = " + BioferriteNeed);
+                BioferriteNeed -= HungerPerRareTick;
             }
         }
 
@@ -73,10 +53,9 @@ namespace AV_Mechtech
         }
 
 
-
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            // fuck this shit, jusst use "Name Your Entities" instead 
+            // fuck this shit, just use "Name Your Entities" instead 
             /*
 
             Command_Action command_Action_Rename = new Command_Action();
@@ -143,15 +122,37 @@ namespace AV_Mechtech
             }
         }
 
+        //we spawn essences in jobDriver_SinistreIngest or SinistrePawn!!
+        /*
+        public override void Notify_Killed(Map prevMap, DamageInfo? dinfo = null)
+        {
+            if (BioferriteNeed >= 0.9f)
+            {
+                BioferriteNeed = 0f;
+
+                Thing essence = ThingMaker.MakeThing(MechtechDefOfs.AV_SinistreEssence);
+                essence.stackCount = 1;
+
+                GenPlace.TryPlaceThing(essence, parent.PositionHeld, prevMap, ThingPlaceMode.Near, out var lastResultingThing);
+
+                //messages dont work in here?!
+                
+                if (lastResultingThing != null)
+                {
+                    Messages.Message("AV_SinistreGift".Translate(), MessageTypeDefOf.PositiveEvent);  
+                    Find.LetterStack.ReceiveLetter("sinistre boon", "AV_SinistreGift".Translate(), LetterDefOf.PositiveEvent, lastResultingThing);
+                }
+                
+            }
+            base.Notify_Killed(prevMap, dinfo);
+        }
+        */
 
         public override void PostExposeData()
         {
             base.PostExposeData();
             Scribe_Values.Look(ref BioferriteNeed, "BioferriteNeed");
         }
-
-        
-
     }
 
 

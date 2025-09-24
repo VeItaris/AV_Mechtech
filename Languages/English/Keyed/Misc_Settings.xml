@@ -41,5 +41,10 @@
     <AV_SettingsSliderLabel_NeuroferiumDeath>chance for neuroferium side effects</AV_SettingsSliderLabel_NeuroferiumDeath>
 	<AV_SettingsSliderDesc_MechDrop_NeuroferiumDeath>chance for neuroferium mechanites to run wild when injested.</AV_SettingsSliderDesc_MechDrop_NeuroferiumDeath>
 	
+	<AV_SettingsSliderLabel_NeurofoamCount>Neurofoam per production</AV_SettingsSliderLabel_NeurofoamCount>
+	<AV_SettingsSliderLabel_NeutroamineCount>Neutroamine per production</AV_SettingsSliderLabel_NeutroamineCount>
+	<AV_SettingsSliderLabel_HemogenPasteCount>Hemogen paste per production</AV_SettingsSliderLabel_HemogenPasteCount>
+
+	
 
 </LanguageData>

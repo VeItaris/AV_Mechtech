@@ -27,16 +27,19 @@ namespace AV_Mechtech
 
         public static readonly int MaxPowerStage = 4;
 
-        public static readonly float BioferriteHungryThreshold = 0.5f; // below 50% == hungry
+        public static readonly float BioferriteFull = 1f;
+        public static readonly float BioferriteCouldEatThreshold = BioferriteFull - BioferriteSatisfyNeed;
+        public static readonly float BioferriteHungryThreshold = 0.5f;
         public static readonly float BioferriteExtremlyHungryThreshold = 0f;
-        public static readonly float BioterriteNeedPerDay =  5; // 5 bioferrite per day -> 25% hunger per day
-        public static readonly float SpawnedHungryFactor = 3f;  // more hunger when spawned
+        public static readonly float BioterriteNeedPerDay =  3; // 3 bioferrite per day -> 15% hunger per day
+        public static readonly float SpawnedHungryFactor = 2f;  // more hunger when spawned
+        public static float HungerPerDay => BioterriteNeedPerDay * BioferriteSatisfyNeed;
 
         public static readonly float BioferriteSatisfyNeed = 0.05f;  // 5%
         public static readonly float ShardSatisfyNeed = 1.0f;    // 100%
 
 
-
+        //for Incident
         public static readonly int ComfyBioferriteCount = 50;
         public static readonly int ComfyShardCount = 2;
 
@@ -89,6 +92,23 @@ namespace AV_Mechtech
                 comp.EatAmount(count * BioferriteSatisfyNeed);
             }
         }
+
+        public static void TryCapAtPeak(Pawn p)
+        {
+            Comp_SinistreNeeds comp = p.TryGetComp<Comp_SinistreNeeds>();
+
+            if (comp == null)
+            {
+                Log.Error("AV_Mechtech.SinistreUtility.TryCapAtFull: tried to change bioferrite need on a pawn without Comp_SinistreNeeds");
+                return;
+            }
+            if(comp.BioferriteNeed >= 1.1f)
+            {
+                comp.BioferriteNeed = 1.1f;
+            }
+ 
+        }
+
 
     }
 }

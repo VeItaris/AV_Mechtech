@@ -242,10 +242,7 @@
 				</li>
 			</lifeStageAges>
 			<hasCorpse>false</hasCorpse>
-			<!-- deathaction worker only works when we have a corpse
-			<deathAction>
-				<workerClass>AV_Mechtech.DeathActionWorker_Sinistre</workerClass>
-			</deathAction> -->
+			<!-- deathaction worker only works when we have a corpse -->
 		</race>
 		<comps Inherit="False">
 			<li Class="CompProperties_MechPowerCell">

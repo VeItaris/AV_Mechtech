@@ -53,13 +53,7 @@ namespace AV_Mechtech
 
         [MayRequire("Ludeon.RimWorld.Anomaly")]
         public static HediffDef AV_SinistreOvertake;
-        /*
-        [MayRequire("Ludeon.RimWorld.Anomaly")]
-        public static HediffDef AV_NeedsBioferrite;
 
-        [MayRequire("Ludeon.RimWorld.Anomaly")]
-        public static NeedDef AV_BioferriteNeed;
-        */
         [MayRequire("Ludeon.RimWorld.Anomaly")]
         public static ThingDef AV_Sinistre;
 
@@ -85,7 +79,10 @@ namespace AV_Mechtech
 
         [MayRequire("Aoba.DeadManSwitch.Core")]
         public static HediffDef DMS_BandNode;
-        
+
+        public static AV_Framework.SpawnerDef AV_HemogenPasteSpawn;
+        public static AV_Framework.SpawnerDef AV_NeutroamineSpawn;
+        public static AV_Framework.SpawnerDef AV_NeurofoamSpawn;
 
 
         static MechtechDefOfs()

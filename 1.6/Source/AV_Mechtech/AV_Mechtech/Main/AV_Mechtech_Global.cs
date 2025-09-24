@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 using UnityEngine;
 using Verse;
-using Verse.Noise;
-using static HarmonyLib.Code;
 using static AV_Framework.SettingsHelper;
-//using static AV_Framework.FrameworkSettings;
 using AV_Framework;
+using AV_Mechtech.Main;
 
 namespace AV_Mechtech
 {
@@ -41,6 +33,14 @@ namespace AV_Mechtech
 
         public static bool AllowTarantulaPlayerAIMissiles = false;
 
+        public static int DefaultNeurofoamProductionCount = 1;
+        public static int DefaultNeutroamineProductionCount = 1;
+        public static int DefaultHemogenePasteProductionCount = 1;
+
+        public static int NeurofoamProductionCount = DefaultNeurofoamProductionCount;
+        public static int NeutroamineProductionCount = DefaultNeutroamineProductionCount;
+        public static int HemogenePasteProductionCount = DefaultHemogenePasteProductionCount;
+
 
         // The part that writes our settings to file. Note that saving is by ref.
         public override void ExposeData()
@@ -49,8 +49,9 @@ namespace AV_Mechtech
             Scribe_Values.Look(ref CarbonPanelsForIdeo, "CarbonPanelsForIdeo");
             Scribe_Values.Look(ref AllowSinistreArrivalWithoutMonolith, "AllowSinistreArrivalWithoutMonolith");
             Scribe_Values.Look(ref AllowTarantulaPlayerAIMissiles, "AllowTarantulaPlayerAIMissiles");
-
-            
+            Scribe_Values.Look(ref NeurofoamProductionCount, "NeurofoamProductionCount", DefaultNeurofoamProductionCount, true);
+            Scribe_Values.Look(ref NeutroamineProductionCount, "NeutroamineProductionCount", DefaultNeutroamineProductionCount, true);
+            Scribe_Values.Look(ref HemogenePasteProductionCount, "HemogenePasteProductionCount", DefaultHemogenePasteProductionCount, true);
 
             Scribe_Values.Look(ref DebugLogging, "DebugLogging");
             Scribe_Values.Look(ref DebugOnLoad, "DefaultDebugOnLoad");
@@ -134,11 +135,14 @@ namespace AV_Mechtech
 
         public void DrawContentSettings(Listing_Standard listingStandard, Rect inRect)
         {
+            /*
             Rect labelRect = inRect;
+            
             labelRect.y = listingStandard.CurHeight;
+            
             DrawCenteredLabel(listingStandard, labelRect, "AV_SettingsLabel_general".Translate().CapitalizeFirst());
             listingStandard.GapLine();
-
+            */
             listingStandard.CheckboxLabeled("Frameworksetting: " + "AV_SettingsBoxLabel_MessageSpawner".Translate().CapitalizeFirst(), ref FrameworkSettings.ShowMessageOnItemSpawn, "AV_SettingsBoxDesc_MessageSpawner".Translate().CapitalizeFirst());
 
             listingStandard.CheckboxLabeled("Frameworksetting: Allow fluoids to spawn items in caravans", ref FrameworkSettings.AllowCaravanItemSpawn, "Allow Fluoid-mechs to spawn items while in a caravan");
@@ -146,18 +150,22 @@ namespace AV_Mechtech
             listingStandard.CheckboxLabeled("Frameworksetting: " + "AV_SettingsBoxLabel_MessageBiocodeable".Translate().CapitalizeFirst(), ref FrameworkSettings.MessageOnBiocodableCreation, "AV_SettingsBoxDesc_MessageBiocodeable".Translate().CapitalizeFirst());
 
             listingStandard.GapLine();
+            /*
             labelRect.y = listingStandard.CurHeight;
+            
             DrawCenteredLabel(listingStandard, labelRect, "AV_SettingsLabel_hacking".Translate().CapitalizeFirst());
             listingStandard.GapLine();
+            */
 
             label = "AV_SettingsSliderLabel_HackingMaxBandwidth".Translate().CapitalizeFirst() + ": " + MechtechSettings.HackingLanceBandwidth.ToString();
             MechtechSettings.HackingLanceBandwidth = (int)listingStandard.SliderLabeled(label, MechtechSettings.HackingLanceBandwidth, 1f, 5f, 0.5f, "AV_SettingsSliderDesc_HackingMaxBandwidth".Translate().CapitalizeFirst());
-
+           
             listingStandard.GapLine();
-            labelRect.y = listingStandard.CurHeight;
-            DrawCenteredLabel(listingStandard, labelRect, "AV_SettingsLabel_difficulty".Translate().CapitalizeFirst());
-            listingStandard.GapLine();
-
+            /*
+           labelRect.y = listingStandard.CurHeight;
+           DrawCenteredLabel(listingStandard, labelRect, "AV_SettingsLabel_difficulty".Translate().CapitalizeFirst());
+           listingStandard.GapLine();
+           */
             label = "AV_SettingsSliderLabel_NeuroferiumDeath".Translate().CapitalizeFirst() + ": " + (MechtechSettings.NeuroferiumInstantDeathChance * 100).ToString() + "%";
             float neuroferiumInstantDeathChance = listingStandard.SliderLabeled(label, MechtechSettings.NeuroferiumInstantDeathChance, 0f, 0.1f, 0.5f, "AV_SettingsSliderDesc_MechDrop_NeuroferiumDeath".Translate().CapitalizeFirst());
             MechtechSettings.NeuroferiumInstantDeathChance = (float)Math.Round(neuroferiumInstantDeathChance, 2);
@@ -166,8 +174,15 @@ namespace AV_Mechtech
 
             listingStandard.CheckboxLabeled("Allow tarantula mech to fire missiles when not drafted", ref MechtechSettings.AllowTarantulaPlayerAIMissiles, "Turn this off if you have mods which might interfere with abilities. Hopefully this helps.");
 
+            label = "AV_SettingsSliderLabel_NeurofoamCount".Translate() + ": " + MechtechSettings.NeurofoamProductionCount.ToString();
+            MechtechSettings.NeurofoamProductionCount = (int)listingStandard.SliderLabeled(label, MechtechSettings.NeurofoamProductionCount, 1f, 10f, 0.5f);
 
-            
+            label = "AV_SettingsSliderLabel_NeutroamineCount".Translate() + ": " + MechtechSettings.NeutroamineProductionCount.ToString();
+            MechtechSettings.NeutroamineProductionCount = (int)listingStandard.SliderLabeled(label, MechtechSettings.NeutroamineProductionCount, 1f, 10f, 0.5f);
+
+            label = "AV_SettingsSliderLabel_HemogenPasteCount".Translate() + ": " + MechtechSettings.HemogenePasteProductionCount.ToString();
+            MechtechSettings.HemogenePasteProductionCount = (int)listingStandard.SliderLabeled(label, MechtechSettings.HemogenePasteProductionCount, 1f, 10f, 0.5f);
+
         }
 
         public void DrawDEVSettings(Listing_Standard listingStandard, Rect inRect)
@@ -197,6 +212,10 @@ namespace AV_Mechtech
 
             MechtechSettings.NeuroferiumInstantDeathChance = MechtechSettings.DefaultNeuroferiumInstantDeathChance;
 
+            MechtechSettings.NeurofoamProductionCount = MechtechSettings.DefaultNeurofoamProductionCount;
+            MechtechSettings.NeutroamineProductionCount = MechtechSettings.DefaultNeutroamineProductionCount;
+            MechtechSettings.HemogenePasteProductionCount = MechtechSettings.DefaultHemogenePasteProductionCount;
+
             MechtechSettings.DebugLogging = MechtechSettings.DefaultDebugLogging;
             MechtechSettings.DebugOnLoad = MechtechSettings.DefaultDebugOnLoad;
         }
@@ -205,8 +224,10 @@ namespace AV_Mechtech
         public override void WriteSettings()
         {
             FrameworkSettingsUtility.ForceSaveSettings();
-
+            
             base.WriteSettings();
+
+            ProductionManager.UpdateProductionCount();
         }
 
         // Override SettingsCategory to show up in the list of settings.

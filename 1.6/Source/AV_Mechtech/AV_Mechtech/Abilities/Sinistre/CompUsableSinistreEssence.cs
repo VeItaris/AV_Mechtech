@@ -155,26 +155,6 @@ namespace AV_Mechtech
 
         }
 
-
-        private void UseEffect(LocalTargetInfo target)
-        {
-            if(target.Pawn.def == MechtechDefOfs.AV_Mech_Reshaper)
-            {
-                Comp_WanderingSinistre comp = target.Pawn.TryGetComp<Comp_WanderingSinistre>();
-                if (comp != null)
-                {
-                    comp.TryIncreaseSinistrePower();
-                }
-            }
-            else
-            {
-                target.Pawn.health.AddHediff(MechtechDefOfs.AV_SinistreMechDeathRefusal);
-            }
-            SoundDef sound = SoundDefOf.ControlMech_Complete;
-            sound.PlayOneShot(new TargetInfo(target.Pawn.Position, target.Pawn.Map));
-        
-        }
-
         #endregion
 
         public void OnUsed(Pawn mech)

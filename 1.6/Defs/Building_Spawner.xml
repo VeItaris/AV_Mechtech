@@ -98,8 +98,7 @@
 		<defName>AV_NeurofoamSpawn</defName>
 		<thingDef>AV_Neurofoam</thingDef>
 		<TexPath>Things/Item/Resource/NeutroFoam/NeutroFoam</TexPath>
-		<countToSpawn>1</countToSpawn>
-		<!--<spawnIntervalRange><min>5000</min><max>5001</max></spawnIntervalRange>		 2h test-->
+		<countToSpawn>1</countToSpawn>	<!-- this gets overridden by the modsettings! -->
 		<spawnIntervalRange><min>180000</min><max>240000</max></spawnIntervalRange>	<!-- 	3-4 days-->
 		<ScalesWithResearchProjectDef>AV_AdvancedNeutroControl</ScalesWithResearchProjectDef>
 		<ResearchScaleFactor>0.75</ResearchScaleFactor>		<!-- results in 2,25-3 days-->
@@ -110,7 +109,7 @@
 		<defName>AV_HemogenPasteSpawn</defName>
 		<thingDef>AV_HemogenPaste</thingDef>
 		<TexPath>Things/Item/Resource/AV_HemogenPaste/AV_HemogenPaste</TexPath>
-		<countToSpawn>1</countToSpawn>
+		<countToSpawn>1</countToSpawn> <!-- this gets overridden by the modsettings! -->
 		<spawnIntervalRange><min>180000</min><max>240000</max></spawnIntervalRange>		<!-- 3-4 days-->
 		<NeedsResearchProjectDef>AV_Hemogen_Extraction</NeedsResearchProjectDef>
 		<color>(237,166,133)</color>
@@ -120,7 +119,7 @@
 		<defName>AV_NeutroamineSpawn</defName>
 		<thingDef>Neutroamine</thingDef>
 		<TexPath>Things/Item/Resource/Neutroamine/Neutroamine_a</TexPath>
-		<countToSpawn>1</countToSpawn>
+		<countToSpawn>1</countToSpawn> <!-- this gets overridden by the modsettings! -->
 		<spawnIntervalRange><min>300000</min><max>420000</max></spawnIntervalRange>		<!-- 5-7 days-->
 		<NeedsResearchProjectDef>AV_Neutroamine_Production</NeedsResearchProjectDef>
 		<ScalesWithResearchProjectDef>AV_AdvancedNeutroControl</ScalesWithResearchProjectDef>

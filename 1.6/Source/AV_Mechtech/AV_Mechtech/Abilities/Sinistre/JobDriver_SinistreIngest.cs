@@ -112,10 +112,13 @@ namespace AV_Mechtech
                     int amount = SinistreUtility.maxAmountToFeedOn(thing);
                     SinistreUtility.Feed(chewer, thing.def, amount);
                     thing.stackCount -= amount;
+
+                    TrySpawnEssenceFromShardEating(thing, chewer);
                 }
                 else
                 {
                     SinistreUtility.Feed(chewer, thing.def, thing.stackCount);
+                    TrySpawnEssenceFromShardEating(thing, chewer);
                     thing.Destroy();
                 }
 
@@ -127,6 +130,22 @@ namespace AV_Mechtech
             return toil;
         }
 
+        private static void TrySpawnEssenceFromShardEating(Thing thing, Pawn chewer)
+        {
+            if (thing.def == ThingDefOf.Shard)
+            {
+                Thing essence = ThingMaker.MakeThing(MechtechDefOfs.AV_SinistreEssence);
+                essence.stackCount = 1;
+
+                GenPlace.TryPlaceThing(essence, chewer.PositionHeld, chewer.MapHeld, ThingPlaceMode.Near, out var lastResultingThing);
+                if (lastResultingThing != null)
+                {
+                    Messages.Message("AV_SinistreGiftOvereating".Translate(), MessageTypeDefOf.PositiveEvent);
+                    SinistreUtility.TryCapAtPeak(chewer);
+                }
+                
+            }
+        }
 
         private Toil ReserveFood()
         {
@@ -155,41 +174,5 @@ namespace AV_Mechtech
             return toil;
         }
 
-
-
-
-        /*
-        public override bool ModifyCarriedThingDrawPos(ref Vector3 drawPos, ref bool flip)
-        {
-            IntVec3 cell = job.GetTarget(TargetIndex.B).Cell;
-            return ModifyCarriedThingDrawPosWorker(ref drawPos, ref flip, cell, pawn);
-        }
-
-        public static bool ModifyCarriedThingDrawPosWorker(ref Vector3 drawPos, ref bool flip, IntVec3 placeCell, Pawn pawn)
-        {
-            if (pawn.pather.Moving)
-            {
-                return false;
-            }
-            Thing carriedThing = pawn.carryTracker.CarriedThing;
-            if (carriedThing == null)
-            {
-                return false;
-            }
-            if (placeCell.IsValid && placeCell.AdjacentToCardinal(pawn.Position) && placeCell.HasEatSurface(pawn.Map) && carriedThing.def.ingestible.ingestHoldUsesTable)
-            {
-                drawPos = new Vector3((float)placeCell.x + 0.5f, drawPos.y, (float)placeCell.z + 0.5f);
-                return true;
-            }
-            HoldOffset holdOffset = carriedThing.def.ingestible.ingestHoldOffsetStanding?.Pick(pawn.Rotation);
-            if (holdOffset != null)
-            {
-                drawPos += holdOffset.offset;
-                flip = holdOffset.flip;
-                return true;
-            }
-            return false;
-        }
-        */
     }
 }

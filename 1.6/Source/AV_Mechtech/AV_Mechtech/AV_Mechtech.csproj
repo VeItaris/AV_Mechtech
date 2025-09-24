@@ -54,7 +54,6 @@
     <Compile Include="Abilities\Tarantula\CompProperties_AbilityBlowUpMissileLauncher.cs" />
     <Compile Include="Abilities\Sinistre\JobDriver_SinistreIngest.cs" />
     <Compile Include="Comps_Hediff\Hediff_MechDeathRefusal.cs" />
-    <Compile Include="DeathActionWorker\DeathActionWorker_Sinistre.cs" />
     <Compile Include="Jobs\JobDriver_SinistreEssence.cs" />
     <Compile Include="Abilities\Sinistre\CompProperties_Usable_SinistreEssence.cs" />
     <Compile Include="Comps_Things\CompProperties_Usable_UnspecializedMechchip.cs" />
@@ -70,6 +69,7 @@
     <Compile Include="Abilities\Sinistre\IncidentWorker_SinistreArriving.cs" />
     <Compile Include="Abilities\Sinistre\JobGiver_SinistreBinge.cs" />
     <Compile Include="Jobs\JobDriver_SpecializeMechanoidChip.cs" />
+    <Compile Include="Main\OnStartUp.cs" />
     <Compile Include="RenderNodes\PawnRenderNodeProperties_CarriedOffset.cs" />
     <Compile Include="RenderNodes\PawnRenderNodeReshaper.cs" />
     <Compile Include="RenderNodes\PawnRenderNode_MechReshapingBelow.cs" />
