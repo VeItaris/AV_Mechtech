@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{BB9D5701-7B01-4A8A-9A2C-957F40730E0F}|AV_Mechtech\\AV_Mechtech.csproj|c:\\program files (x86)\\steam\\steamapps\\common\\rimworld\\mods\\av_mechtech\\1.6\\source\\av_mechtech\\av_mechtech\\abilities\\sinistre\\compusablesinistreessence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB9D5701-7B01-4A8A-9A2C-957F40730E0F}|AV_Mechtech\\AV_Mechtech.csproj|solutionrelative:av_mechtech\\abilities\\sinistre\\compusablesinistreessence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB9D5701-7B01-4A8A-9A2C-957F40730E0F}|AV_Mechtech\\AV_Mechtech.csproj|c:\\program files (x86)\\steam\\steamapps\\common\\rimworld\\mods\\av_mechtech\\1.6\\source\\av_mechtech\\av_mechtech\\jobs\\jobdriver_sinistreessence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB9D5701-7B01-4A8A-9A2C-957F40730E0F}|AV_Mechtech\\AV_Mechtech.csproj|solutionrelative:av_mechtech\\jobs\\jobdriver_sinistreessence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BB9D5701-7B01-4A8A-9A2C-957F40730E0F}|AV_Mechtech\\AV_Mechtech.csproj|c:\\program files (x86)\\steam\\steamapps\\common\\rimworld\\mods\\av_mechtech\\1.6\\source\\av_mechtech\\av_mechtech\\main\\av_mechtech_global.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BB9D5701-7B01-4A8A-9A2C-957F40730E0F}|AV_Mechtech\\AV_Mechtech.csproj|solutionrelative:av_mechtech\\main\\av_mechtech_global.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -62,7 +70,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "DefOf.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Main\\DefOf.cs",
               "RelativeDocumentMoniker": "AV_Mechtech\\Main\\DefOf.cs",
@@ -76,19 +84,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "CompUsableSinistreEssence.cs",
+              "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Abilities\\Sinistre\\CompUsableSinistreEssence.cs",
+              "RelativeDocumentMoniker": "AV_Mechtech\\Abilities\\Sinistre\\CompUsableSinistreEssence.cs",
+              "ToolTip": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Abilities\\Sinistre\\CompUsableSinistreEssence.cs",
+              "RelativeToolTip": "AV_Mechtech\\Abilities\\Sinistre\\CompUsableSinistreEssence.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAwwCMAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T14:37:59.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "JobDriver_SinistreEssence.cs",
+              "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Jobs\\JobDriver_SinistreEssence.cs",
+              "RelativeDocumentMoniker": "AV_Mechtech\\Jobs\\JobDriver_SinistreEssence.cs",
+              "ToolTip": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Jobs\\JobDriver_SinistreEssence.cs",
+              "RelativeToolTip": "AV_Mechtech\\Jobs\\JobDriver_SinistreEssence.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAIwE0AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T14:37:28.922Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "AV_Mechtech_Global.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Main\\AV_Mechtech_Global.cs",
               "RelativeDocumentMoniker": "AV_Mechtech\\Main\\AV_Mechtech_Global.cs",
               "ToolTip": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Main\\AV_Mechtech_Global.cs",
               "RelativeToolTip": "AV_Mechtech\\Main\\AV_Mechtech_Global.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAAwKIAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAwKMAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-24T15:45:00.052Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Comp_SinistreNeeds.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Abilities\\Sinistre\\Comp_SinistreNeeds.cs",
               "RelativeDocumentMoniker": "AV_Mechtech\\Abilities\\Sinistre\\Comp_SinistreNeeds.cs",
@@ -100,7 +134,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Comp_WanderingSinistre.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Abilities\\Sinistre\\Comp_WanderingSinistre.cs",
               "RelativeDocumentMoniker": "AV_Mechtech\\Abilities\\Sinistre\\Comp_WanderingSinistre.cs",
@@ -112,7 +146,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "SinistreUtility.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Abilities\\Sinistre\\SinistreUtility.cs",
               "RelativeDocumentMoniker": "AV_Mechtech\\Abilities\\Sinistre\\SinistreUtility.cs",
@@ -124,7 +158,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "PawnRenderNodeTarantula.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\RenderNodes\\PawnRenderNodeTarantula.cs",
               "RelativeDocumentMoniker": "AV_Mechtech\\RenderNodes\\PawnRenderNodeTarantula.cs",
@@ -136,7 +170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "JobDriver_SinistreIngest.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Abilities\\Sinistre\\JobDriver_SinistreIngest.cs",
               "RelativeDocumentMoniker": "AV_Mechtech\\Abilities\\Sinistre\\JobDriver_SinistreIngest.cs",
@@ -148,7 +182,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "SinistrePawn.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Abilities\\Sinistre\\SinistrePawn.cs",
               "RelativeDocumentMoniker": "AV_Mechtech\\Abilities\\Sinistre\\SinistrePawn.cs",
@@ -160,7 +194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "CompAbilityEffect_CallBackSinistre.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Abilities\\Sinistre\\CompAbilityEffect_CallBackSinistre.cs",
               "RelativeDocumentMoniker": "AV_Mechtech\\Abilities\\Sinistre\\CompAbilityEffect_CallBackSinistre.cs",
@@ -172,7 +206,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "CompProperties_AbilityCallBackSinistre.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Abilities\\Sinistre\\CompProperties_AbilityCallBackSinistre.cs",
               "RelativeDocumentMoniker": "AV_Mechtech\\Abilities\\Sinistre\\CompProperties_AbilityCallBackSinistre.cs",
@@ -184,7 +218,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "Comp_GiveHediffsWhenAlive_Reshaper.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Comps_Things\\Comp_GiveHediffsWhenAlive_Reshaper.cs",
               "RelativeDocumentMoniker": "AV_Mechtech\\Comps_Things\\Comp_GiveHediffsWhenAlive_Reshaper.cs",
@@ -196,7 +230,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "CultivationPod.cs",
               "DocumentMoniker": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\RimWorld\\Mods\\AV_Mechtech\\1.6\\Source\\AV_Mechtech\\AV_Mechtech\\Thingclass\\CultivationPod.cs",
               "RelativeDocumentMoniker": "AV_Mechtech\\Thingclass\\CultivationPod.cs",

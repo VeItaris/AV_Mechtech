@@ -9,6 +9,7 @@ using Verse.AI;
 using Verse;
 using Verse.Sound;
 using static UnityEngine.GraphicsBuffer;
+using static RimWorld.MechClusterSketch;
 
 namespace AV_Mechtech
 {
@@ -120,12 +121,19 @@ namespace AV_Mechtech
                 return false;
             }
 
-            if (target.Pawn.def == MechtechDefOfs.AV_Mech_Reshaper && target.Pawn.TryGetComp<Comp_WanderingSinistre>()?.powerStage >= SinistreUtility.MaxPowerStage)
+            if (target.Pawn.def == MechtechDefOfs.AV_Mech_Reshaper)
             {
-                return false; //"Already at maximum power";
+                if(target.Pawn.TryGetComp<Comp_WanderingSinistre>()?.powerStage >= SinistreUtility.MaxPowerStage)
+                {
+                    return false; //"Already at maximum power";
+                }
+                else
+                {
+                    return true;
+                }
             }
 
-            if (target.Pawn.health.hediffSet.HasHediff(MechtechDefOfs.AV_SinistreMechDeathRefusal))
+            if (target.Pawn.health.hediffSet.HasHediff(MechtechDefOfs.AV_SinistreMechDeathRefusal) )
             {
                 return false; //"Already applied";
             }
@@ -142,6 +150,16 @@ namespace AV_Mechtech
                 //Log.Message("CompUsableSinistreEssence -> TryStartUseJob -> stoped");
                 return;
             }
+
+            if (target.Pawn != null)
+            {
+                if (target.Pawn.def == MechtechDefOfs.AV_Mech_Reshaper)
+                {
+                    Log.Message("Targeting reshaper");
+                }
+            }
+
+
             //Log.Message("CompUsableSinistreEssence -> TryStartUseJob -> 2");
             StartJob();
 
