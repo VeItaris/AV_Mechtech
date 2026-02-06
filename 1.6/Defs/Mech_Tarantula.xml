@@ -577,7 +577,7 @@
 	<!-- rendertree --> 
 	<PawnRenderTreeDef>
 		<defName>AV_RenderTreeTarantula</defName>
-			<root Class="PawnRenderNodeProperties_Parent">
+		<root Class="PawnRenderNodeProperties_Parent">
 			<debugLabel>Root</debugLabel>
 			<tagDef>Root</tagDef>
 			<children>
@@ -585,6 +585,8 @@
 					<debugLabel>Body</debugLabel>
 					<tagDef>Body</tagDef>
 					<nodeClass>AV_Mechtech.PawnRenderNodeTarantula</nodeClass>
+					<!--<workerClass>AV_MechanoidSkins.PawnRenderNodeWorker_MechSkin</workerClass>
+					 add worker class here! --> 
 					<useRottenColor>true</useRottenColor>
 					<children>
 						<li>

@@ -198,7 +198,7 @@ namespace AV_Mechtech
     
         public Graphic GetGraphic(Pawn pawn, Graphic baseGraphic, string texpath,  string maskpath = null)
         {
-            if(maskpath == null && pawn.Faction == Faction.OfPlayer)
+            if(maskpath == null)
             {
                 maskpath = Maskpath;
                 return GraphicDatabase.Get<Graphic_Multi>(texpath, shader, baseGraphic.drawSize, baseGraphic.color, baseGraphic.colorTwo, baseGraphic.data, maskpath);

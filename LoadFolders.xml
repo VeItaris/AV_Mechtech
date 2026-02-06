@@ -24,8 +24,6 @@
 		<li IfModNotActive="Erin.Body.Texture">1.6/Mods/NoErinsBodyRetexture</li>
 		<li IfModActive="Mlie.RecycleThis">1.6/Mods/RecycleThis</li>
 		<li IfModActive="VanillaExpanded.HelixienGas">1.6/Mods/Helixien</li>
-	 	
-
 		
 		
 		<!--<li IfModActive="Veltaris.Pyrophobia">1.5/Mods/Anomaly</li>-->
