@@ -17,7 +17,7 @@
 	</Operation>
 
  	<Operation Class="PatchOperationConditional">
-		<xpath>/Defs/RecipeDef[defName = "ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
+		<xpath>Defs/RecipeDef[defName = "ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
 		<match Class="PatchOperationAdd">
 			<xpath>/Defs/RecipeDef[defName = "ResurrectLightMech"]/fixedIngredientFilter/thingDefs</xpath>
 			<value>
