@@ -9,7 +9,7 @@
 		<li IfModActive="Ludeon.RimWorld.Anomaly">1.5/Mods/Anomaly</li>
 		
 		<li IfModActive="Erin.Body.Texture">1.5/Mods/ErinsBodyRetexture</li>
-		<li IfModNotActive="Erin.Body.Texture">1.5/Mods/NoErinsBodyRetexture</li>
+		<!--<li IfModNotActive="Erin.Body.Texture">1.5/Mods/NoErinsBodyRetexture</li>-->
 		<li IfModActive="Mlie.RecycleThis">1.5/Mods/RecycleThis</li>
 		<li IfModActive="VanillaExpanded.HelixienGas">1.5/Mods/Helixien</li>
 	</v1.5>
@@ -21,7 +21,7 @@
 		<li IfModActive="Ludeon.RimWorld.Anomaly">1.6/Mods/Anomaly</li>
 		
 		<li IfModActive="Erin.Body.Texture">1.6/Mods/ErinsBodyRetexture</li>
-		<li IfModNotActive="Erin.Body.Texture">1.6/Mods/NoErinsBodyRetexture</li>
+		<!--<li IfModNotActive="Erin.Body.Texture">1.6/Mods/NoErinsBodyRetexture</li>-->
 		<li IfModActive="Mlie.RecycleThis">1.6/Mods/RecycleThis</li>
 		<li IfModActive="VanillaExpanded.HelixienGas">1.6/Mods/Helixien</li>
 		

@@ -191,23 +191,27 @@ namespace AV_Mechtech
                     }
                 }
             }
-
+            
             return null;
         }
     
+
+
     
         public Graphic GetGraphic(Pawn pawn, Graphic baseGraphic, string texpath,  string maskpath = null)
         {
             if(maskpath == null)
             {
                 maskpath = Maskpath;
+
                 return GraphicDatabase.Get<Graphic_Multi>(texpath, shader, baseGraphic.drawSize, baseGraphic.color, baseGraphic.colorTwo, baseGraphic.data, maskpath);
             }
-            //return GraphicDatabase.Get<Graphic_Multi>(texpath, shader, baseGraphic.drawSize, baseGraphic.color, baseGraphic.colorTwo, baseGraphic.data, maskpath);
+
+            return GraphicDatabase.Get<Graphic_Multi>(texpath, shader, baseGraphic.drawSize, baseGraphic.color, baseGraphic.colorTwo, baseGraphic.data, maskpath);
 
 
 
-            return GraphicDatabase.Get<Graphic_Multi>(texpath, shader, baseGraphic.drawSize, baseGraphic.color, baseGraphic.colorTwo, baseGraphic.data);
+            //return GraphicDatabase.Get<Graphic_Multi>(texpath, shader, baseGraphic.drawSize, baseGraphic.color, baseGraphic.colorTwo, baseGraphic.data);
         }
     }
 }
